@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    background-color: #3A66E6;
+    top: 0;
+    left: 0;
+    height: 60px;              
+    display: flex;             
+    justify-content: space-between; 
+    align-items: center;       
+    padding: 0 20px;          
+    color: white;          
+}
+
+.logo {
+    height: 40px;            
+    display: block;
+}
+
+.logout {
+    color: white;
+    font-size: 14px;
+}
+
+.logout:hover {
+    color: #e0e0e0; 
+}
