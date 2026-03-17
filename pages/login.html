@@ -1,33 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인</title>
     <link rel="stylesheet" href="/src/css/pages/login.css"/>
 </head>
+
 <body>
-    <div class="top-logo">
-        <img src="/asset/logo.png" alt="로그인 로고" />
-    </div>
-    <div class="box">
-        <h2> 로그인 </h2>
 
-        <label for="userid">아이디</label>
-        <input type="text" id="userid" name="userid" placeholder="아이디를 입력해 주세요"/>
-        <div class="error-message" id="userid-error"></div>
+    <div class="login-container">
 
-        <label for="userpwd">비밀번호</label>
-        <input type="password" id="userpwd" name="userpwd" placeholder="비밀번호를 입력해 주세요">
+        <div class="left-wrapper">
 
-        <div class="error-message" id="password-error"></div>
-    </div>
+            <div class="top-logo">
+                <img src="/asset/logo.png" alt="로고">
+            </div>
 
-    <div class="bottom-area">
-        <button id="loginBtn">로그인</button>
-        <p>계정이 없으신가요? <a href="signup.html">회원가입</a></p>
+            <div class="login-left-area">
+                <div class="login-left">로그인</div>
+
+                <div class="input-box">
+                    <span>ID</span>
+                    <input type="text" id="userid" placeholder="아이디를 입력해 주세요">
+                    <div class="error-message" id="userid-error"></div>
+                </div>
+                
+                
+
+                <div class="input-box password-box">
+                    <span>PW</span>
+                    <input type="password" id="userpwd" placeholder="비밀번호를 입력해 주세요">
+                    <img src="/asset/eyesclose.svg" class="toggle-pwd" id="togglePwd">
+                    <div class="error-message" id="password-error"></div>
+                </div>
+                
+                    
+
+                <button id="loginBtn" type="button">로그인</button>
+
+                <p>
+                    계정이 없으신가요?
+                    <a href="signup.html">회원가입</a>
+                </p>
+            </div>
+
+        </div>
+        
+        <div class="divider"></div>
+
+        <div class="login-right">
+            <img src="/asset/mascot.png" alt="마스코트">
+        </div>
+
     </div>
 
     <script src="/src/js/pages/login.js"></script>
+
 </body>
 </html>
