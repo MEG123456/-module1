@@ -4,33 +4,47 @@
     list-style: none;   /* 불렛 포인트 제거 */
     padding: 0;
     margin: 0;
-    border: 3px solid #3A66E6;
+    border-bottom: 3px solid #3A66E6;
 }
 
 /* 각 메뉴 항목 */
 .student-sidebar li {
     flex: 1;
     text-align: center;
-    border-right: 4px solid #3A66E6;
+    position: relative;
+}
+
+/* 메뉴 사이 세로선 만들기 */
+.student-sidebar li::after {
+    content: "";
+    position: absolute;
+    right: 0;          
+    top: 15%;          
+    height: 70%;       
+    width: 3px; 
+    border-radius: 8px;
+    background-color: #3A66E6; 
 }
 
 /* 마지막 메뉴의 세로선은 제거 */
-.student-sidebar li:last-child {
-    border-right: none;
+.student-sidebar li:last-child::after {
+    display: none;
 }
 
 /* 링크 텍스트 스타일 */
 .student-sidebar li a {
+    font-family: 'Roboto', 'Noto Sans KR', sans-serif;
+    font-weight: 500;
     display: block;
-    padding: 15px 0;
+    padding: 10px 0;
     text-decoration: none;  /* 밑줄 제거 */
     color: #0B0D0F;
     font-size: 1.2rem;
+    text-align: center;
 }
 
 /* 마우스 올렸을 때 효과 */
 .student-sidebar li a:hover {
-    background-color: #e0e0e0;  /* 괜찮은 것 같아 넣어보았습니다 */
-    text-decoration: underline;
+    background-color: #E9E5E5;
     font-weight: bold;
 }
