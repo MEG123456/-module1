@@ -61,11 +61,11 @@
 }
 
 /* 확인 버튼 색상 */
-.btn-confirm {
+.confirm-btn {
     background-color: #186CE9;
 }
 
 /* 취소 버튼 색상 */
-.btn-cancel {
+.cancel-btn {
     background-color: #898A8D;
 }

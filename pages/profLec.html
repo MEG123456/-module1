@@ -8,25 +8,118 @@
     <link rel="stylesheet" href="../src/css/ui/module/header.css">
     <link rel="stylesheet" href="../src/css/ui/module/sidebar.css">
     <link rel="stylesheet" href="../src/css/ui/module/modal.css">
+    <link rel="stylesheet" href="../src/css/ui/module/profLec.css">
+
 </head>
 
 <body>
     <div class="container">
         <div class="container-main">
+            <div class="body-main">
+                <p class="body-title">내 강의</p>
 
-            <button id="saveBtn" class="save-main-btn">저장</button>
+                <div class="table1-container">
+                    <table id="profLecTable">
+                        <thead>
+                            <tr>
+                                <th>교과목 번호</th>
+                                <th>과목 명</th>
+                                <th>구분</th>
+                                <th>학점</th>
+                                <th>시간</th>
+                                <th></th>
+                            </tr>
+                        </thead>
 
-            <div id="modalOverlay" class="modal-overlay">
-                <div class="modal-content">
-                    <p class="modal-text">“ 변경사항을 저장하시겠습니까? ”</p>
-                    <div class="modal-buttons">
-                        <button id="confirmBtn" class="btn-confirm">확인</button>
-                        <button id="cancelBtn" class="btn-cancel">취소</button>
+                        <tbody id="profLecListBody">
+                            <tr>
+                                <td>400968</td>
+                                <td>인공지능개론</td>
+                                <td>전공</td>
+                                <td>3</td>
+                                <td>수 10:00~12:00</td>
+                                <td>
+                                    <button class="edit-btn">수정</button>
+                                    <button class="delete-btn">삭제</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="footer-action">
+                    <button id="enrollBtn" class="enroll-btn">등록</button>
+                </div>
+                <button id="saveBtn" class="save-btn">저장</button>
+
+                <div id="modalOverlay" class="modal-overlay">
+                    <div class="modal-content">
+                        <p class="modal-text">변경사항을 저장하시겠습니까?</p>
+                        <div class="modal-buttons">
+                            <button id="confirmBtn" class="confirm-btn">확인</button>
+                            <button id="cancelBtn" class="cancel-btn">취소</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            
+
+            </div>
         </div>
     </div>
 
