@@ -1,97 +1,108 @@
-body {
-            margin: 0;
-            background: #2f2f2f;
-            font-family: Arial, sans-serif;
-        }
+/* signup2 박스 크기/여백 조정 */
+.signup-box {
+    width: 1100px;
+    min-height: 560px;
+    padding: 38px 80px 96px;
+}
 
-        .signup-page {
-            background: #fff;
-            margin: 40px;
-            padding: 40px;
-        }
+/* 진행바 폭/여백만 조정 */
+.progress-bar {
+    width: 870px;
+    margin: 0 auto 54px;
+}
 
-        .signup-layout {
-            position: relative;
-        }
+/* 제목 크기/간격 */
+.signup-title {
+    font-size: 28px;
+    margin-bottom: 56px;
+}
 
-        /* 마스코트 */
-        .signup-logo {
-            width: 80px;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
+/* 입력영역 폭 */
+.signup-content {
+    width: 470px;
+    margin: 0 auto;
+    gap: 26px;
+}
 
-        /* 박스 */
-        .signup-box {
-            border: 1px solid #ccc;
-            padding: 40px;
-            width: 600px;
-            margin: 0 auto;
-        }
+/* 각 줄 */
+.form {
+    width: 470px;
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 0;
+}
 
-        /* 진행바 */
-        .signup-progress-bar {
-            height: 20px;
-            background: #eee;
-            margin-bottom: 30px;
-        }
+/* 라벨 */
+.form > label {
+    width: 54px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #464A58;
+    line-height: 32px;
+    white-space: nowrap;
+}
 
-        .signup-progress-fill {
-            width: 70%;
-            height: 100%;
-            background: #4f63d2;
-        }
+/* 입력칸 감싸는 영역 */
+.field-wrap {
+    width: 320px;
+}
 
-        /* 제목 */
-        .signup-title {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+/* 학년은 짧게 */
+.form.grade-row .field-wrap {
+    width: 120px;
+}
 
-        /* 입력 영역 */
-        .signup-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
+/* 입력창/선택창 */
+.form select,
+.form input[type="text"] {
+    width: 100%;
+    height: 32px;
+    padding: 4px 10px;
+    border: 1px solid #898A8D;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #464A58;
+    background-color: #ffffff;
+}
 
-        .signup-label {
-            width: 80px;
-        }
+/* 화살표 */
+.form select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 
-        .signup-field-group {
-            flex: 1;
-        }
+    background-image: url("/asset/down.png");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 18px 10px;
 
-        select, input {
-            width: 100%;
-            padding: 5px;
-        }
+    padding-right: 40px;
+}
 
-        /* 오류 메시지 */
-        .error-message {
-            color: red;
-            font-size: 12px;
-            display: none;
-        }
+/* 포커스 파란색 제거 */
+.form select:focus,
+.form input[type="text"]:focus {
+    outline: none;
+    border-color: #898A8D;
+}
 
-        select:invalid + .error-message,
-        input:invalid + .error-message {
-            display: block;
-        }
+/* 학부만 빨간 테두리 */
+#college.error {
+    border-color: #FF0000;
+}
 
-        /* 버튼 */
-        .signup-button-row {
-            text-align: right;
-            margin-top: 20px;
-        }
+/* 에러 메시지 */
+.error-message {
+    margin: 4px 0 0;
+    min-height: 16px;
+    font-size: 12px;
+    line-height: 16px;
+    color: #FF0000;
+}
 
-        .signup-next-button {
-            width: 100px;
-            height: 40px;
-            border: 1px solid #4f63d2;
-            background: #fff;
-            color: #4f63d2;
-            cursor: pointer;
-        }
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    box-shadow: 0 0 0 1000px #ffffff inset !important;
+    -webkit-text-fill-color: #464A58 !important;
+}
