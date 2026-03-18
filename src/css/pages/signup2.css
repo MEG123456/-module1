@@ -1,0 +1,97 @@
+body {
+            margin: 0;
+            background: #2f2f2f;
+            font-family: Arial, sans-serif;
+        }
+
+        .signup-page {
+            background: #fff;
+            margin: 40px;
+            padding: 40px;
+        }
+
+        .signup-layout {
+            position: relative;
+        }
+
+        /* 마스코트 */
+        .signup-logo {
+            width: 80px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* 박스 */
+        .signup-box {
+            border: 1px solid #ccc;
+            padding: 40px;
+            width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 진행바 */
+        .signup-progress-bar {
+            height: 20px;
+            background: #eee;
+            margin-bottom: 30px;
+        }
+
+        .signup-progress-fill {
+            width: 70%;
+            height: 100%;
+            background: #4f63d2;
+        }
+
+        /* 제목 */
+        .signup-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* 입력 영역 */
+        .signup-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .signup-label {
+            width: 80px;
+        }
+
+        .signup-field-group {
+            flex: 1;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 5px;
+        }
+
+        /* 오류 메시지 */
+        .error-message {
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+
+        select:invalid + .error-message,
+        input:invalid + .error-message {
+            display: block;
+        }
+
+        /* 버튼 */
+        .signup-button-row {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .signup-next-button {
+            width: 100px;
+            height: 40px;
+            border: 1px solid #4f63d2;
+            background: #fff;
+            color: #4f63d2;
+            cursor: pointer;
+        }
