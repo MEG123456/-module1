@@ -56,8 +56,35 @@ function checkButton() {
     }
 }
 
-idInput.addEventListener("input", () => checkInput(idInput));
-pwInput.addEventListener("input", () => checkInput(pwInput));
+idInput.addEventListener("input", () => {
+    checkInput(idInput);
+    const id = idInput.value.trim();
+    if (id === "") {
+        idError.textContent = "아이디를 다시 확인해 주세요";
+        idInput.parentElement.classList.add("error");
+    } else {
+        idError.textContent = "";
+        idInput.parentElement.classList.remove("error");
+    }
+});
+
+pwInput.addEventListener("input", () => {
+    checkInput(pwInput);
+    updateToggleState();
+
+    const pw = pwInput.value.trim();
+    
+    if (pw === "") {
+        pwError.textContent = "비밀번호를 다시 확인해 주세요";
+        pwInput.parentElement.classList.add("error");
+    } else if (pw.length < 8 || pw.length > 12) {
+        pwError.textContent = "비밀번호는 8~12자리여야 합니다";
+        pwInput.parentElement.classList.add("error");
+    } else {
+        pwError.textContent = "";
+        pwInput.parentElement.classList.remove("error");
+    }
+});
 
 loginBtn.addEventListener("click", () => {
     const id = idInput.value.trim();
@@ -90,5 +117,5 @@ loginBtn.addEventListener("click", () => {
         pw.length <= 12
     ) {
         alert("로그인 시도!"); // 나중에 서버 연결시 지워야댐 확인용임!!!
-    } ㅊ   
+    }  
 });    
