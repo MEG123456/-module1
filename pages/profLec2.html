@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../src/css/ui/module/header.css">
+    <link rel="stylesheet" href="../src/css/ui/module/sidebar.css">
+    <link rel="stylesheet" href="../src/css/ui/module/modal.css">
     <link rel="stylesheet" href="../src/css/ui/module/profLec2.css">
 </head>
+
 <body>
     <div class="enroll_body">
         <div class="enroll_box">
@@ -55,10 +60,26 @@
                     <textarea name="about" class="about_text"></textarea>
                     <div class="btn_box">
                         <button type="submit" id="save-btn" class="save_btn">저장</button>
+
+                        <div id="modalOverlay" class="modal-overlay">
+                            <div class="modal-content">
+                                <p class="modal-text">변경사항을 저장하시겠습니까?</p>
+                                <div class="modal-buttons">
+                                    <button id="confirmBtn" class="confirm-btn">확인</button>
+                                    <button id="cancelBtn" class="cancel-btn">취소</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script type="module" src="../src/js/utils/modal.js"></script>
+    <script type="module" src="../src/js/layout/includeHeader.js"></script>
+    <script type="module" src="../src/js/layout/includeProfSidebar.js"></script>
+    <script type="module" src="../src/js/pages/profLec2.js"></script>
 </body>
+
 </html>
