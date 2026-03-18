@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../src/css/ui/module/profLec2.css">
+</head>
+<body>
+    <div class="enroll_body">
+        <div class="enroll_box">
+            <div class="input_group">
+                <label>강의 명 :</label>
+                <input type="text" name="lecture_title" class="word">
+            </div>
+
+            <div class="input_group">
+                <label>교수명 :</label>
+                <input type="text" name="prof_name" class="word">
+            </div>
+
+            <div class="input_group">
+                <label>정원 :</label>
+                <input type="number" name="lecture_max" class="word">
+            </div>
+
+            <div class="input_group">
+                <label>요일/시간 :</label>
+                <input type="text" name="lecture_time" class="word">
+            </div>
+
+            <div class="input_group">
+                <label>구분 :</label>
+                <div class="radio_group">
+                    <input type="radio" value="m" name="subject" id="major" checked>
+                    <label for="major">전공</label>
+                    <input type="radio" value="e" name="subject" id="etc">
+                    <label for="etc">교양</label>
+                </div>
+            </div>
+
+            <div class="input_group">
+                <label>학점 :</label>
+                <input type="text" name="credit" class="word">
+            </div>
+
+            <div class="input_group">
+                <label>강의 :</label>
+                <input type="text" name="classroom" class="word">
+            </div>
+
+            <div class="input_group align_top">
+                <label>설명 :</label>
+                <div class="descrip_con">
+                    <textarea name="about" class="about_text"></textarea>
+                    <div class="btn_box">
+                        <button type="submit" id="save-btn" class="save_btn">저장</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
