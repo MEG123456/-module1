@@ -16,6 +16,6 @@ cancelBtn.addEventListener('click', () => {
 
 // 4. 확인 버튼 클릭 시 -> 알림창 띄우고 모달 사라짐
 confirmBtn.addEventListener('click', () => {
-    alert("저장되었습니다!");
+    // alert("저장되었습니다!");
     modal.classList.remove('active');
 });

@@ -1,0 +1,109 @@
+.body-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 50px;
+}
+
+
+.body-title {
+    font-family: 'Roboto', 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+/* 표 스타일 */
+.table1-container {
+    border: 1.5px solid #2A2A2A;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.thread {
+    border: 1px solid #2A2A2A;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    font-family: 'Roboto', 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    background-color: #F7F8FD;
+    border-bottom: 1.5px solid #2A2A2A !important; 
+    padding: 10px 12px;
+}
+
+/* 표의 전체적인 세로 정렬 보정 */
+th, td {
+    padding: 5px;
+    text-align: center;
+    border-bottom: 1px solid #898A8D;
+    height: 50px;
+    vertical-align: middle;
+}
+
+/* 마지막 행은 밑줄 제거 (테두리와 겹치지 않게) */
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+td {
+    font-family: 'Roboto', 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+/* 마지막 열(버튼이 있는 칸)의 너비를 고정하고 내부 여백을 줍니다. */
+td:last-child {
+    width: 250px;       
+    padding-right: 20px; 
+    padding-left: 20px;  
+    text-align: center;  
+}
+
+/* 버튼 스타일 */
+.edit-btn, .delete-btn {
+    border: none;
+    border-radius: 48.5px;
+    padding: 6px 31.5px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.edit-btn {
+    background-color: #186CE9;
+    margin-right: 8px;
+}
+
+.delete-btn {
+    background-color: #898A8D;
+}
+
+.footer-action {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;               
+    padding-right: 0;          
+}
+
+.enroll-btn {
+    background-color: #186CE9;
+    padding: 0px 45px;
+    border: none;
+    border-radius: 3px;
+    font-size: 20px;
+    color: white;
+    font-weight: 400;
+}
