@@ -11,7 +11,7 @@
     <div class="signup-container">
 
         <div class="logo">
-            <img src="/asset/logo.png">
+            <img src="/asset/logo5.png">
         </div>
 
         <div class="signup-box">
@@ -25,53 +25,65 @@
             <div class="signup-content">
                 <div class="form">
                     <label>이름</label>
-                    <input type="text" placeholder="이름을 입력해 주세요">
+                    <input type="text" id="name" placeholder="이름을 입력해 주세요">
+                    <div class="error-message" id="name-error"></div>
                 </div>
+                
 
-                <div class="form">
+                <div class="form radio-form">
                     <label>성별</label>
-
                     <div class="radio-group">
                         <label><input type="radio" name="gender">남</label>
                         <label><input type="radio" name="gender">여</label>
                     </div>
+                    <div class="error-message" id="gender-error"></div>
                 </div>
+                
 
             <div class="form">
                 <label>생년월일</label>
+
                 <div class="birth-box">
-                    <input type="text">
+                    <input type="text" class="birth-input" maxlength="4" inputmode="numeric">
                     <span>년</span>
                 </div>
 
                 <div class="birth-box">
-                    <input type="text">
+                    <input type="text" class="birth-input" maxlength="2" inputmode="numeric">
                     <span>월</span>
                 </div>
 
                 <div class="birth-box">
-                    <input type="text">
+                    <input type="text" class="birth-input" maxlength="2" inputmode="numeric">
                     <span>일</span>
                 </div>
+                <div class="error-message" id="birth-error"></div>
             </div>
+            
 
             <div class="form">
                 <label>이메일</label>
-                <input type="email" placeholder="example@eulji.ac.kr">
+                <input type="email" id="email" placeholder="example@eulji.ac.kr">
+                <div class="error-message" id="email-error"></div>
             </div>
+            
 
             <div class="form">
                 <label>전화번호</label>
-                <input type="text" placeholder="010-XXXX-XXXX">
+                <input type="text" id="phone" placeholder="010-XXXX-XXXX">
+                <div class="error-message" id="phone-error"></div>
             </div>
+            
 
-            <div class="form">
+            <div class="form radio-form">
                 <label>소속 구분</label>
                 <div class="radio-group">
                     <label><input type="radio" name="role">학생</label>
                     <label><input type="radio" name="role">교수</label>
                 </div>
+                <div class="error-message" id="role-error"></div>
             </div>
+            
 
             <div class="signup-footer">
                 <button class="next-btn">다음</button>
@@ -82,5 +94,7 @@
     </div>
 
 </div>
+
+<script src="/src/js/pages/signup1.js"></script>
 </body>
 </html>
