@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입2</title>
+
+
+    <link rel="stylesheet" href="/src/css/ui/module/signup.css">
+    <link rel="stylesheet" href="/src/css/pages/student/signup2.css">
+
+
+</head>
+
+<body>
+    <div class="signup-container">
+
+
+        <div class="logo">
+            <img src="/asset/logo5.png" alt="로고">
+        </div>
+
+
+        <div class="signup-box">
+
+
+            <div class="progress-bar">
+                <div class="progress-fill step2"></div>
+            </div>
+
+
+            <h2 class="signup-title">가입을 위한 정보를 입력해 주세요</h2>
+
+
+            <div class="signup-content">
+
+
+                <div class="form">
+                    <label for="college">학부</label>
+                    <div class="field-wrap">
+                        <select id="college">
+                            <option value="">선택</option>
+                            <option value="medical_college">의과대학</option>
+                            <option value="nursing_college">간호대학</option>
+                            <option value="health_science_college">보건과학대학</option>
+                            <option value="free_major_school">자유전공학부</option>
+                            <option value="advanced_school">첨단학부</option>
+                            <option value="natural_school">자연계열학부</option>
+                            <option value="human_social_school">인문사회계열학부</option>
+                        </select>
+                        <p class="error-message" id="college-error"></p>
+                    </div>
+                </div>
+
+
+                <div class="form">
+                    <label for="department">학과</label>
+                    <div class="field-wrap">
+                        <select id="department">
+                            <option value="">선택</option>
+                        </select>
+                        <p class="error-message" id="department-error"></p>
+                    </div>
+                </div>
+
+
+                <div class="form">
+                    <label for="grade">학년</label>
+                    <div class="field-wrap">
+                        <select id="grade">
+                            <option value="">선택</option>
+                            <option value="1">1학년</option>
+                            <option value="2">2학년</option>
+                            <option value="3">3학년</option>
+                            <option value="4">4학년</option>
+                        </select>
+                        <p class="error-message" id="grade-error"></p>
+                    </div>
+                </div>
+
+
+                <div class="form">
+                    <label for="studentId">학번</label>
+                    <div class="field-wrap">
+                        <input type="text" id="studentId" placeholder="20XXXXXXXX" maxlength="10" inputmode="numeric">
+                        <p class="error-message" id="studentId-error"></p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="signup-footer">
+                <button class="next-btn">다음</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/src/js/pages/student/signup2.js"></script>
+</body>
+
+</html>
