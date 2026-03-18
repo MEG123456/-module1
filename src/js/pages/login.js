@@ -111,11 +111,24 @@ loginBtn.addEventListener("click", () => {
         pwError.textContent = "";
         pwInput.parentElement.classList.remove("error");
     }
-    if (
-        id !== "" &&
-        pw.length >= 8 &&
-        pw.length <= 12
-    ) {
-        alert("로그인 시도!"); // 나중에 서버 연결시 지워야댐 확인용임!!!
-    }  
-});    
+    
+    
+    if (!isValid) return;
+        const savedUser = JSON.parse(localStorage.getItem("user"));
+
+        if (!savedUser) {
+            alert("회원가입을 먼저 해주세요");
+            return;
+        }
+
+        if (id === savedUser.id && pw === savedUser.password) {
+            alert("로그인 성공!");
+
+        localStorage.setItem("isLogin", "true");
+        //이동 (원하는 페이지로 바꿔도 됨)
+        // window.location.href = ""
+        } else {
+            pwError.textContent = "아이디 또는 비밀번호가 일치하지 않습니다";
+            pwInput.parentElement.classList.add("error");
+        }
+    });
