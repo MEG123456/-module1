@@ -90,5 +90,5 @@ loginBtn.addEventListener("click", () => {
         pw.length <= 12
     ) {
         alert("로그인 시도!"); // 나중에 서버 연결시 지워야댐 확인용임!!!
-    }
+    } ㅊ   
 });    

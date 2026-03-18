@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 틀</title>
+    <link rel="stylesheet" href="/src/css/ui/module/signup.css"/>
+    <link rel="stylesheet" href="/src/css/pages/signup1.css">
+</head>
+<body>
+    <div class="signup-container">
+
+        <div class="logo">
+            <img src="/asset/logo.png">
+        </div>
+
+        <div class="signup-box">
+
+            <div class="progress-bar">
+                <div class="progress-fill step1"></div>
+            </div>
+
+            <h2 class="signup-title">가입을 위한 정보를 입력해 주세요</h2>
+
+            <div class="signup-content">
+                <div class="form">
+                    <label>이름</label>
+                    <input type="text" placeholder="이름을 입력해 주세요">
+                </div>
+
+                <div class="form">
+                    <label>성별</label>
+
+                    <div class="radio-group">
+                        <label><input type="radio" name="gender">남</label>
+                        <label><input type="radio" name="gender">여</label>
+                    </div>
+                </div>
+
+            <div class="form">
+                <label>생년월일</label>
+                <div class="birth-box">
+                    <input type="text">
+                    <span>년</span>
+                </div>
+
+                <div class="birth-box">
+                    <input type="text">
+                    <span>월</span>
+                </div>
+
+                <div class="birth-box">
+                    <input type="text">
+                    <span>일</span>
+                </div>
+            </div>
+
+            <div class="form">
+                <label>이메일</label>
+                <input type="email" placeholder="example@eulji.ac.kr">
+            </div>
+
+            <div class="form">
+                <label>전화번호</label>
+                <input type="text" placeholder="010-XXXX-XXXX">
+            </div>
+
+            <div class="form">
+                <label>소속 구분</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="role">학생</label>
+                    <label><input type="radio" name="role">교수</label>
+                </div>
+            </div>
+
+            <div class="signup-footer">
+                <button class="next-btn">다음</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>
