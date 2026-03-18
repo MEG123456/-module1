@@ -1,0 +1,77 @@
+body {
+    padding: 10px 50px;
+}
+
+.enroll_body {
+    background: #F3F3F3;
+    border: 3px solid #898A8D;
+    border-radius: 8px;
+    padding: 25px;
+}
+
+.enroll_box {
+    background: #FFFFFF;
+    border: 0.5px solid #000000;
+    padding: 50px 90px;
+    overflow-y: scroll; /* auto */
+}
+
+.input_group {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.align_top {
+    align-items: flex-start;
+}
+
+label {
+    font-weight: 600;
+    font-size: 24px;
+    width: 160px;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.word {
+    border: 1px solid #D9D9D9;
+    background: #F3F3F3;
+    height: 40px;
+    width: 400px;
+    padding-left: 10px;
+}
+
+.about_text {
+    border: 1px solid #D9D9D9;
+    background: #F3F3F3;
+    height: 200px;
+    width: 700px;
+    resize: none;
+    padding: 10px;
+    box-sizing: border-box; /* 패딩이 너비에 포함되도록 설정 */
+}
+
+.descrip_con {
+    display: flex;
+    position: relative;
+    flex: 1;
+}
+
+.btn_box {
+    position: absolute;
+    right: -50px;
+    bottom: 0px;
+    margin: 0;
+}
+
+.save_btn {
+    background-color: #186CE9;
+    color: white;
+    border: none;
+    padding: 0px 45px;
+    border-radius: 3px;
+    font-size: 20px;
+    font-weight: 400;
+
+}
