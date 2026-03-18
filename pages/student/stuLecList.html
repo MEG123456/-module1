@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학생 강의목록</title>
+    <link rel="stylesheet" href="/src/css/pages/stuLecList.css">
+    <link rel="stylesheet" href="/src/css/ui/module/graybox.css">
+</head>
+<body>
+    <div class="gb-container">
+        <div class="gb-sub">
+            <div class="search-container">
+                <input type="text" class="lecture-search">
+                <button type="button" class="lecSearch_btn">검색</button>
+            </div>
+            <div class="filter-container">
+                <p class="filter-title">강의 필터</p>
+
+                <div class="filter-group">
+                    <label>학부</label><br>
+                    <select name="college">
+                        <option value="all-college" selected>전체</option>
+                        <option value="hightech">첨단학부</option>
+                        <option value="nature">자연계열학부</option>
+                        <option value="human">인문사회계열학부</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="major-filter">학과</label><br>
+                    <select id="major-filter" class="major-select" disabled>
+                        <option value="all-major" selected>전체</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="grade-filter">학년</label><br>
+                    <select id="grade-filter" class="major-select" disabled>
+                        <option value="all-grade" selected>전체</option>
+                        <option value="first">1학년</option>
+                        <option value="second">2학년</option>
+                        <option value="third">3학년</option>
+                        <option value="fourth">4학년</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>구분</label><br>
+                    <select name="sort">
+                        <option value="all-sort" selected>전체</option>
+                        <option value="sort-major">전공</option>
+                        <option value="sort-etc">교양</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>요일</label><br>
+                    <select name="week">
+                        <option value="all-week" selected>전체</option>
+                        <option value="mon">월요일</option>
+                        <option value="tue">화요일</option>
+                        <option value="wed">수요일</option>
+                        <option value="thu">목요일</option>
+                        <option value="fri">금요일</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>학점</label><br>
+                    <select name="score">
+                        <option value="all-score" selected>전체</option>
+                        <option value="one">1학점</option>
+                        <option value="two">2학점</option>
+                        <option value="three">3학점</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="gb-main">
+
+        </div>
+    </div>
+    <script type="module" src="/src/js/layout/includeGraybox.js"></script>
+</body>
+</html>
