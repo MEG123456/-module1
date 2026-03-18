@@ -20,10 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (textFilled && birthFilled && genderSelected && roleSelected) {
             nextBtn.classList.add('active-btn');
-            nextBtn.disabled = false;
         } else {
             nextBtn.classList.remove('active-btn');
-            nextBtn.disabled = true; 
         }
     };
 
@@ -123,6 +121,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (!isValid && firstErrorInput) firstErrorInput.focus();
-        if (isValid) alert("성공! 다음 단계로 이동합니다.");
-    });
+        if (isValid) {
+            const selectedRole = document.querySelector('input[name="role"]:checked');
+
+            if (selectedRole) {
+                    if (selectedRole.value === "student") {
+                        window.location.href = "/pages/student/signup2.html";
+                    } else if (selectedRole.value === "professor") {
+                        window.location.href = "pages/professor/signup3.html";
+                    }
+                }
+            }
+        })
 });

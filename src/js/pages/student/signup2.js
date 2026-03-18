@@ -170,7 +170,7 @@ nextBtn.addEventListener("click", () => {
     updateButtonState();
 
     if (isCollegeValid && isDepartmentValid && isGradeValid && isStudentIdValid) {
-        alert("다음 단계로 이동");
+        window.location.href = "/pages/signup4.html"
     }
 });
 

@@ -1,0 +1,70 @@
+.form {
+    width: 400px;
+    justify-content: flex-start;
+    margin-bottom: 25px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-pwd {
+    position: absolute;
+    right: 15px;
+    top: 8px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.form > label {
+    width: 80px;
+    gap: 4px;
+    font-size: 14px;
+    color: #464A58;
+    white-space: nowrap;
+    margin-right: 15px;
+}
+
+.form input[type="text"],
+.form input[type="password"] {
+    width: 300px;
+    height: 32px;
+    padding: 4px 10px;
+    border: 1px solid #898A8D;
+}
+
+.form input::placeholder {
+    color: #898A8D;
+    font-size: 12px;
+}
+
+.signup-content {
+    margin-top: 70px;
+    gap: 25px;
+}
+
+.input-wrap {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.error-message {
+    position: absolute;
+    top: 45px;
+    font-size: 12px;
+    color: #FF0000;
+    pointer-events: none;
+}
+
+.error-border {
+    border: 1px solid #FF0000 !important;
+    outline: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    box-shadow: 0 0 0 30px white inset !important;
+}

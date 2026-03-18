@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 마지막!</title>
+    <link rel="stylesheet" href="/src/css/ui/module/signup.css"/>
+    <link rel="stylesheet" href="/src/css/pages/signup5.css">
+</head>
+<body>
+    <div class="signup-container">
+
+        <div class="logo">
+            <img src="/asset/logo5.png">
+        </div>
+    <div class="signup-box">
+
+    <div class="complete-box">
+
+        <h1 class="complete-title">회원 가입이 완료 되었습니다.</h1>
+
+        <p class="complete-desc">
+            로그인 페이지에서 <br>
+            다시 로그인 해주세요
+        </p>
+
+        <div class="signup-footer">
+            <button class="next-btn active-btn">로그인하기</button>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    document.querySelector('.next-btn').addEventListener('click', () => {
+    window.location.href = "/pages/login.html";
+});
+</script>
+</body>
+</html>
