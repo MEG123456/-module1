@@ -1,0 +1,105 @@
+/* html과 body부터 화면을 꽉 채우게 설정 */
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; /* 전체 페이지 스크롤 원천 차단 */
+}
+
+
+.body-main {
+    display: flex;
+    flex-direction: column;
+
+    height: calc(100vh - 100px);
+    padding: 10px 50px;
+    box-sizing: border-box;
+    overflow: hidden; /* 바깥쪽 스크롤 방지 */
+}
+
+.body-title {
+    font-family: 'Roboto', 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+
+.enroll-body {
+    background: #F3F3F3;
+    border: 3px solid #898A8D;
+    border-radius: 8px;
+    padding: 25px;
+    flex: 1;           /* 남는 세로 공간을 다 차지함 */
+    display: flex;
+    flex-direction: column;
+    min-height: 0;      /* 중요: flex 자식이 부모를 뚫고 나가지 못하게 방어 */
+    overflow: hidden;  /* 회색 박스 자체도 스크롤 방지 */
+}
+
+.enroll-box {
+    background: #FFFFFF;
+    border: 0.5px solid #000000;
+    padding: 50px 90px;
+    flex: 1;           /* 회색 박스 내부에서 남는 공간 차지 */
+    overflow-y: auto;  /* 내용이 많아지면 세로 스크롤 생성 */
+    min-height: 0;      /* 중요: 내부 스크롤이 작동하게 만드는 핵심 */
+}
+
+.input-group {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.align-top {
+    align-items: flex-start;
+}
+
+label {
+    font-weight: 600;
+    font-size: 24px;
+    width: 160px;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.word {
+    border: 1px solid #D9D9D9;
+    background: #F3F3F3;
+    height: 40px;
+    width: 400px;
+    padding-left: 10px;
+}
+
+.about-text {
+    border: 1px solid #D9D9D9;
+    background: #F3F3F3;
+    height: 200px;
+    width: 700px;
+    resize: none;
+    padding: 10px;
+    box-sizing: border-box; /* 패딩이 너비에 포함되도록 설정 */
+}
+
+.descrip-con {
+    display: flex;
+    position: relative;
+    flex: 1;
+}
+
+
+.save-btn {
+    background-color: #186CE9;
+    color: white;
+    border: none;
+    padding: 0px 45px;
+    border-radius: 3px;
+    font-size: 20px;
+    font-weight: 400;
+
+    position: absolute;
+    right: -50px;
+    bottom: 0px;
+    margin: 0;
+}

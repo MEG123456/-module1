@@ -5,68 +5,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../src/css/ui/module/header.css">
-    <link rel="stylesheet" href="../src/css/ui/module/sidebar.css">
-    <link rel="stylesheet" href="../src/css/ui/module/modal.css">
-    <link rel="stylesheet" href="../src/css/ui/module/profLec2.css">
+    <link rel="stylesheet" href="/src/css/ui/module/header.css">
+    <link rel="stylesheet" href="/src/css/ui/module/sidebar.css">
+    <link rel="stylesheet" href="/src/css/pages/professor/profLec2.css">
+    <link rel="stylesheet" href="/src/css/ui/module/modal.css">
 </head>
 
 <body>
-    <div class="enroll_body">
-        <div class="enroll_box">
-            <div class="input_group">
-                <label>강의 명 :</label>
-                <input type="text" name="lecture_title" class="word">
-            </div>
+    <div class="container"> <!--헤더-->
 
-            <div class="input_group">
-                <label>교수명 :</label>
-                <input type="text" name="prof_name" class="word">
-            </div>
+        <div class="container-main"> <!--사이드바-->
 
-            <div class="input_group">
-                <label>정원 :</label>
-                <input type="number" name="lecture_max" class="word">
-            </div>
+            <div class="body-main"> <!--바디 메인-->
+                <p class="body-title">내 강의</p>
+                
+                <div class="enroll-body"> <!--회색 박스-->
+                    <div class="enroll-box"> <!--흰색 박스-->
 
-            <div class="input_group">
-                <label>요일/시간 :</label>
-                <input type="text" name="lecture_time" class="word">
-            </div>
+                        <div class="input-group">
+                            <label>강의명 :</label>
+                            <input type="text" name="lecture-title" class="word">
+                        </div>
 
-            <div class="input_group">
-                <label>구분 :</label>
-                <div class="radio_group">
-                    <input type="radio" value="m" name="subject" id="major" checked>
-                    <label for="major">전공</label>
-                    <input type="radio" value="e" name="subject" id="etc">
-                    <label for="etc">교양</label>
-                </div>
-            </div>
+                        <div class="input-group">
+                            <label>교수명 :</label>
+                            <input type="text" name="prof-name" class="word">
+                        </div>
 
-            <div class="input_group">
-                <label>학점 :</label>
-                <input type="text" name="credit" class="word">
-            </div>
+                        <div class="input-group">
+                            <label>정원 :</label>
+                            <input type="number" name="lecture_max" class="word">
+                        </div>
 
-            <div class="input_group">
-                <label>강의 :</label>
-                <input type="text" name="classroom" class="word">
-            </div>
+                        <div class="input-group">
+                            <label>요일/시간 :</label>
+                            <input type="text" name="lecture-time" class="word">
+                        </div>
 
-            <div class="input_group align_top">
-                <label>설명 :</label>
-                <div class="descrip_con">
-                    <textarea name="about" class="about_text"></textarea>
-                    <div class="btn_box">
-                        <button type="submit" id="save-btn" class="save_btn">저장</button>
+                        <div class="input-group">
+                            <label>구분 :</label>
+                            <div class="radio-group">
+                                <input type="radio" value="m" name="subject" id="major" checked>
+                                <label for="major">전공</label>
+                                <input type="radio" value="e" name="subject" id="etc">
+                                <label for="etc">교양</label>
+                            </div>
+                        </div>
 
-                        <div id="modalOverlay" class="modal-overlay">
-                            <div class="modal-content">
-                                <p class="modal-text">변경사항을 저장하시겠습니까?</p>
-                                <div class="modal-buttons">
-                                    <button id="confirmBtn" class="confirm-btn">확인</button>
-                                    <button id="cancelBtn" class="cancel-btn">취소</button>
+                        <div class="input-group">
+                            <label>학점 :</label>
+                            <input type="text" name="credit" class="word">
+                        </div>
+
+                        <div class="input-group">
+                            <label>강의실 :</label>
+                            <input type="text" name="classroom" class="word">
+                        </div>
+
+                        <div class="input-group align-top">
+                            <label>설명 :</label>
+                            <textarea name="about" class="about-text"></textarea>
+                        </div>
+
+                        <div class="descrip-con">
+                            <button type="submit" id="saveBtn" class="save-btn">저장</button>
+
+                            <div id="modalOverlay" class="modal-overlay">
+                                <div class="modal-content">
+                                    <p class="modal-text">새 강좌를 등록하시겠습니까?</p>
+                                    <div class="modal-buttons">
+                                        <button id="confirmBtn" class="confirm-btn">확인</button>
+                                        <button id="cancelBtn" class="cancel-btn">취소</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -76,10 +86,10 @@
         </div>
     </div>
 
-    <script type="module" src="../src/js/utils/modal.js"></script>
-    <script type="module" src="../src/js/layout/includeHeader.js"></script>
-    <script type="module" src="../src/js/layout/includeProfSidebar.js"></script>
-    <script type="module" src="../src/js/pages/profLec2.js"></script>
+    <script type="module" src="/src/js/utils/modal.js"></script>
+    <script type="module" src="/src/js/layout/includeHeader.js"></script>
+    <script type="module" src="/src/js/layout/includeProfSidebar.js"></script>
+    <script type="module" src="/src/js/pages/professor/profLec2.js"></script>
 </body>
 
 </html>
