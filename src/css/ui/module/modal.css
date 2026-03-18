@@ -1,0 +1,71 @@
+/* 모달이 활성화되었을 때 보일 스타일 */
+.modal-overlay.active {
+    display: flex;
+}
+
+/* 1. 모달 전체 배경 */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    
+    /* [핵심] 평소에는 안 보이게 설정 */
+    display: none; 
+    
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* 2. 흰색 박스 (테두리와 그림자가 핵심) */
+.modal-content {
+    background-color: #F1F2F4;
+    width: 353px;
+    padding: 48px 25px;
+    border: 2px solid #898A8D; 
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.4); /* 짙은 그림자 */
+}
+
+/* 3. 문구 스타일 */
+.modal-text {
+    font-family: 'Roboto', 'Noto Sans KR', sans-serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: #000;
+    margin-top: 0;
+    margin-bottom: 38px;    /* 문구와 버튼 사이 간격 */
+    letter-spacing: -0.25px;
+}
+
+/* 4. 버튼 영역 */
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 35px;              /* 버튼 사이의 넓은 간격 */
+}
+
+/* 5. 버튼 스타일 (크기와 색상) */
+.modal-buttons button {
+    width: 95px;           /* 버튼 너비 */
+    height: 40px;           /* 버튼 높이 */
+    border: none;
+    border-radius: 3px;
+
+    font-size: 17px;
+    font-weight: 400;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+/* 확인 버튼 색상 */
+.btn-confirm {
+    background-color: #186CE9;
+}
+
+/* 취소 버튼 색상 */
+.btn-cancel {
+    background-color: #898A8D;
+}
