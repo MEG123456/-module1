@@ -1,0 +1,102 @@
+/* 전체 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.signup-container {
+    position: relative;
+    width: 1000px;
+}
+
+.logo {
+    position: absolute;
+    top: -100px;
+    left: -200px;
+}
+
+.logo img {
+    width: 230px;
+}
+
+.signup-box {
+    width: 1000px;
+    height: 500px;
+    padding: 40px 50px;
+
+    background-color: #ffffff;
+    border: 1px solid #898A8D;
+    position: relative;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 25px;
+    background-color: #F7F8FD;
+    margin-bottom: 25px;
+    border-radius: 3px;
+    overflow: hidden;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #3A66E6;
+}
+
+.step1 { width: 30%; }
+.step2 { width: 65%; }
+.step3 { width: 100%; }
+
+.signup-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    color: #000000;
+}
+
+.signup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.signup-footer {
+    position: absolute;
+    justify-content: flex-end;
+    bottom: 30px;
+    right: 50px;
+}
+
+.next-btn {
+    width: 100px;
+    height: 38px;
+
+    border: 1px solid #3A66E6;
+    border-radius: 4px;
+
+    background-color: #ffffff;
+    color: #3A66E6;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.2s;
+}

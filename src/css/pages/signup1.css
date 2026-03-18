@@ -1,0 +1,84 @@
+
+.form {
+    width: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 12px;
+    gap: 10px;
+}
+
+.form > label {
+    width: 80px;
+    gap: 4px;
+    font-size: 14px;
+    color: #464A58;
+    white-space: nowrap;
+}
+
+.form input[type="text"],
+.form input[type="email"] {
+    flex: none;
+    width: 300px;
+    height: 32px;
+    padding: 4px 12px;
+    border: 1px solid #898A8D;
+    white-space: nowrap;
+}
+
+.radio-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: auto;
+
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    color: #464A58;
+    font-size: 14px;
+    gap: 5px;
+    white-space: nowrap;
+
+}
+
+
+.birth-wrap {
+    display: flex;
+}
+
+.birth-box {
+    position: relative;
+}
+
+.birth-box input {
+    width: 100px !important;
+    height: 32px;
+    padding-right: 20px;  
+    border: 1px solid #898A8D;
+    text-align: center;
+}
+
+.birth-box span {
+    position: absolute;  
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #898A8D;
+    pointer-events: none; 
+}
+
+
+.form .birth-box {
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+}
+
+.form .birth-box:last-child {
+    margin-right: 0;
+}
