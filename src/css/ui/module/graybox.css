@@ -12,16 +12,15 @@
 
 
 .gb-sub {
-    width: 200px;
+    width: 285px;
     flex-shrink: 0;
     border-right: 3px solid #898A8D;
-    padding: 20px;
+    padding: 20px 10px;
     box-sizing: border-box;
 }
 
 .gb-main {
     flex-grow: 1; /* 남은 모든 공간 차지 */
-    padding: 20px;
     box-sizing: border-box;
     overflow-y: auto; /* 내부 스크롤 */
 }

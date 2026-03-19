@@ -1,15 +1,123 @@
+.filter-container {
+    padding-left: 10px;
+}
+
 .filter-title {
-    font-size: 18px;
+    font-size: 25px;
     font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
     color: #545559;
+}
+
+.filter-group label{
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    color: #545559;
+}
+
+.filter-group {
+    padding-bottom: 10px;
+}
+
+.filter-group select {
+    width: 200px;
+    height: 31px;
+    border: 1.5px solid #545559;
+    font-size: 18px;
+    font-weight: 450;
+    color: #545559;
+}
+
+.search-container {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 15px;     /* 선과 검색창 사이의 간격 */
+    margin-bottom: 10px;
+    border-bottom: 2px solid #898A8D;
+    margin-left: -12px;  
+    margin-right: -12px;
+    padding-left: 13px;
+    padding-right: 13px;
 }
 
 .lecture-search {
     border: 3px solid #4563B2;
+    box-sizing: border-box;
+    height: 50px;
+    width: 200px;
 }
 
-.filter-group {
-    font-size: 15px;
-    color: #545559;
+.lecture-search::placeholder {
+    font-size: 18px;
+    font-weight: 600;
 }
 
+.lecSearch_btn {
+    color: #FFFFFF;
+    background: #4563B2;
+    border: none;
+    font-size: 26px;
+    align-items: center;
+    font-weight: 500;
+    height: 50px;
+    width: 60px
+}
+
+.checkbtn-container {
+    padding-top: 5px;
+    padding-left: 17px;
+}
+
+.check-btn {
+    background-color: #5D87F5;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    width: 85px;
+    height: 30px;
+    font-size: 17px;
+}
+
+
+.allLec-container {
+    height: 100%;
+    width: 100%;
+}
+
+.allLec-table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    table-layout: fixed;
+}
+
+.allLec-table tbody tr {
+    height: calc(100% / 11);
+}
+
+.allLec-table thead th {
+    background-color: #F7F8FD;
+    font-size: 27px;
+    font-weight: bold;
+    padding: 10px 10px;
+    border-bottom: 2px solid #898A8D;
+    border-right: 1px solid #898A8D;
+}
+
+.allLec-table thead th:last-child,
+.allLec-table tbody td:last-child {
+    border-right: none;
+}
+
+.allLec-table tbody td {
+    padding: 11px 10px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid #D1D1D1;
+    border-right: 1px solid #D1D1D1;
+    color: #444;
+}
