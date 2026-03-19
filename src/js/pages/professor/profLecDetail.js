@@ -1,9 +1,8 @@
-// profLecDetail.js 전체 코드
 const $ = (selector) => document.querySelector(selector);
 
 const store = {
     getLocalStorage() {
-        // profLec2.js와 동일하게 "lectures" 키를 사용해야 합니다.
+        // profLec2.js와 동일하게 "lectures" 키를 사용
         return JSON.parse(localStorage.getItem("lectures")) || [];
     }
 };
@@ -15,8 +14,7 @@ function LectureDetail() {
 
     this.init = () => {
         this.lectures = store.getLocalStorage();
-        
-        // 데이터가 있는지 콘솔에서 먼저 확인해보세요 (F12 - Console)
+
         console.log("불러온 데이터 전체:", this.lectures);
         console.log("선택된 인덱스:", index);
 
@@ -29,13 +27,21 @@ function LectureDetail() {
         const backBtn = $("#backBtn");
         if (backBtn) {
             backBtn.addEventListener("click", () => {
-                window.location.href = "profLec.html";
+                const prevPage = document.referrer; // 이전 페이지 주소 가져오기
+
+                // 이전 페이지 주소에 'stuLecList'가 포함되어 있다면 학생 페이지로 이동
+                if (prevPage.includes("stuLecList.html")) {
+                    // 파일 구조에 맞춰 상대 경로 설정 (professor 폴더에서 student 폴더로)
+                    window.location.href = "../student/stuLecList.html";
+                } else {
+                    // 그 외(교수 페이지에서 왔을 때)에는 기존처럼 교수 목록으로 이동
+                    window.location.href = "profLec.html";
+                }
             });
         }
     };
 
     this.renderDetail = (data) => {
-        // 필드명이 profLec2.js에서 저장한 것과 일치해야 합니다.
         $("#view-title").innerText = data.title || "-";
         $("#view-prof").innerText = data.prof || "-";
         $("#view-max").innerText = data.max || "-";
