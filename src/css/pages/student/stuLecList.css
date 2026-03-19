@@ -3,22 +3,23 @@
 }
 
 .filter-title {
-    font-size: 25px;
+    font-size: 28px;
     font-weight: bold;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     color: #545559;
 }
 
 .filter-group label{
     display: block;
-    font-size: 18px;
+    font-size: 21px;
     font-weight: 500;
     color: #545559;
+    padding-bottom: 2px;
 }
 
 .filter-group {
-    padding-bottom: 10px;
+    padding-bottom: 15px;
 }
 
 .filter-group select {
@@ -66,8 +67,8 @@
 }
 
 .checkbtn-container {
-    padding-top: 5px;
-    padding-left: 17px;
+    padding-top: 20px;
+    padding-left: 160px;
 }
 
 .check-btn {
@@ -75,7 +76,7 @@
     color: white;
     border: none;
     border-radius: 3px;
-    width: 85px;
+    width: 95px;
     height: 30px;
     font-size: 17px;
 }
@@ -95,7 +96,7 @@
 }
 
 .allLec-table tbody tr {
-    height: calc(100% / 11);
+    height: calc(100% / 12);
 }
 
 .allLec-table thead th {
