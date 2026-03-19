@@ -156,7 +156,6 @@ grade.addEventListener("change", () => {
 
 studentId.addEventListener("input", () => {
     studentId.value = studentId.value.replace(/[^0-9]/g, "");
-
     validateStudentId();
     updateButtonState();
 });
@@ -170,7 +169,15 @@ nextBtn.addEventListener("click", () => {
     updateButtonState();
 
     if (isCollegeValid && isDepartmentValid && isGradeValid && isStudentIdValid) {
-        window.location.href = "/pages/signup4.html"
+        const signup2Data = {
+            college: college.value,
+            department: department.value,
+            grade: grade.value,
+            studentId: studentId.value.trim()
+        };
+
+        localStorage.setItem("signup2Data", JSON.stringify(signup2Data));
+        window.location.href = "/pages/signup4.html";
     }
 });
 

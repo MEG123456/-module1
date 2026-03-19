@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     const nextBtn = document.querySelector('.next-btn');
-    const signupForm = document.querySelector('.signup-box');
 
     const birthInputs = document.querySelectorAll('.birth-input');
     const phoneInput = document.getElementById('phone');
@@ -11,10 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkAllFilled = () => {
         const textFilled = [nameInput, emailInput, phoneInput].every(input => input && input.value.trim() !== "");
         const birthFilled = Array.from(birthInputs).every(input => input.value.trim() !== "");
-        
+
         const genderRadios = document.getElementsByName('gender');
         const roleRadios = document.getElementsByName('role');
-        
+
         const genderSelected = Array.from(genderRadios).some(radio => radio.checked);
         const roleSelected = Array.from(roleRadios).some(radio => radio.checked);
 
@@ -29,9 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
         e.target.value = e.target.value.replace(/[^0-9]/g, '');
         checkAllFilled();
     };
+
     birthInputs.forEach(input => input.addEventListener('input', onlyNumber));
     if (phoneInput) phoneInput.addEventListener('input', onlyNumber);
-
 
     const inputConfig = [
         { input: nameInput, msg: "이름을 다시 확인해 주세요", border: true },
@@ -39,8 +38,9 @@ document.addEventListener('DOMContentLoaded', () => {
         { input: phoneInput, msg: "전화번호를 다시 확인해 주세요", border: false }
     ];
 
-    inputConfig.forEach(({input, msg, border}) => {
+    inputConfig.forEach(({ input, msg, border }) => {
         if (!input) return;
+
         input.addEventListener('input', () => {
             const errorElement = document.getElementById(`${input.id}-error`);
             const val = input.value.trim();
@@ -52,10 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (errorElement) errorElement.textContent = "";
                 input.classList.remove('error-border');
             }
+
             checkAllFilled();
         });
     });
-
 
     ['gender', 'role'].forEach(name => {
         const radios = document.getElementsByName(name);
@@ -71,21 +71,20 @@ document.addEventListener('DOMContentLoaded', () => {
     birthInputs.forEach(input => {
         input.addEventListener('input', () => {
             const anyEmpty = Array.from(birthInputs).some(i => i.value.trim() === "");
-            const allFilled = !anyEmpty;
 
             if (anyEmpty) {
                 if (birthError) birthError.textContent = "생년월일을 다시 확인해 주세요";
             } else {
                 if (birthError) birthError.textContent = "";
             }
+
             checkAllFilled();
         });
     });
 
-
     nextBtn.addEventListener('click', () => {
         let isValid = true;
-        let firstErrorInput = null; 
+        let firstErrorInput = null;
 
         const handleError = (inputElement, errorElement, message, showBorder = false) => {
             isValid = false;
@@ -94,8 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (inputElement && showBorder) inputElement.classList.add('error-border');
         };
 
-        if (nameInput.value.trim() === "") handleError(nameInput, document.getElementById('name-error'), "이름을 다시 확인해 주세요", true);
-        
+        if (nameInput.value.trim() === "") {
+            handleError(nameInput, document.getElementById('name-error'), "이름을 다시 확인해 주세요", true);
+        }
+
         const genderRadios = document.getElementsByName('gender');
         if (![...genderRadios].some(r => r.checked)) {
             handleError(null, document.getElementById('gender-error'), "성별을 다시 확인해 주세요");
@@ -120,17 +121,34 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!firstErrorInput) firstErrorInput = roleRadios[0];
         }
 
-        if (!isValid && firstErrorInput) firstErrorInput.focus();
+        if (!isValid && firstErrorInput) {
+            firstErrorInput.focus();
+        }
+
         if (isValid) {
+            const selectedGender = document.querySelector('input[name="gender"]:checked');
             const selectedRole = document.querySelector('input[name="role"]:checked');
 
+            const signup1Data = {
+                name: nameInput.value.trim(),
+                gender: selectedGender ? selectedGender.value : "",
+                birthYear: birthInputs[0].value.trim(),
+                birthMonth: birthInputs[1].value.trim(),
+                birthDay: birthInputs[2].value.trim(),
+                email: emailInput.value.trim(),
+                phone: phoneInput.value.trim(),
+                role: selectedRole ? selectedRole.value : ""
+            };
+
+            localStorage.setItem("signup1Data", JSON.stringify(signup1Data));
+
             if (selectedRole) {
-                    if (selectedRole.value === "student") {
-                        window.location.href = "/pages/student/signup2.html";
-                    } else if (selectedRole.value === "professor") {
-                        window.location.href = "pages/professor/signup3.html";
-                    }
+                if (selectedRole.value === "student") {
+                    window.location.href = "/pages/student/signup2.html";
+                } else if (selectedRole.value === "professor") {
+                    window.location.href = "/pages/professor/signup3.html";
                 }
             }
-        })
+        }
+    });
 });
