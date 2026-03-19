@@ -151,7 +151,14 @@ nextBtn.addEventListener("click", () => {
     updateButtonState();
 
     if (isCollegeValid && isDepartmentValid && isProfessorCodeValid) {
-        alert("다음 단계로 이동");
+        const signup3Data = {
+            college: college.value,
+            department: department.value,
+            professorCode: professorCode.value.trim()
+        };
+
+        localStorage.setItem("signup3Data", JSON.stringify(signup3Data));
+        window.location.href = "/pages/signup4.html";
     }
 });
 
