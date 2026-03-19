@@ -11,6 +11,8 @@ const store = {
 
 function LectureList() {
     this.lectures = [];
+    // 1. 변수를 함수 스코프 상단에 명시적으로 선언
+    let currentIndex = null; 
 
     this.init = () => {
         this.lectures = store.getLocalStorage("lectures");
@@ -47,30 +49,43 @@ function LectureList() {
     };
 
     const initEventListeners = () => {
-        // 등록 버튼 이벤트
         $("#enrollBtn").addEventListener("click", () => {
             window.location.href = "profLec2.html";
         });
 
-        // 표 내부 버튼 클릭 이벤트 (삭제 & 수정)
         $("#profLecListBody").addEventListener("click", (e) => {
-            const index = e.target.dataset.index; // 클릭된 버튼의 데이터 인덱스 가져오기
+            // dataset.index를 가져올 때 숫자로 변환하여 저장
+            const index = e.target.dataset.index;
+            if (index === undefined) return;
 
-            // 1. 삭제 버튼 클릭 시
             if (e.target.classList.contains("delete-btn")) {
-                if (confirm("정말 이 강의를 삭제하시겠습니까?")) {
-                    this.lectures.splice(index, 1);
-                    store.setLocalStorage("lectures", this.lectures);
-                    renderLectures();
-                }
-                return; // 처리 완료 후 종료
-            }
-
-            // 2. 수정 버튼 클릭 시 (추가된 부분)
-            if (e.target.classList.contains("edit-btn")) {
-                // 주소창 뒤에 ?editIndex=숫자 형태로 붙여서 수정 페이지로 이동
+                currentIndex = Number(index); // 인덱스 저장
+                $("#modalMessage").innerText = "정말 이 강의를 삭제하시겠습니까?";
+                $("#modalOverlay").style.display = "flex";
+            } 
+            else if (e.target.classList.contains("edit-btn")) {
                 window.location.href = `profLec2.html?editIndex=${index}`;
             }
+        });
+
+        // 2. 화살표 함수를 사용하여 'this'가 LectureList 객체를 가리키도록 고정
+        $("#confirmBtn").addEventListener("click", () => {
+            if (currentIndex !== null) {
+                // 선택한 인덱스의 데이터를 삭제
+                this.lectures.splice(currentIndex, 1);
+                // 로컬 스토리지 업데이트
+                store.setLocalStorage("lectures", this.lectures);
+                // 화면 다시 그리기
+                renderLectures();
+                // 모달 닫기 및 인덱스 초기화
+                $("#modalOverlay").style.display = "none";
+                currentIndex = null;
+            }
+        });
+
+        $("#cancelBtn").addEventListener("click", () => {
+            $("#modalOverlay").style.display = "none";
+            currentIndex = null;
         });
     };
 }
