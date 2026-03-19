@@ -11,7 +11,6 @@ const store = {
 
 function LectureList() {
     this.lectures = [];
-    // 1. 변수를 함수 스코프 상단에 명시적으로 선언
     let currentIndex = null;
 
     this.init = () => {

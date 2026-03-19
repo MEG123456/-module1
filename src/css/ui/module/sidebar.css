@@ -1,20 +1,18 @@
-/* 전체 메뉴를 감싸는 컨테이너 */
+/* 전체 컨테이너 */
 .student-sidebar {
     display: flex;
-    list-style: none;   /* 불렛 포인트 제거 */
+    list-style: none;
     padding: 0;
     margin: 0;
     border-bottom: 3px solid #3A66E6;
 }
 
-/* 각 메뉴 항목 */
 .student-sidebar li {
     flex: 1;
     text-align: center;
     position: relative;
 }
 
-/* 메뉴 사이 세로선 만들기 */
 .student-sidebar li::after {
     content: "";
     position: absolute;
@@ -26,7 +24,6 @@
     background-color: #3A66E6; 
 }
 
-/* 마지막 메뉴의 세로선은 제거 */
 .student-sidebar li:last-child::after {
     display: none;
 }
@@ -37,14 +34,14 @@
     font-weight: 500;
     display: block;
     padding: 10px 0;
-    text-decoration: none;  /* 밑줄 제거 */
+    text-decoration: none;
     color: #0B0D0F;
     font-size: 1.2rem;
     text-align: center;
 }
 
-/* 마우스 올렸을 때 효과 */
-.student-sidebar li a:hover {
+/* 선택된 메뉴 표시 */
+.student-sidebar li a.active {
     background-color: #E9E5E5;
     font-weight: bold;
 }
