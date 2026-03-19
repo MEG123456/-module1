@@ -1,0 +1,136 @@
+.container-main {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    padding: 30px;
+}
+
+.left-section {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.right-section {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card {
+    border: 1px solid #898A8D;
+    border-radius:8px;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+.lecture-card,
+.notice-card {
+    height: 250px;  
+    overflow: hidden;
+}
+
+.profile-avatar img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.btn-icon-plus svg {
+    display: block;
+}
+
+.profile-card {
+    background: #F7F8FD;
+    border-radius:8px;
+}
+
+.profile-layout {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    width: 100%;
+    min-height: 100px;
+}
+
+.profile-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.btn-check-info {
+    position: absolute;
+    right: 10px;
+    top: 24px;
+    padding: 6px 12px;
+    background-color: #407FDE;
+    border: none;
+    color: #ffffff;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+    white-space: nowrap; 
+    margin-left: auto; 
+}
+
+.timetable-card {
+    flex: 2;
+    min-height: 400px;
+}
+
+.card-title,
+.card-header span{
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -15px;
+}
+
+.card-title {
+    margin-bottom: 15px;
+}
+
+
+
+.plus-btn {
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+}
+
+.timetable {
+    width: 100%;
+    border: 3px solid #898A8D;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 12px;
+}
+
+.timetable th,
+.timetable td {
+    border: 1px solid #898A8D;
+    width: 50px;
+    height: 40px;
+}
+
+.timetable th {
+    background-color: #F3F3F3;
+    font-weight: bold;
+}
+
+.timetable td:first-child {
+    background-color: #F3F3F3;
+    font-weight: bold;
+}
