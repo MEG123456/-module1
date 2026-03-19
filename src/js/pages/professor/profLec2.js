@@ -28,7 +28,7 @@ function LectureManager() {
     const fillEditForm = (data) => {
         $('input[name="lecture-title"]').value = data.title || "";
         $('input[name="prof-name"]').value = data.prof || "";
-        $('input[name="lecture_max"]').value = data.max || "";
+        $('input[name="lecture-max"]').value = data.max || "";
         $('input[name="lecture-time"]').value = data.time || "";
         $('input[name="credit"]').value = data.credit || "";
         $('input[name="classroom"]').value = data.room || "";
@@ -41,7 +41,7 @@ function LectureManager() {
     const getFormData = () => {
         const title = $('input[name="lecture-title"]').value;
         const prof = $('input[name="prof-name"]').value;
-        const max = $('input[name="lecture_max"]').value;
+        const max = $('input[name="lecture-max"]').value;
         const time = $('input[name="lecture-time"]').value;
         const type = $('input[name="subject"]:checked').id === 'major' ? '전공' : '교양';
         const credit = $('input[name="credit"]').value;
@@ -58,40 +58,48 @@ function LectureManager() {
     };
 
     const initEventListeners = () => {
+
         // 1. [저장] 버튼 클릭 시
         $("#saveBtn").addEventListener("click", (e) => {
-            e.preventDefault();
-            const data = getFormData(); // 여기서 알람창이 뜸
+            e.preventDefault(); // 폼 제출 기본 동작 방지
             
-            if (data) { 
-                // 모든 값이 있을 때만! 데이터를 임시 저장하고 모달을 띄움
-                tempLectureData = data; 
-                $("#modalOverlay").style.display = "flex";
-            } else {
-                // 값이 누락되었다면 모달을 띄우지 않음
-                tempLectureData = null;
-                $("#modalOverlay").style.display = "none";
+            // 유효성 검사 실행 (여기서 비어있으면 alert가 뜸)
+            const data = getFormData(); 
+
+            if (!data) {
+                return; 
             }
+
+            // 2. 데이터가 정상적으로 있을 때만 모달 관련 로직 실행
+            tempLectureData = data; 
+            
+            const modalText = $(".modal-text");
+            if (editIndex !== null) {
+                modalText.innerText = "변경사항을 저장하시겠습니까?";
+            } else {
+                modalText.innerText = "새 강좌를 등록하시겠습니까?";
+            }
+            
+            // 3. 모든 조건이 만족될 때만 모달을 화면에 표시
+            $("#modalOverlay").style.display = "flex";
         });
 
         // 2. 모달 내 [확인] 버튼 클릭 시
         $("#confirmBtn").addEventListener("click", () => {
-            // 이미 위에서 검증된 tempLectureData가 있을 때만 실행
             if (tempLectureData) {
                 if (editIndex !== null) {
                     this.lectures[editIndex] = tempLectureData;
                 } else {
                     this.lectures.push(tempLectureData);
                 }
-                
                 store.setLocalStorage(this.lectures);
                 window.location.href = "profLec.html"; 
             }
         });
 
-        // 3. 모달 내 [취소] 버튼 클릭 시
+        // 3. 모달 내 [취소] 버튼
         $("#cancelBtn").addEventListener("click", () => {
-            tempLectureData = null; // 데이터 비우기
+            tempLectureData = null;
             $("#modalOverlay").style.display = "none";
         });
     };
