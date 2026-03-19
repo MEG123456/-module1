@@ -2,7 +2,7 @@
 html, body {
     height: 100%;
     margin: 0;
-    overflow: hidden; /* 전체 페이지 스크롤 원천 차단 */
+    overflow: hidden; 
 }
 
 
@@ -13,7 +13,7 @@ html, body {
     height: calc(100vh - 100px);
     padding: 10px 50px;
     box-sizing: border-box;
-    overflow: hidden; /* 바깥쪽 스크롤 방지 */
+    overflow: hidden; 
 }
 
 .body-title {
@@ -30,20 +30,20 @@ html, body {
     border: 3px solid #898A8D;
     border-radius: 8px;
     padding: 25px;
-    flex: 1;           /* 남는 세로 공간을 다 차지함 */
+    flex: 1;
     display: flex;
     flex-direction: column;
-    min-height: 0;      /* 중요: flex 자식이 부모를 뚫고 나가지 못하게 방어 */
-    overflow: hidden;  /* 회색 박스 자체도 스크롤 방지 */
+    min-height: 0;      /* flex 자식이 부모를 뚫고 나가지 못하게 방어 */
+    overflow: hidden;  
 }
 
 .enroll-box {
     background: #FFFFFF;
     border: 0.5px solid #000000;
-    padding: 50px 90px;
+    padding: 40px 150px;
     flex: 1;           /* 회색 박스 내부에서 남는 공간 차지 */
-    overflow-y: auto;  /* 내용이 많아지면 세로 스크롤 생성 */
-    min-height: 0;      /* 중요: 내부 스크롤이 작동하게 만드는 핵심 */
+    overflow-y: auto;
+    min-height: 0;
 }
 
 .input-group {
@@ -84,22 +84,24 @@ label {
 
 .descrip-con {
     display: flex;
-    position: relative;
-    flex: 1;
+    justify-content: center; /* 버튼을 오른쪽 정렬하되 박스 안쪽으로 배치 */
+    margin-top: auto;        /* 내용이 적어도 버튼이 아래쪽에 배치되도록 함 */
+    padding-top: 20px;
 }
-
 
 .save-btn {
     background-color: #186CE9;
     color: white;
     border: none;
-    padding: 0px 45px;
+    padding: 5px 45px;
     border-radius: 3px;
     font-size: 20px;
     font-weight: 400;
-
-    position: absolute;
-    right: -50px;
-    bottom: 0px;
+    cursor: pointer;
+    position: static; 
     margin: 0;
+}
+
+.save-btn:hover {
+    background-color: #155dc8;
 }

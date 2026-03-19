@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/src/css/ui/module/header.css">
+    <link rel="stylesheet" href="/src/css/ui/module/sidebar.css">
+    <link rel="stylesheet" href="/src/css/pages/professor/profLecDetail.css">
+    <link rel="stylesheet" href="/src/css/ui/module/modal.css">
+
+    <style>
+        
+    </style>
+
+</head>
+
+<body>
+    <div class="container"> <!--헤더-->
+
+        <div class="container-main"> <!--사이드바-->
+
+            <div class="body-main">
+                <p class="body-title">강의 상세 정보</p>
+                <div class="enroll-body">
+                    <div class="enroll-box">
+                        <div class="info-row">
+                            <div class="info-label">강의명 :</div>
+                            <div id="view-title" class="info-content"></div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">교수명 :</div>
+                            <div id="view-prof" class="info-content"></div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">정원 :</div>
+                            <div class="info-content"><span id="view-max"></span><span class="info-unit">명</span></div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">요일/시간 :</div>
+                            <div id="view-time" class="info-content"></div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">구분 :</div>
+                            <div id="view-type" class="info-content"></div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">학점 :</div>
+                            <div class="info-content"><span id="view-credit"></span><span class="info-unit">학점</span>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">강의실 :</div>
+                            <div id="view-room" class="info-content"></div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">설명 :</div>
+                            <div id="view-about" class="info-content"></div>
+                        </div>
+
+                        <div class="descrip-con">
+                            <button type="button" id="backBtn" class="listback-btn">목록으로</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/src/js/layout/includeHeader.js"></script>
+    <script type="module" src="/src/js/layout/includeProfSidebar.js"></script>
+    <script type="module" src="/src/js/pages/professor/profLecDetail.js"></script>
+</body>
+
+</html>

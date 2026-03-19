@@ -12,7 +12,7 @@ const store = {
 function LectureList() {
     this.lectures = [];
     // 1. 변수를 함수 스코프 상단에 명시적으로 선언
-    let currentIndex = null; 
+    let currentIndex = null;
 
     this.init = () => {
         this.lectures = store.getLocalStorage("lectures");
@@ -29,20 +29,23 @@ function LectureList() {
             return;
         }
 
+
         const lectureTemplate = this.lectures.map((lecture, index) => {
             return `
-                <tr>
-                    <td>${400960 + index}</td> 
-                    <td>${lecture.title}</td>
-                    <td>${lecture.type}</td>
-                    <td>${lecture.credit}</td>
-                    <td>${lecture.time}</td>
-                    <td>
-                        <button class="edit-btn" data-index="${index}">수정</button>
-                        <button class="delete-btn" data-index="${index}">삭제</button>
-                    </td>
-                </tr>
-            `;
+            <tr>
+                <td>${100000 + index}</td> 
+                <td class="lecture-link" data-index="${index}" style="cursor:pointer;">
+                ${lecture.title}
+                </td>
+                <td>${lecture.type}</td>
+                <td>${lecture.credit}</td>
+                <td>${lecture.time}</td>
+                <td>
+                    <button class="edit-btn" data-index="${index}">수정</button>
+                    <button class="delete-btn" data-index="${index}">삭제</button>
+                </td>
+            </tr>
+        `;
         }).join("");
 
         $("#profLecListBody").innerHTML = lectureTemplate;
@@ -58,11 +61,16 @@ function LectureList() {
             const index = e.target.dataset.index;
             if (index === undefined) return;
 
+            // 강의명을 클릭했을 경우 상세 페이지로 이동
+            if (e.target.classList.contains("lecture-link")) {
+                window.location.href = `profLecDetail.html?index=${index}`;
+            }
+
             if (e.target.classList.contains("delete-btn")) {
                 currentIndex = Number(index); // 인덱스 저장
                 $("#modalMessage").innerText = "정말 이 강의를 삭제하시겠습니까?";
                 $("#modalOverlay").style.display = "flex";
-            } 
+            }
             else if (e.target.classList.contains("edit-btn")) {
                 window.location.href = `profLec2.html?editIndex=${index}`;
             }
