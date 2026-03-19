@@ -2,7 +2,7 @@
     display: flex;
     margin: 15px auto;
     width: 95%;
-    height: 720px;
+    height: 83vh;
     background: #F3F3F3;
     border: 3px solid #898A8D;
     border-radius: 8px;
@@ -14,12 +14,15 @@
     width: 285px;
     flex-shrink: 0;
     border-right: 3px solid #898A8D;
-    padding: 20px 10px;
+    padding: 19px 10px;
     box-sizing: border-box;
+    overflow-y: auto;    /* 내용이 많아지면 사이드바 자체에 스크롤 생성 */
+    overflow-x: hidden;
+    min-height: 0;
 }
 
 .gb-main {
-    flex-grow: 1; /* 남은 모든 공간 차지 */
+    flex-grow: 1;
     box-sizing: border-box;
-    overflow-y: auto; /* 내부 스크롤 */
+    overflow-y: auto;
 }
