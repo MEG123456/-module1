@@ -31,79 +31,80 @@
                             </select>
                         </div>
 
-                    <div class="filter-group">
-                        <label for="major-filter">학과</label>
-                        <select id="major-filter" class="major-select" disabled>
-                            <option value="all-major" selected>전체</option>
-                        </select>
+                        <div class="filter-group">
+                            <label for="major-filter">학과</label>
+                            <select id="major-filter" class="major-select" disabled>
+                                <option value="all-major" selected>전체</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="grade-filter">학년</label>
+                            <select id="grade-filter" class="major-select" disabled>
+                                <option value="all-grade" selected>전체</option>
+                                <option value="first">1학년</option>
+                                <option value="second">2학년</option>
+                                <option value="third">3학년</option>
+                                <option value="fourth">4학년</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label>구분</label>
+                            <select name="sort">
+                                <option value="all-sort" selected>전체</option>
+                                <option value="sort-major">전공</option>
+                                <option value="sort-etc">교양</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label>요일</label>
+                            <select name="week">
+                                <option value="all-week" selected>전체</option>
+                                <option value="mon">월요일</option>
+                                <option value="tue">화요일</option>
+                                <option value="wed">수요일</option>
+                                <option value="thu">목요일</option>
+                                <option value="fri">금요일</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label>학점</label>
+                            <select name="score">
+                                <option value="all-score" selected>전체</option>
+                                <option value="one">1학점</option>
+                                <option value="two">2학점</option>
+                                <option value="three">3학점</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="filter-group">
-                        <label for="grade-filter">학년</label>
-                        <select id="grade-filter" class="major-select" disabled>
-                            <option value="all-grade" selected>전체</option>
-                            <option value="first">1학년</option>
-                            <option value="second">2학년</option>
-                            <option value="third">3학년</option>
-                            <option value="fourth">4학년</option>
-                        </select>
-                    </div>
-
-                    <div class="filter-group">
-                        <label>구분</label>
-                        <select name="sort">
-                            <option value="all-sort" selected>전체</option>
-                            <option value="sort-major">전공</option>
-                            <option value="sort-etc">교양</option>
-                        </select>
-                    </div>
-
-                    <div class="filter-group">
-                        <label>요일</label>
-                        <select name="week">
-                            <option value="all-week" selected>전체</option>
-                            <option value="mon">월요일</option>
-                            <option value="tue">화요일</option>
-                            <option value="wed">수요일</option>
-                            <option value="thu">목요일</option>
-                            <option value="fri">금요일</option>
-                        </select>
-                    </div>
-
-                    <div class="filter-group">
-                        <label>학점</label>
-                        <select name="score">
-                            <option value="all-score" selected>전체</option>
-                            <option value="one">1학점</option>
-                            <option value="two">2학점</option>
-                            <option value="three">3학점</option>
-                        </select>
+                    <div class="checkbtn-container">
+                        <button type="button" class="check-btn">조회</button>
                     </div>
                 </div>
 
-                <div class="checkbtn-container">
-                    <button type="button" class="check-btn">조회</button>
-                </div>
-            </div>
+                <div class="gb-main">
+                    <div class="allLec-container">
+                        <table class="allLec-table">
+                            <thead>
+                                <tr>
+                                    <th>교과목 번호</th>
+                                    <th>과목명</th>
+                                    <th>구분</th>
+                                    <th>학점</th>
+                                    <th>시간</th>
+                                </tr>
+                            </thead>
 
-            <div class="gb-main">
-                <div class="allLec-container">
-                    <table class="allLec-table">
-                        <thead>
-                            <tr>
-                                <th>교과목 번호</th>
-                                <th>과목명</th>
-                                <th>구분</th>
-                                <th>학점</th>
-                                <th>시간</th>
-                            </tr>
-                        </thead>
+                            <tbody id="allLecTableBody">
 
-                        <tbody id="allLecTableBody">
+                            </tbody>
 
-                        </tbody>
-
-                    </table>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
