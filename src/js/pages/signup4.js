@@ -131,7 +131,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 password: pwdInput.value
             };
 
-            localStorage.setItem("user", JSON.stringify(userData));
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+
+            const exists = users.some(u => u.id === userData.id);
+
+            if (exists) {
+            alert("이미 존재하는 아이디입니다");
+            return;
+            }
+
+
+            users.push(userData);
+            localStorage.setItem("users", JSON.stringify(users));
             window.location.href = "/pages/signup5.html";
         }
     });

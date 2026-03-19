@@ -104,31 +104,37 @@ loginBtn.addEventListener("click", () => {
     if (pw === "") {
         pwError.textContent = "비밀번호를 다시 확인해 주세요";
         pwInput.parentElement.classList.add("error");
+        isValid = false;
     } else if (pw.length < 8 || pw.length > 12) {
         pwError.textContent = "비밀번호는 8~12자리여야 합니다";
         pwInput.parentElement.classList.add("error");
+        isValid = false;
     } else {
         pwError.textContent = "";
         pwInput.parentElement.classList.remove("error");
     }
     
-    
     if (!isValid) return;
-        const savedUser = JSON.parse(localStorage.getItem("user"));
+    const users = JSON.parse(localStorage.getItem("users")) || [];
 
-        if (!savedUser) {
-            alert("회원가입을 먼저 해주세요");
-            return;
-        }
+    const user = users.find(u => u.id === id && u.password === pw);
 
-        if (id === savedUser.id && pw === savedUser.password) {
-            alert("로그인 성공!");
+    if (!user) {
+        pwError.textContent = "아이디 또는 비밀번호가 일치하지 않습니다";
+        pwInput.parentElement.classList.add("error");
+        return;
+    }
 
-        localStorage.setItem("isLogin", "true");
-        //이동 (원하는 페이지로 바꿔도 됨)
-        // window.location.href = ""
-        } else {
-            pwError.textContent = "아이디 또는 비밀번호가 일치하지 않습니다";
-            pwInput.parentElement.classList.add("error");
-        }
-    });
+    alert("로그인 성공!");
+
+
+    localStorage.setItem("loginUser", JSON.stringify(user));
+    localStorage.setItem("isLogin", "true");
+
+
+    if (user.role === "student") {
+        window.location.href = "/pages/student/mypage_s.html";
+    } else if (user.role === "professor") {
+        window.location.href = "/pages/professor/mypages_p.html";
+    }
+});
