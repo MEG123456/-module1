@@ -2,7 +2,7 @@
     display: flex;
     margin: 15px auto;
     width: 95%;
-    height: 83vh;
+    height: 82vh;
     background: #F3F3F3;
     border: 3px solid #898A8D;
     border-radius: 8px;
@@ -16,7 +16,7 @@
     border-right: 3px solid #898A8D;
     padding: 19px 10px;
     box-sizing: border-box;
-    overflow-y: auto;    /* 내용이 많아지면 사이드바 자체에 스크롤 생성 */
+    overflow-y: auto;
     overflow-x: hidden;
     min-height: 0;
 }
