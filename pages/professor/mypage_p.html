@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지 학생</title>
+    <link rel="stylesheet" href="/src/css/ui/module/header.css">
+    <link rel="stylesheet" href="/src/css/ui/module/sidebar.css">
+    <link rel="stylesheet" href="/src/css/pages/professor/mypage_p.css">
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <div class="container">
+
+        <div id="sidebar"></div>
+
+        <div class="container-main">
+
+            <div class="left-section">
+
+                <div class="card profile-card">
+                    <div class="profile-layout">
+                        <div class="profile-avatar">
+                            <img src = "../../asset/profile.svg" alt="프로필" width="80">
+                            <div class="profile-info">
+
+                            </div>
+                            <div class="profile-info">
+                                <div class="info-text-group"></div>
+                            </div>
+                            
+                        <button class="btn-check-info">내 프로필</button>
+                    </div>
+                </div>
+                </div>
+
+                <div class="card timetable-card">
+                    <p class="card-title">나의 시간표</p>
+
+                    <table class="timetable">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>월</th>
+                                <th>화</th>
+                                <th>수</th>
+                                <th>목</th>
+                                <th>금 </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td></td><td></td><td></td><td></td><td></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td></td><td></td><td></td><td></td><td></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td></td><td></td><td></td><td></td><td></td>
+                            </tr>
+                            <tr>
+                            <td>4</td>
+                            <td></td><td></td><td></td><td></td><td></td>
+                            </tr>
+                            <tr>
+                            <td>5</td>
+                            <td></td><td></td><td></td><td></td><td></td>
+                            </tr>
+                            <tr>
+                            <td>6</td>
+                            <td></td><td></td><td></td><td></td><td></td>
+                            </tr>
+                            <tr>
+                            <td>7</td>
+                            <td></td><td></td><td></td><td></td><td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="right-section">
+
+                <div class="card lecture-card">
+                    <div class="card-header">
+                        <span>강의목록</span>
+                        <img src="/asset/plus.svg" class="plus-btn">
+                    </div>
+                </div>
+
+                <div class="card notice-card">
+                    <div class="card-header">
+                        <span>공지사항</span>
+                        <img src="/asset/plus.svg" class="plus-btn">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script type="module" src="/src/js/layout/includeHeader.js"></script>
+    <script type="module" src="/src/js/layout/includeProfSidebar.js"></script>
+
+</body>
+</html>

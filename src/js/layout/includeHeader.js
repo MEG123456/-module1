@@ -1,5 +1,5 @@
 fetch("/layout/header.html")
-  .then((response) => response.text())
-  .then((responseText) => {
-    document.querySelector(".container").insertAdjacentHTML("afterbegin", responseText);
-  })
+  .then((res) => res.text())
+  .then((html) => {
+    document.body.insertAdjacentHTML("afterbegin", html);
+  });
