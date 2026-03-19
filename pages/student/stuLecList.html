@@ -11,14 +11,14 @@
     <div class="gb-container">
         <div class="gb-sub">
             <div class="search-container">
-                <input type="text" class="lecture-search">
+                <input type="text" class="lecture-search" placeholder=" 과목명을 입력해주세요">
                 <button type="button" class="lecSearch_btn">검색</button>
             </div>
             <div class="filter-container">
                 <p class="filter-title">강의 필터</p>
 
                 <div class="filter-group">
-                    <label>학부</label><br>
+                    <label>학부</label>
                     <select name="college">
                         <option value="all-college" selected>전체</option>
                         <option value="hightech">첨단학부</option>
@@ -28,14 +28,14 @@
                 </div>
 
                 <div class="filter-group">
-                    <label for="major-filter">학과</label><br>
+                    <label for="major-filter">학과</label>
                     <select id="major-filter" class="major-select" disabled>
                         <option value="all-major" selected>전체</option>
                     </select>
                 </div>
 
                 <div class="filter-group">
-                    <label for="grade-filter">학년</label><br>
+                    <label for="grade-filter">학년</label>
                     <select id="grade-filter" class="major-select" disabled>
                         <option value="all-grade" selected>전체</option>
                         <option value="first">1학년</option>
@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="filter-group">
-                    <label>구분</label><br>
+                    <label>구분</label>
                     <select name="sort">
                         <option value="all-sort" selected>전체</option>
                         <option value="sort-major">전공</option>
@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="filter-group">
-                    <label>요일</label><br>
+                    <label>요일</label>
                     <select name="week">
                         <option value="all-week" selected>전체</option>
                         <option value="mon">월요일</option>
@@ -67,7 +67,7 @@
                 </div>
 
                 <div class="filter-group">
-                    <label>학점</label><br>
+                    <label>학점</label>
                     <select name="score">
                         <option value="all-score" selected>전체</option>
                         <option value="one">1학점</option>
@@ -76,10 +76,99 @@
                     </select>
                 </div>
             </div>
+
+            <div class="checkbtn-container">
+                <button type="button" class="check-btn">조회</button>
+            </div>
         </div>
 
         <div class="gb-main">
+            <div class="allLec-container">
+                <table class="allLec-table">
+                    <thead>
+                        <tr>
+                            <th>교과목 번호</th>
+                            <th>과목명</th>
+                            <th>구분</th>
+                            <th>학점</th>
+                            <th>시간</th>
+                        </tr>
+                    </thead>
 
+                    <tbody id="allLecTableBody">
+                        <tr>
+                            <td>114530</td>
+                            <td>동아시아문화의 이해</td>
+                            <td>교양</td>
+                            <td>3</td>
+                            <td>화 14:00~16:50</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <script type="module" src="/src/js/layout/includeGraybox.js"></script>
