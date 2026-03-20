@@ -8,10 +8,6 @@ html, body {
     overflow: hidden; 
 }
 
-.filter-container {
-    padding-left: 10px;
-}
-
 .filter-title {
     font-size: 23px;
     font-weight: bold;
@@ -33,7 +29,7 @@ html, body {
 }
 
 .filter-group select {
-    width: 200px;
+    width: 190px;
     height: 30px;
     border: 1.5px solid #545559;
     font-size: 16px;
@@ -44,24 +40,24 @@ html, body {
 .search-container {
     display: flex;
     flex-direction: row;
-    padding-bottom: 15px;     /* 선과 검색창 사이의 간격 */
-    margin-bottom: 10px;
     border-bottom: 2px solid #898A8D;
+    padding-bottom: 20px;     /* 선과 검색창 사이의 간격 */
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
     margin-left: -12px;  
     margin-right: -12px;
-    padding-left: 13px;
-    padding-right: 13px;
 }
 
 .lecture-search {
     border: 3px solid #4563B2;
     box-sizing: border-box;
-    height: 45px;
-    width: 200px;
+    height: 40px;
+    width: 140px;
 }
 
 .lecture-search::placeholder {
-    font-size: 18px;
+    font-size: 13px;
     font-weight: 500;
 }
 
@@ -69,20 +65,21 @@ html, body {
     color: #FFFFFF;
     background: #4563B2;
     border: none;
-    font-size: 23px;
+    font-size: 20px;
     align-items: center;
     font-weight: 500;
-    height: 45px;
-    width: 60px
+    height: 40px;
+    width: 50px
 }
 
 .checkbtn-container {
-    padding-left: 150px;
+    padding-top: 5px;
+    padding-left: 95px;
 }
 
 .check-btn {
-    background-color: #5D87F5;
-    color: white;
+    background-color: #186CE9;
+    color: #FFFFFF;
     border: none;
     border-radius: 3px;
     width: 95px;
@@ -94,7 +91,7 @@ html, body {
     background-color: #155dc8;
 }
 
-
+/* 강의 목록 표 부분 */
 .allLec-container {
     height: 100%;
     width: 100%;
@@ -104,7 +101,7 @@ html, body {
     width: 100%;
     table-layout: fixed; /* 중요: 이 설정을 해야 컬럼 너비 조절이 잘 됩니다 */
     border-collapse: collapse;
-    background-color: white;
+    background-color: #FFFFFF;
 }
 
 .allLec-table tbody tr {
