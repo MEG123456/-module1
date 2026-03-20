@@ -1,0 +1,19 @@
+.sub-title {
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    padding: 15px 0;
+    color: #3F424C;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+.gb-sub {
+    padding: 0;
+}
+.sub-line {
+    width: 100%;
+    height: 2px;
+    background-color: #898A8D;
+}
