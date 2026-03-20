@@ -1,8 +1,10 @@
-// 2. 데이터 정의
 const majorData = {
-  "hightech": ["빅데이터인공지능학과", "글로벌AI학과"],
-  "nature": ["식품영양전공", "의료공학전공", "안전공학전공", "화장품과학전공"],
-  "human": ["사회복지전공", "중독상담전공", "장례산업전공", "레저산업전공"]
+  "medical": ["의예과"],
+  "nursing": ["간호학과"],
+  "health_science": ["임상병리학과", "안경광학과", "응급구조학과", "방사선학과", "치위생학과", "물리치료학과", "의료경영학과"],
+  "hightech": ["빅데이터인공지능학과"],
+  "nature": ["식품영양전공", "식품생명공학전공", "안전공학전공", "의료공학전공", "화장품과학전공"],
+  "human": ["레저산업전공", "뷰티아트전공", "시각디자인전공", "사회복지전공", "아동청소년상담전공", "중독상담전공", "장례산업전공"]
 };
 
 
@@ -13,10 +15,9 @@ function initFilters() {
   const sortSelect = document.querySelector('select[name="sort"]');
   const weekSelect = document.querySelector('select[name="week"]');
 
-  // 학과 활성화를 결정하는 공통 함수
+
   function updateMajorStatus() {
     const isCollegeSelected = collegeSelect.value !== "all-college";
-    // [수정된 조건] 구분이 '전공(sort-major)'일 때만 활성화 조건에 포함
     const isMajorSortSelected = sortSelect.value === "sort-major";
 
     // 학부를 선택했거나, 구분에서 '전공'을 선택했다면 학과 활성화
@@ -34,18 +35,29 @@ function initFilters() {
   // 1. 학부 변경 시
   collegeSelect.addEventListener('change', function() {
     const selectedCollege = this.value;
-    
-    // 학과 옵션 초기화 및 데이터 로드
+
     majorSelect.innerHTML = '<option value="all-major" selected>전체</option>';
-    if (selectedCollege !== "all-college") {
-      const majors = majorData[selectedCollege] || [];
-      majors.forEach(major => {
-        const option = document.createElement('option');
-        option.value = major;
-        option.textContent = major;
-        majorSelect.appendChild(option);
-      });
+    let majors = [];
+    
+    if (selectedCollege === "free_major") {
+      // ⭐ 자유전공학부 선택 시: hightech, nature, human 학과를 모두 합침
+      majors = [
+        ...majorData["hightech"],
+        ...majorData["nature"],
+        ...majorData["human"]
+      ];
+    } else if (selectedCollege !== "all-college") {
+      // 일반 학부 선택 시
+      majors = majorData[selectedCollege] || [];
     }
+
+    // 합쳐진(또는 선택된) 학과들을 옵션으로 추가
+    majors.forEach(major => {
+      const option = document.createElement('option');
+      option.value = major;
+      option.textContent = major;
+      majorSelect.appendChild(option);
+    });
 
     updateMajorStatus();
   });
@@ -60,7 +72,6 @@ function initFilters() {
       weekSelect.value = "all-week";
     }
     
-    // '전공' 선택 여부에 따라 학과 활성화 상태 업데이트
     updateMajorStatus();
   });
 
@@ -77,3 +88,5 @@ function initFilters() {
   // 초기 실행: 모든 필터 상태 세팅
   updateMajorStatus();
 }
+
+initFilters();
