@@ -107,3 +107,25 @@ function LectureManager() {
 
 const lectureManager = new LectureManager();
 lectureManager.init();
+
+document.addEventListener("DOMContentLoaded", () => {
+    const interval = setInterval(() => {
+        // 사이드바가 로드되었는지 확인 (클래스명을 확인해 보세요!)
+        const target = document.querySelector(".professor-sidebar") || document.querySelector(".sidebar"); 
+
+        if (target) {
+            clearInterval(interval);
+
+            const sidebarLinks = target.querySelectorAll('li a');
+            
+            // 1. 모든 메뉴에서 active 제거
+            sidebarLinks.forEach(link => link.classList.remove('active'));
+
+            // 2. '강의 목록'이 두 번째 메뉴라면 1번 인덱스에 active 추가
+            // 등록/수정 페이지에 들어와 있어도 부모 메뉴인 '강의 목록'에 불이 들어오게 합니다.
+            if (sidebarLinks[0]) {
+                sidebarLinks[0].classList.add('active');
+            }
+        }
+    }, 50);
+});
