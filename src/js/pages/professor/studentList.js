@@ -1,3 +1,9 @@
+fetch("/pages/professor/myLecMane.html")
+    .then(res => res.text())
+    .then(data => {
+        document.querySelector(".container-main").insertAdjacentHTML("beforeend", data);
+    });
+
 document.addEventListener("DOMContentLoaded", () => {
 
     let selectedIndex = null;
