@@ -56,11 +56,29 @@
     min-height: 100px;
 }
 
+.info-text-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
 .profile-info {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 20px;
+    color: #0B0D0F;
+}
+
+.profile-line {
+    display: flex;
+}
+.profile-line:first-child {
+    gap: 20px;
+}
+
+.profile-line:last-child {
+    gap: 40px;
 }
 
 .btn-check-info {

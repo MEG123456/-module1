@@ -120,16 +120,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (isValid) {
             const signup1Data = JSON.parse(localStorage.getItem("signup1Data")) || {};
-            const signup2Data = JSON.parse(localStorage.getItem("signup2Data")) || {};
-            const signup3Data = JSON.parse(localStorage.getItem("signup3Data")) || {};
+            const role = signup1Data.role;
 
-            const userData = {
+            let userData = {
                 ...signup1Data,
-                ...signup2Data,
-                ...signup3Data,
                 id: idInput.value.trim(),
                 password: pwdInput.value
             };
+
+            if (role === "student") {
+                const signup2Data = JSON.parse(localStorage.getItem("signup2Data")) || {};
+                userData = { ...userData, ...signup2Data };
+            } else if (role === "professor") {
+                const signup3Data = JSON.parse(localStorage.getItem("signup3Data")) || {};
+                userData = { ...userData, ...signup3Data };
+            }
 
             const users = JSON.parse(localStorage.getItem("users")) || [];
 
@@ -143,6 +148,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             users.push(userData);
             localStorage.setItem("users", JSON.stringify(users));
+            localStorage.removeItem("signup1Data");
+            localStorage.removeItem("signup2Data");
+            localStorage.removeItem("signup3Data");
             window.location.href = "/pages/signup5.html";
         }
     });
