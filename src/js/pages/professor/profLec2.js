@@ -111,13 +111,13 @@ lectureManager.init();
 document.addEventListener("DOMContentLoaded", () => {
     const interval = setInterval(() => {
         // 사이드바가 로드되었는지 확인 (클래스명을 확인해 보세요!)
-        const target = document.querySelector(".professor-sidebar") || document.querySelector(".sidebar"); 
+        const target = document.querySelector(".professor-sidebar") || document.querySelector(".sidebar");
 
         if (target) {
             clearInterval(interval);
 
             const sidebarLinks = target.querySelectorAll('li a');
-            
+
             // 1. 모든 메뉴에서 active 제거
             sidebarLinks.forEach(link => link.classList.remove('active'));
 

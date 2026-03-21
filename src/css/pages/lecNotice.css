@@ -1,0 +1,291 @@
+/* 컨테이너 여백 */
+.notice-container {
+    padding: 20px 30px;
+}
+
+/* 상단 영역 (개수 & 버튼) */
+.notice-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    margin-left: 15px;
+}
+
+.total-count {
+    font-size: 16px;
+    color: #464A58;
+    font-weight: 600;
+}
+
+.write-btn {
+    background-color: #898A8D;
+    color: #FFFFFF;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* 테이블 스타일 */
+.notice-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 2px solid #000;
+    background-color: #FFFFFF;
+}
+
+.notice-table th {
+    padding: 10px;
+    border-bottom: 1px solid #000;
+    color: #3F424C;
+    font-size: 18px;
+}
+
+.notice-table td {
+    padding: 10px 10px;
+    border-bottom: 1px solid #000;
+    text-align: center;
+    font-size: 16px;
+}
+
+.notice-table td.txt-title {
+    text-align: center;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+.notice-table td:last-child {
+    width: 190px;
+    white-space: nowrap;
+}
+
+/* 수정 버튼 (회색) */
+.edit-btn {
+    background-color: #898A8D;
+    color: white;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 8px;
+}
+
+/* 삭제 버튼 (빨간색 계열) */
+.delete-btn {
+    background-color: #C07676;
+    color: white;
+    border: none;
+    padding: 4px 18px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* 테이블 제목 왼쪽 정렬 및 여백 */
+.notice-table td.txt-left {
+    text-align: left;
+    padding-left: 20px;
+}
+
+/* 등록 화면 전체 컨테이너 */
+.notice-write-container {
+    margin-bottom: 50px;
+    margin-top: 4px;
+}
+
+/* 상단 '공지사항 등록' 타이틀과 굵은 구분선 */
+.write-header {
+    padding-bottom: 19px;
+    border-bottom: 2px solid #3F424C;
+    display: flex;
+    align-items: center;
+}
+
+.write-header p {
+    font-size: 22px;
+    font-weight: 700;
+    color: #898A8D;
+    margin-left: 30px;
+}
+
+/* 상세보기 전체 컨테이너 */
+.notice-detail-view {
+    padding: 30px 40px;
+    min-height: 500px;
+}
+
+/* 목록으로 돌아가기 버튼 */
+.detail-back-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.back-to-list {
+    background: none;
+    border: none;
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* 상세 테이블 스타일 (사진의 선 스타일 반영) */
+.detail-table-wrapper {
+    border-top: 3px solid #898A8D;
+    border-bottom: 3px solid #898A8D;
+}
+
+.detail-header-row {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #000;
+    background-color: #fff;
+}
+
+.detail-id {
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.detail-title-text {
+    flex: 1;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.detail-date-text {
+    color: #000;
+    font-size: 16px;
+}
+
+/* 본문 영역 */
+.detail-content-area {
+    padding: 30px 20px;
+    min-height: 250px;
+    line-height: 1.8;
+    background-color: #fff;
+}
+
+.content-text {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+/* 첨부파일 스타일 */
+.detail-attachment {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #2E4298;
+}
+
+/* 공지사항 등록 컨테이너 */
+.notice-write-container {
+    margin-bottom: 0px; /* 여백 줄임 */
+    margin-top: 4px;
+    padding: 10px 0px;
+}
+
+.write-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;              /* 항목 간 간격 */
+    padding: 0px 40px;
+    padding-top: 30px;
+    box-sizing: border-box;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-item label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #FFFFFF;
+    background-color: #898A8D;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.notice-title {
+    display: flex;
+    width: 100%;
+    align-items: stretch; 
+    border-radius: 3px 0 0 3px; /* 왼쪽 모서리만 둥글게 */
+}
+
+.title-label {
+    width: 120px; 
+    min-width: 60px; /* 줄어들지 않도록 고정 */
+}
+
+#notice-content {
+    border-radius: 3px;
+}
+
+/* 제목 입력창 및 내용 입력창 */
+.form-item input[type="text"], 
+.form-item textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #898A8D;
+
+    font-size: 14px;
+    background-color: #fff;
+    outline: none;
+}
+
+.form-item textarea {
+    height: 330px;
+    resize: none;
+}
+
+/* 파일 첨부 영역 */
+.file-box {
+    display: flex;
+}
+
+.file-box input[type="text"] {
+    background-color: #FFFFFF;
+    color: #898A8D;
+    flex: 1;
+}
+
+.file-label {
+    cursor: pointer;
+    height: 50px; /* 입력창 높이와 맞춤 */
+    margin-left: 10px;
+    padding: 0 30px;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-submit {
+    background-color: #7498CE;
+    color: #FFFFFF;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    width: 90px;
+}

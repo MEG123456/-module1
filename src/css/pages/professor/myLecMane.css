@@ -1,0 +1,87 @@
+.sub-title {
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    padding: 15px 0;
+    color: #3F424C;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+.gb-sub {
+    padding: 0;
+}
+.sub-line {
+    width: 100%;
+    height: 2px;
+    background-color: #898A8D;
+}
+
+.top-menu {
+    display: flex;
+    gap: 20px;
+    margin-top: 28px;
+    margin-left: 30px;
+}
+
+.menu-btn {
+    padding: 6px 30px;
+    border-radius: 45px;
+    border: none;
+    background-color: #9EC1F4;
+    color: white;
+
+    font-size: clamp(16px, 2.5vw, 24px);
+
+    cursor: pointer;
+}
+
+.menu-btn.active {
+    background-color: #2E4298;
+}
+
+#my-lecture-list {
+    height: 210px;
+    padding-top: 8px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #464A58;
+}
+
+#my-lecture-list li {
+    color: #464A58;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+#my-lecture-list li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#my-lecture-list li::before {
+    content: "●";
+    font-size: 10px;
+    margin-right: 14px;
+}
+
+/* 선택된 강의 항목 */
+.lec-item.selected {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #2E4298;
+}
+
+/* 버튼 비활성화 상태 */
+.menu-btn {
+    pointer-events: none; /* 클릭 방지 */
+    transition: all 0.3s;
+}
+
+/* 활성화된 버튼 스타일 */
+.menu-btn.enabled {
+    pointer-events: auto; /* 클릭 허용 */
+    cursor: pointer;
+}

@@ -64,7 +64,7 @@ function LectureDetail() {
         if (backBtn) {
             backBtn.addEventListener("click", () => {
                 const prevPage = document.referrer;
-                if (prevPage.includes("stuLecList.html")) {
+               if (prevPage.includes("stuLecList.html")) {
                     window.location.href = "../student/stuLecList.html";
                 } else {
                     window.location.href = "profLec.html";
@@ -87,9 +87,6 @@ function LectureDetail() {
 
 const detail = new LectureDetail();
 detail.init();
-
-// [중요] 기존에 밖에 따로 있던 document.addEventListener("DOMContentLoaded", ...) 블록은 삭제하세요!
-// setupSidebar() 함수 안에 그 로직이 통합되었습니다.
 
 document.addEventListener("DOMContentLoaded", () => {
     const interval = setInterval(() => {
