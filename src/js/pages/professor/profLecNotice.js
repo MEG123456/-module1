@@ -1,4 +1,3 @@
-// 1. 외부 HTML 가져오기 (이 작업이 완료된 후 리스트를 그려야 안전합니다)
 fetch("/pages/professor/myLecMane.html")
     .then(res => res.text())
     .then(data => {
@@ -18,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if(document.querySelector(".gb-main")) {
                 clearInterval(checkEmpty);
                 document.querySelector(".gb-main").innerHTML = `
-                    <div style="text-align:center; padding:100px; color:#888;">
+                    <div style="text-align:center; padding:100px;">
                         <p>왼쪽 [내 강의 목록]에서 과목을 먼저 선택해 주세요.</p>
                     </div>`;
             }
@@ -40,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
             clearInterval(checkExist);
             renderList();
             
-            // [추가] 왼쪽 과목 리스트 강조 유지 함수 호출 (선택사항)
+            // 왼쪽 과목 리스트 강조 유지 함수 호출
             if (typeof applySelection === 'function') applySelection();
         }
     }, 50);
@@ -70,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         mainContainer.innerHTML = `
             <div class="top-menu">
-                <button class="menu-btn active" onclick="location.href='proflecNotice.html'">공지사항</button>
+                <button class="menu-btn active" onclick="location.href='profLecNotice.html'">공지사항</button>
                 <button class="menu-btn" onclick="location.href='studentList.html'">수강 학생</button>
             </div>
             <div id="page-content">
@@ -128,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         mainContainer.innerHTML = `
             <div class="top-menu">
-                <button class="menu-btn active" onclick="location.href='proflecNotice.html'">공지사항</button>
+                <button class="menu-btn active" onclick="location.href='profLecNotice.html'">공지사항</button>
                 <button class="menu-btn" onclick="location.href='studentList.html'">수강 학생</button>
             </div>
             <div id="page-content">
@@ -161,7 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (notice.fileName) {
             document.querySelector("#file-download-link").addEventListener("click", (e) => {
                 e.preventDefault();
-                // [에러 수정] confirmAction 대신 직접 confirm 사용
                 if (confirm(`${notice.fileName} 파일을 여시겠습니까?`)) {
                     alert("서버 연결 시 파일이 다운로드됩니다.");
                 }
@@ -180,16 +178,20 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="form-item">
                         <div class="notice-title">
                             <label class="title-label">제목</label>
-                            <input type="text" id="notice-title" value="${isEdit ? notice.title : ''}">
+                            <input type="text" id="notice-title" 
+                                   placeholder="공지사항 제목을 입력해주세요." 
+                                   value="${isEdit ? notice.title : ''}">
                         </div>
                     </div>
                     <div class="form-item">
-                        <textarea id="notice-content">${isEdit ? notice.content : ''}</textarea>
+                        <textarea id="notice-content" 
+                                  placeholder="학생들에게 공지할 상세 내용을 입력해주세요.">${isEdit ? notice.content : ''}</textarea>
                     </div>
                     <div class="form-item">
                         <div class="file-box">
-                            <label class="title-label">파일 첨부</label>
-                            <input type="text" id="file-name-display" readonly value="${isEdit && notice.fileName ? notice.fileName : ''}">
+                            <input type="text" id="file-name-display" readonly 
+                                   placeholder="선택된 파일이 없습니다."
+                                   value="${isEdit && notice.fileName ? notice.fileName : ''}">
                             <label for="file-upload" class="file-label">찾아보기</label>
                             <input type="file" id="file-upload" style="display:none">
                         </div>

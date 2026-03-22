@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학생 강의 공지사항/수강평 선택 전</title>
+    <link rel="stylesheet" href="/src/css/ui/module/graybox.css">
+    <link rel="stylesheet" href="/src/css/ui/module/header.css">
+    <link rel="stylesheet" href="/src/css/ui/module/sidebar.css">
+    <link rel="stylesheet" href="/src/css/pages/professor/myLecMane.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="sidebar"></div>
+
+        <div class="container-main">
+            <div class="gb-container">
+                <div class="gb-sub">
+
+                    <div class="sub-title" id="side-list-title">나의 강의 목록</div>
+                    <div class="sub-line"></div>
+                    <ul id="my-lecture-list" style="list-style: none; padding: 10px; cursor: pointer;"></ul>
+                </div>
+
+                <div class="gb-main">
+                    <div class="top-menu">
+                        <button class="menu-btn">공지사항</button>
+                        <button class="menu-btn">수강평</button>
+                    </div>
+
+                    <div class="inner-menu" id="page-content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="module" src="/src/js/layout/includeHeader.js"></script>
+    <script type="module" src="/src/js/layout/includeStuSidebar.js"></script>
+    <script type="module" src="/src/js/pages/student/myClassRoom.js"></script>
+</body>
+
+</html>
