@@ -93,7 +93,7 @@ function LectureManager() {
                     this.lectures.push(tempLectureData);
                 }
                 store.setLocalStorage(this.lectures);
-                window.location.href = "profLec.html"; 
+                window.location.href = "lec_create.html"; 
             }
         });
 
