@@ -12,11 +12,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const interval = setInterval(() => {
         const profileContainer = document.querySelector(".info-text-group");
+        const lectureListContainer = document.querySelector(".lecture-list");
 
-        if (profileContainer) {
+        if (profileContainer && lectureListContainer) {
             clearInterval(interval);
 
             const user = JSON.parse(localStorage.getItem("loginUser"));
+
+            const lectures = JSON.parse(localStorage.getItem("lectures")) || [];
+
+            const myLectures = lectures.filter(l => l.prof === user.name);
+
+            lectureListContainer.innerHTML = myLectures.map((lec, index) => `
+                <li class="lecture-item" data-id="${index}">
+                    ${lec.title}
+                </li>
+            `).join('');
+
+            document.querySelectorAll(".lecture-item").forEach((item, index) => {
+                item.addEventListener("click", () => {
+                    localStorage.setItem("selectedLecture", JSON.stringify(myLectures[index]));
+                    window.location.href = "/pages/professor/myLecMane.html";
+                });
+            });
 
             profileContainer.innerHTML = `
                 <div class="profile-line">

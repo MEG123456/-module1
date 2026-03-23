@@ -152,3 +152,17 @@
     background-color: #F3F3F3;
     font-weight: bold;
 }
+
+.lecture-list {
+    padding-left: 30px;
+    color: #464A58;
+    font-size: 20px;
+}
+
+.lecture-item {
+    cursor: pointer;
+}
+
+.lecture-item:hover {
+    background-color: #F7F8FD;
+}
