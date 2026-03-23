@@ -52,7 +52,7 @@ function LectureList() {
 
     const initEventListeners = () => {
         $("#enrollBtn").addEventListener("click", () => {
-            window.location.href = "profLec2.html";
+            window.location.href = "lec_createDetail.html";
         });
 
         $("#profLecListBody").addEventListener("click", (e) => {
@@ -62,7 +62,7 @@ function LectureList() {
 
             // 강의명을 클릭했을 경우 상세 페이지로 이동
             if (e.target.classList.contains("lecture-link")) {
-                window.location.href = `profLecDetail.html?index=${index}`;
+                window.location.href = `lec_detail.html?index=${index}`;
             }
 
             if (e.target.classList.contains("delete-btn")) {
@@ -71,7 +71,7 @@ function LectureList() {
                 $("#modalOverlay").style.display = "flex";
             }
             else if (e.target.classList.contains("edit-btn")) {
-                window.location.href = `profLec2.html?editIndex=${index}`;
+                window.location.href = `lec_createDetail.html?editIndex=${index}`;
             }
         });
 

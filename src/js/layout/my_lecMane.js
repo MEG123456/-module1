@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem("selectedLecIndex", index);
             
             // 과목을 새로 선택하면 무조건 해당 과목의 공지사항 첫 페이지로 보냄
-            window.location.href = "proflecNotice.html";
+            window.location.href = "my_lecNotice.html";
         });
 
         // 3. 페이지 로드 시 기존 선택 상태 복원
@@ -40,11 +40,11 @@ document.addEventListener("DOMContentLoaded", () => {
         // 4. 상단 메뉴 버튼(공지사항/수강학생) 클릭 이벤트
         if (menuButtons.length >= 2) {
             menuButtons[0].onclick = () => {
-                if(menuButtons[0].classList.contains("enabled")) location.href = "lec_Notice.html";
+                if(menuButtons[0].classList.contains("enabled")) location.href = "my_lecNotice.html";
                 else alert("과목을 선택해주세요.");
             };
             menuButtons[1].onclick = () => {
-                if(menuButtons[1].classList.contains("enabled")) location.href = "studentList.html";
+                if(menuButtons[1].classList.contains("enabled")) location.href = "my_studentList.html";
                 else alert("과목을 선택해주세요.");
             };
         }

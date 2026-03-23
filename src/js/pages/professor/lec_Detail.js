@@ -17,20 +17,20 @@ function LectureDetail() {
         const interval = setInterval(() => {
             // 교수용, 공통, 학생용 사이드바 클래스를 모두 체크
             const target = document.querySelector(".professor-sidebar") || 
-                           document.querySelector(".sidebar") || 
-                           document.querySelector(".student-sidebar");
+                            document.querySelector(".sidebar") || 
+                            document.querySelector(".student-sidebar");
 
             if (target) {
                 clearInterval(interval);
                 const referrer = document.referrer;
 
                 // 1. 학생 페이지에서 왔다면 내용을 통째로 바꿈
-                if (referrer.includes("stuLecList.html")) {
+                if (referrer.includes("lec_list.html")) {
                     target.className = "student-sidebar"; // 클래스명 교체
                     target.innerHTML = `
-                        <li><a href="../student/stuLecList.html">강의</a></li>
+                        <li><a href="../student/lec_list.html">강의</a></li>
                         <li><a href="#">수강</a></li>
-                        <li><a href="../student/myPage.html">마이페이지</a></li>
+                        <li><a href="../student/my_Page.html">마이페이지</a></li>
                     `;
                     
                     
@@ -64,10 +64,10 @@ function LectureDetail() {
         if (backBtn) {
             backBtn.addEventListener("click", () => {
                 const prevPage = document.referrer;
-               if (prevPage.includes("stuLecList.html")) {
-                    window.location.href = "../student/stuLecList.html";
+               if (prevPage.includes("lec_list.html")) {
+                    window.location.href = "../student/lec_list.html";
                 } else {
-                    window.location.href = "profLec.html";
+                    window.location.href = "lec_create.html";
                 }
             });
         }
