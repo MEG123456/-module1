@@ -44,10 +44,9 @@
     margin-right: 14px;
 }
 
-
 .inner-menu li.active a {
     font-weight: bold;
-    font-size: 23px;
+    font-size: 22px;
     text-decoration: underline;
     color: #000000;
 }

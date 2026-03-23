@@ -119,6 +119,10 @@
     <script type="module" src="/src/js/layout/includeHeader.js"></script>
     <script type="module" src="/src/js/layout/includeStuSidebar.js"></script>
     <script type="module" src="/src/js/pages/student/lecList.js"></script>
-    <script type="module" src="/src/js/pages/student/stuLecList.js"></script>
+
+    <script type="module">
+        import { initFilters } from '/src/js/pages/student/stuLecList.js';
+        initFilters();
+    </script>
 </body>
 </html>

@@ -1,0 +1,23 @@
+.inner-filter {
+    width: 215px;
+    flex-shrink: 0;
+    height: 100%;
+    padding: 19px 10px;
+    border-right: 3px solid #898A8D;
+    box-sizing: border-box;
+}
+
+.gb-main {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.inner-table {
+    flex-grow: 1;
+    min-width: 0;
+    /* padding: 20px; */
+    box-sizing: border-box;
+    height: 100%;
+}
