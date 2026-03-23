@@ -125,16 +125,14 @@ loginBtn.addEventListener("click", () => {
         return;
     }
 
-    alert("로그인 성공!");
-
 
     localStorage.setItem("loginUser", JSON.stringify(user));
     localStorage.setItem("isLogin", "true");
 
 
     if (user.role === "student") {
-        window.location.href = "/pages/student/mypage.html";
+        window.location.href = "/pages/student/my_page.html";
     } else if (user.role === "professor") {
-        window.location.href = "/pages/professor/mypage.html";
+        window.location.href = "/pages/professor/my_page.html";
     }
 });

@@ -1,4 +1,4 @@
-fetch("/layout/my_lecMane.html")
+fetch("/pages/professor/my_lecMane.html")
     .then(res => res.text())
     .then(data => {
         document.querySelector(".container-main").insertAdjacentHTML("beforeend", data);
