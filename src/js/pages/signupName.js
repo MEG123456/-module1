@@ -1,140 +1,169 @@
-const idInput = document.getElementById("userid");
-const pwInput = document.getElementById("userpwd");
-const loginBtn = document.getElementById("loginBtn");
-const togglePw = document.querySelector(".toggle-pwd");
-const idError = document.getElementById("userid-error");
-const pwError = document.getElementById("password-error");
+document.addEventListener('DOMContentLoaded', () => {
+    const nextBtn = document.querySelector('.next-btn');
+
+    const birthInputs = document.querySelectorAll('.birth-input');
+    const phoneInput = document.getElementById('phone');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const birthError = document.getElementById('birth-error');
+
+    const checkAllFilled = () => {
+        const textFilled = [nameInput, emailInput, phoneInput].every(input => input && input.value.trim() !== "");
+        const birthFilled = Array.from(birthInputs).every(input => input.value.trim() !== "");
+
+        const genderRadios = document.getElementsByName('gender');
+        const roleRadios = document.getElementsByName('role');
+
+        const genderSelected = Array.from(genderRadios).some(radio => radio.checked);
+        const roleSelected = Array.from(roleRadios).some(radio => radio.checked);
+
+        if (textFilled && birthFilled && genderSelected && roleSelected) {
+            nextBtn.classList.add('active-btn');
+        } else {
+            nextBtn.classList.remove('active-btn');
+        }
+    };
 
 
-function updateToggleState() {
-    if (pwInput.value.trim() === "") {
-        togglePw.classList.add("disabled");
-    } else {
-        togglePw.classList.remove("disabled");
-    }
-}
-togglePw.addEventListener("click", () => {
-    if (pwInput.value.trim() ==="") return;
-    if (pwInput.type === "password") {
-        pwInput.type = "text";
-        togglePw.src = "/asset/eyeson.svg";
-    } else {
-        pwInput.type = "password";
-        togglePw.src = "/asset/eyesclose.svg";
-    }
-});
-
-updateToggleState();
-
-pwInput.addEventListener("input", updateToggleState);
-
-function checkInput(input) {
-    const box = input.parentElement;
-
-    if (input.value.trim() !== "") {
-        box.classList.add("active");
-    } else {
-        box.classList.remove("active");
-    }
-
-    checkButton();
-}
-
-
-function checkButton() {
-    const id = idInput.value.trim();
-    const pw = pwInput.value.trim();
+    phoneInput.addEventListener('keydown', (e) => {
+    const value = e.target.value;
 
     if (
-        id !== "" &&
-        pw.length >= 8 &&
-        pw.length <= 12
+        value.length >= 11 &&
+        e.key !== "Backspace" &&
+        e.key !== "Delete" &&
+        e.key !== "ArrowLeft" &&
+        e.key !== "ArrowRight"
     ) {
-        loginBtn.classList.add("active-btn");
-    } else {
-        loginBtn.classList.remove("active-btn");
+        e.preventDefault();
     }
-}
+    });
 
-idInput.addEventListener("input", () => {
-    checkInput(idInput);
-    const id = idInput.value.trim();
-    if (id === "") {
-        idError.textContent = "아이디를 다시 확인해 주세요";
-        idInput.parentElement.classList.add("error");
-    } else {
-        idError.textContent = "";
-        idInput.parentElement.classList.remove("error");
-    }
-});
+    const onlyNumber = (e) => {
+        e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        checkAllFilled();
+    };
 
-pwInput.addEventListener("input", () => {
-    checkInput(pwInput);
-    updateToggleState();
+    birthInputs.forEach(input => input.addEventListener('input', onlyNumber));
+    if (phoneInput) phoneInput.addEventListener('input', onlyNumber);
 
-    const pw = pwInput.value.trim();
-    
-    if (pw === "") {
-        pwError.textContent = "비밀번호를 다시 확인해 주세요";
-        pwInput.parentElement.classList.add("error");
-    } else if (pw.length < 8 || pw.length > 12) {
-        pwError.textContent = "비밀번호는 8~12자리여야 합니다";
-        pwInput.parentElement.classList.add("error");
-    } else {
-        pwError.textContent = "";
-        pwInput.parentElement.classList.remove("error");
-    }
-});
+    const inputConfig = [
+        { input: nameInput, msg: "이름을 다시 확인해 주세요", border: true },
+        { input: emailInput, msg: "이메일을 다시 확인해 주세요", border: false },
+        { input: phoneInput, msg: "전화번호를 다시 확인해 주세요", border: false }
+    ];
 
-loginBtn.addEventListener("click", () => {
-    const id = idInput.value.trim();
-    const pw = pwInput.value.trim();
+    inputConfig.forEach(({ input, msg, border }) => {
+        if (!input) return;
 
-    let isValid = true;
+        input.addEventListener('input', () => {
+            const errorElement = document.getElementById(`${input.id}-error`);
+            const val = input.value.trim();
 
-    if (id === "") {
-        idError.textContent = "아이디를 다시 확인해 주세요";
-        idInput.parentElement.classList.add("error");
-        isValid = false;
-    } else {
-        idError.textContent = "";
-        idInput.parentElement.classList.remove("error");
-    }
+            if (val === "") {
+                if (errorElement) errorElement.textContent = msg;
+                if (border) input.classList.add('error-border');
+            } else {
+                if (errorElement) errorElement.textContent = "";
+                input.classList.remove('error-border');
+            }
 
-    if (pw === "") {
-        pwError.textContent = "비밀번호를 다시 확인해 주세요";
-        pwInput.parentElement.classList.add("error");
-        isValid = false;
-    } else if (pw.length < 8 || pw.length > 12) {
-        pwError.textContent = "비밀번호는 8~12자리여야 합니다";
-        pwInput.parentElement.classList.add("error");
-        isValid = false;
-    } else {
-        pwError.textContent = "";
-        pwInput.parentElement.classList.remove("error");
-    }
-    
-    if (!isValid) return;
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+            checkAllFilled();
+        });
+    });
 
-    const user = users.find(u => u.id === id && u.password === pw);
+    ['gender', 'role'].forEach(name => {
+        const radios = document.getElementsByName(name);
+        radios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                const errorElement = document.getElementById(`${name}-error`);
+                if (errorElement) errorElement.textContent = "";
+                checkAllFilled();
+            });
+        });
+    });
 
-    if (!user) {
-        pwError.textContent = "아이디 또는 비밀번호가 일치하지 않습니다";
-        pwInput.parentElement.classList.add("error");
-        return;
-    }
+    birthInputs.forEach(input => {
+        input.addEventListener('input', () => {
+            const anyEmpty = Array.from(birthInputs).some(i => i.value.trim() === "");
 
-    alert("로그인 성공!");
+            if (anyEmpty) {
+                if (birthError) birthError.textContent = "생년월일을 다시 확인해 주세요";
+            } else {
+                if (birthError) birthError.textContent = "";
+            }
 
+            checkAllFilled();
+        });
+    });
 
-    localStorage.setItem("loginUser", JSON.stringify(user));
-    localStorage.setItem("isLogin", "true");
+    nextBtn.addEventListener('click', () => {
+        let isValid = true;
+        let firstErrorInput = null;
 
+        const handleError = (inputElement, errorElement, message, showBorder = false) => {
+            isValid = false;
+            if (errorElement) errorElement.textContent = message;
+            if (inputElement && !firstErrorInput) firstErrorInput = inputElement;
+            if (inputElement && showBorder) inputElement.classList.add('error-border');
+        };
 
-    if (user.role === "student") {
-        window.location.href = "/pages/student/mypage_s.html";
-    } else if (user.role === "professor") {
-        window.location.href = "/pages/professor/mypage_p.html";
-    }
+        if (nameInput.value.trim() === "") {
+            handleError(nameInput, document.getElementById('name-error'), "이름을 다시 확인해 주세요", true);
+        }
+
+        const genderRadios = document.getElementsByName('gender');
+        if (![...genderRadios].some(r => r.checked)) {
+            handleError(null, document.getElementById('gender-error'), "성별을 다시 확인해 주세요");
+            if (!firstErrorInput) firstErrorInput = genderRadios[0];
+        }
+
+        if (Array.from(birthInputs).some(i => i.value.trim() === "")) {
+            handleError(birthInputs[0], birthError, "생년월일을 다시 확인해 주세요");
+        }
+
+        if (emailInput.value.trim() === "" || !emailInput.value.includes('@')) {
+            handleError(emailInput, document.getElementById('email-error'), "이메일을 다시 확인해 주세요");
+        }
+
+        if (phoneInput.value.trim() === "") {
+            handleError(phoneInput, document.getElementById('phone-error'), "전화번호를 다시 확인해 주세요");
+        }
+
+        const roleRadios = document.getElementsByName('role');
+        if (![...roleRadios].some(r => r.checked)) {
+            handleError(null, document.getElementById('role-error'), "소속을 다시 확인해 주세요");
+            if (!firstErrorInput) firstErrorInput = roleRadios[0];
+        }
+
+        if (!isValid && firstErrorInput) {
+            firstErrorInput.focus();
+        }
+
+        if (isValid) {
+            const selectedGender = document.querySelector('input[name="gender"]:checked');
+            const selectedRole = document.querySelector('input[name="role"]:checked');
+
+            const signup1Data = {
+                name: nameInput.value.trim(),
+                gender: selectedGender ? selectedGender.value : "",
+                birthYear: birthInputs[0].value.trim(),
+                birthMonth: birthInputs[1].value.trim(),
+                birthDay: birthInputs[2].value.trim(),
+                email: emailInput.value.trim(),
+                phone: phoneInput.value.trim(),
+                role: selectedRole ? selectedRole.value : ""
+            };
+
+            localStorage.setItem("signup1Data", JSON.stringify(signup1Data));
+
+            if (selectedRole) {
+                if (selectedRole.value === "student") {
+                    window.location.href = "/pages/student/signup_affiliation.html";
+                } else if (selectedRole.value === "professor") {
+                    window.location.href = "/pages/professor/signup_affiliation.html";
+                }
+            }
+        }
+    });
 });

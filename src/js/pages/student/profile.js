@@ -31,3 +31,6 @@ function convertCollege(collegeValue) {
 
   return collegeMap[collegeValue] || collegeValue;
 }
+
+
+//로컬 연동 해주세요 + 수정 버튼 동작 되게 수정 페이지 만들어주세요
