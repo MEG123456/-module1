@@ -1,4 +1,4 @@
-fetch("/pages/professor/myLecMane.html")
+fetch("/layout/myLecmane.html")
     .then(res => res.text())
     .then(data => {
         document.querySelector(".container-main").insertAdjacentHTML("beforeend", data);
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         mainContainer.innerHTML = `
             <div class="top-menu">
-                <button class="menu-btn active" onclick="location.href='profLecNotice.html'">공지사항</button>
+                <button class="menu-btn active" onclick="location.href='lec_Notice.html'">공지사항</button>
                 <button class="menu-btn" onclick="location.href='studentList.html'">수강 학생</button>
             </div>
             <div id="page-content">
@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         mainContainer.innerHTML = `
             <div class="top-menu">
-                <button class="menu-btn active" onclick="location.href='profLecNotice.html'">공지사항</button>
+                <button class="menu-btn active" onclick="location.href='lec_Notice.html'">공지사항</button>
                 <button class="menu-btn" onclick="location.href='studentList.html'">수강 학생</button>
             </div>
             <div id="page-content">

@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // 4. 상단 메뉴 버튼(공지사항/수강학생) 클릭 이벤트
         if (menuButtons.length >= 2) {
             menuButtons[0].onclick = () => {
-                if(menuButtons[0].classList.contains("enabled")) location.href = "proflecNotice.html";
+                if(menuButtons[0].classList.contains("enabled")) location.href = "lec_Notice.html";
                 else alert("과목을 선택해주세요.");
             };
             menuButtons[1].onclick = () => {

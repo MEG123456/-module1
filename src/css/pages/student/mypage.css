@@ -6,17 +6,17 @@
 }
 
 .left-section {
-    width: 40%;
+    width: 50%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
 }
 
 .right-section {
-    width: 60%;
+    width: 80%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
 }
 
 .card {
@@ -28,8 +28,8 @@
 
 .lecture-card,
 .notice-card {
-    height: 250px;  
-    overflow: hidden;
+    flex: 1;
+    height: auto;
 }
 
 .profile-avatar img {
@@ -51,9 +51,9 @@
     display: flex;
     align-items: center;
     gap: 20px;
-    position: relative;
     width: 100%;
     min-height: 100px;
+    position: relative;
 }
 
 .info-text-group {
@@ -66,13 +66,20 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     color: #0B0D0F;
 }
 
 .profile-line {
     display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
+
+.profile-line span {
+    white-space: nowrap;
+}
+
 .profile-line:first-child {
     gap: 20px;
 }
@@ -83,9 +90,10 @@
 
 .btn-check-info {
     position: absolute;
-    right: 10px;
-    top: 24px;
     padding: 6px 12px;
+    right: 20px;
+    top: 50%; 
+    transform: translateY(-50%);
     background-color: #407FDE;
     border: none;
     color: #ffffff;
@@ -106,7 +114,7 @@
 .card-title,
 .card-header span{
     font-weight: 700;
-    font-size: 16px;
+    font-size: clamp(22px, 1vw, 30px);
 }
 
 .card-header {
@@ -119,8 +127,6 @@
 .card-title {
     margin-bottom: 15px;
 }
-
-
 
 .plus-btn {
     width: 45px;
@@ -151,4 +157,41 @@
 .timetable td:first-child {
     background-color: #F3F3F3;
     font-weight: bold;
+}
+
+.lecture-list {
+    padding-left: 30px;
+    color: #464A58;
+    font-size: clamp(20px, 1.2vw, 28px);
+}
+
+.lecture-item {
+    cursor: pointer;
+}
+
+.lecture-item:hover {
+    background-color: #F7F8FD;
+}
+
+@media (max-width: 1200px) {
+    
+    .profile-layout {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .profile-info {
+        width: 100%;
+    }
+
+    .profile-line {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .btn-check-info {
+        position: static;
+        transform: none;
+        margin-top: 10px;
+    }
 }

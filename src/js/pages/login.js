@@ -133,8 +133,8 @@ loginBtn.addEventListener("click", () => {
 
 
     if (user.role === "student") {
-        window.location.href = "/pages/student/mypage_s.html";
+        window.location.href = "/pages/student/mypage.html";
     } else if (user.role === "professor") {
-        window.location.href = "/pages/professor/mypage_p.html";
+        window.location.href = "/pages/professor/mypage.html";
     }
 });

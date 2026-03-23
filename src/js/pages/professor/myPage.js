@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.querySelectorAll(".lecture-item").forEach((item, index) => {
                 item.addEventListener("click", () => {
                     localStorage.setItem("selectedLecture", JSON.stringify(myLectures[index]));
-                    window.location.href = "/pages/professor/myLecMane.html";
+                    window.location.href = "/layout/myLecMane.html";
                 });
             });
 
