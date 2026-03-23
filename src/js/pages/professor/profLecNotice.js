@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (isEdit) {
                 const idx = noticeList.findIndex(n => n.id === notice.id);
-                noticeList[idx] = { ...noticeList[idx], title, content, fileName, date: dateStr + " (수정)" };
+                noticeList[idx] = { ...noticeList[idx], title, content, fileName, date: dateStr + " (수정됨)" };
             } else {
                 noticeList.unshift({
                     id: noticeList.length > 0 ? Math.max(...noticeList.map(o => o.id)) + 1 : 1,

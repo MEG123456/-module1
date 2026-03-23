@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/src/css/ui/module/sidebar.css">
     <link rel="stylesheet" href="/src/css/pages/student/stuLecList.css">
     <link rel="stylesheet" href="/src/css/pages/lecNotice.css">
+    <link rel="stylesheet" href="/src/css/ui/module/modal.css">
 </head>
 
 <body>
@@ -20,6 +21,16 @@
 
         <div class="container-main">
             <div id="student-content"></div>
+        </div>
+    </div>
+
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <p id="modalMessage" class="modal-text"></p>
+            <div class="modal-buttons">
+                <button id="confirmBtn" class="confirm-btn">확인</button>
+                <button id="cancelBtn" class="cancel-btn">취소</button>
+            </div>
         </div>
     </div>
 
