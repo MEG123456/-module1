@@ -30,7 +30,7 @@ fetch('/pages/student/classFilter.html')
         }
     })
 
-const subTarget2 = document.querySelector('.inner-table2');
+const subTarget2 = document.querySelector('.inner-table');
 
 fetch('/pages/student/basketTable.html')
     .then(res => res.text())
@@ -38,26 +38,6 @@ fetch('/pages/student/basketTable.html')
         subTarget2.innerHTML = data;
 
         const regiBtns = subTarget2.querySelectorAll('.regi');
-
-        regiBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                this.innerText = '완료';
-                this.classList.add('done');
-                this.disabled = true;
-                this.style.cursor = 'default';
-            });
-        });
-    })
-
-
-const subTarget3 = document.querySelector('.inner-table3');
-
-fetch('/pages/student/classTable.html')
-    .then(res => res.text())
-    .then(data => {
-        subTarget3.innerHTML = data;
-
-        const regiBtns = subTarget3.querySelectorAll('.regi');
 
         regiBtns.forEach(btn => {
             btn.addEventListener('click', function() {
