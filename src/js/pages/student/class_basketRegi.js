@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const subTarget1 = document.querySelector('.inner-filter');
 
-fetch('/pages/student/classFilter.html')
+fetch('/pages/student/filter.html')
     .then(res => res.text())
     .then(data => {
         subTarget1.innerHTML = data;
@@ -32,7 +32,7 @@ fetch('/pages/student/classFilter.html')
 
 const subTarget2 = document.querySelector('.inner-table');
 
-fetch('/pages/student/basketTable.html')
+fetch('/pages/student/class_basketTable.html')
     .then(res => res.text())
     .then(data => {
         subTarget2.innerHTML = data;

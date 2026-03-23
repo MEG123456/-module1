@@ -46,7 +46,7 @@ function highlightActiveMenu() {
 
 
 // 그레이박스 메인
-fetch('/pages/student/basketTable.html')
+fetch('/pages/student/class_basketTable.html')
     .then(res => res.text())
     .then(data => {
         document.querySelector('.gb-main').innerHTML = data;

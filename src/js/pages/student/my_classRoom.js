@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // 현재 페이지 확인 (메인 페이지인지 상세 페이지인지)
         const currentPage = window.location.pathname.split("/").pop();
         // 학생용 강의 목록 메인 파일명을 여기에 적으세요
-        const isMainPage = (currentPage === "myClassRoom.html" || currentPage === "stuLec");
+        const isMainPage = (currentPage === "/pages/student/my_classRoom.html" || currentPage === "stuLec");
 
         // 메인 페이지 진입 시에는 선택 기록 초기화
         if (isMainPage) {
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem("selectedStuLecIndex", index);
             
             // 학생 공지사항 페이지로 이동
-            window.location.href = "stuLecNotice.html";
+            window.location.href = "/pages/student/my_lecNotice.html";
         });
 
         // 4. 페이지 로드 시 기존 선택 상태 복원 (메인이 아닐 때만)
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // 첫 번째 버튼: 공지사항
             menuButtons[0].onclick = () => {
                 if(menuButtons[0].classList.contains("enabled")) {
-                    location.href = "stuLecNotice.html";
+                    location.href = "/pages/student/my_lecNotice.html";
                 } else {
                     alert("강의를 먼저 선택해주세요.");
                 }
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // 두 번째 버튼: 수강평
             menuButtons[1].onclick = () => {
                 if(menuButtons[1].classList.contains("enabled")) {
-                    location.href = "lecReview.html";
+                    location.href = "/pages/student/my_lecReview.html";
                 } else {
                     alert("강의를 먼저 선택해주세요.");
                 }

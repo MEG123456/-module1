@@ -45,7 +45,7 @@ function StudentLectureList() {
             if (index === undefined) return;
 
             if (e.target.classList.contains("lecture-link")) {
-                window.location.href = `../professor/profLecDetail.html?index=${index}`;
+                window.location.href = `/pages/student/lec_Detail.html?index=${index}`;
             }
         });
     };
