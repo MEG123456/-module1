@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.removeItem("signup1Data");
             localStorage.removeItem("signup2Data");
             localStorage.removeItem("signup3Data");
-            window.location.href = "/pages/signup5.html";
+            window.location.href = "/pages/signupLast.html";
         }
     });
 });

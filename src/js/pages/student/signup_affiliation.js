@@ -177,7 +177,7 @@ nextBtn.addEventListener("click", () => {
         };
 
         localStorage.setItem("signup2Data", JSON.stringify(signup2Data));
-        window.location.href = "/pages/signup4.html";
+        window.location.href = "/pages/signupId.html";
     }
 });
 
