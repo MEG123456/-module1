@@ -90,6 +90,10 @@
     text-align: center;
 }
 
+.student-table td {
+    background-color: #fff;
+}
+
 .student-table td:last-child {
     padding: 4px;
 }
