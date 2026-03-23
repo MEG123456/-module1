@@ -24,6 +24,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+
+    phoneInput.addEventListener('keydown', (e) => {
+    const value = e.target.value;
+
+    if (
+        value.length >= 11 &&
+        e.key !== "Backspace" &&
+        e.key !== "Delete" &&
+        e.key !== "ArrowLeft" &&
+        e.key !== "ArrowRight"
+    ) {
+        e.preventDefault();
+    }
+    });
+
     const onlyNumber = (e) => {
         e.target.value = e.target.value.replace(/[^0-9]/g, '');
         checkAllFilled();
