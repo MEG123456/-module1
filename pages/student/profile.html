@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학생 마이페이지</title>
+
+    <link rel="stylesheet" href="/src/css/ui/module/header.css">
+    <link rel="stylesheet" href="/src/css/ui/module/sidebar.css">
+    <link rel="stylesheet" href="/src/css/pages/student/profile.css">
+</head>
+<body>
+    <div id="header"></div>
+
+    <div class="container">
+        <div id="sidebar"></div>
+
+        <div class="container-main">
+            <div class="profile-wrapper">
+                <div class="profile-box">
+                    <div class="profile-top">
+                        <p class="profile-title">프로필</p>
+
+                        <div class="profile-image-wrap">
+                            <img src="/asset/profile.svg" alt="프로필 이미지" class="profile-image">
+                        </div>
+                    </div>
+
+                    <div class="profile-content">
+                        <div class="profile-row">
+                            <span class="label">이름</span>
+                            <span class="colon">:</span>
+                            <span class="value" id="profile-name">홍길동</span>
+                        </div>
+
+                        <div class="profile-row">
+                            <span class="label">학부</span>
+                            <span class="colon">:</span>
+                            <span class="value" id="profile-college">첨단학부</span>
+                        </div>
+
+                        <div class="profile-row">
+                            <span class="label">학과</span>
+                            <span class="colon">:</span>
+                            <span class="value" id="profile-department">의료 IT</span>
+                        </div>
+
+                        <div class="profile-row">
+                            <span class="label">학번</span>
+                            <span class="colon">:</span>
+                            <span class="value" id="profile-studentId">20nnnnnnnn</span>
+                        </div>
+
+                        <div class="profile-row">
+                            <span class="label">이메일</span>
+                            <span class="colon">:</span>
+                            <span class="value" id="profile-email">gildong@eulji.ac.kr</span>
+                        </div>
+
+                        <div class="profile-row">
+                            <span class="label">전화번호</span>
+                            <span class="colon">:</span>
+                            <span class="value" id="profile-phone">010 - XXXX - XXXX</span>
+                        </div>
+
+                        <div class="profile-btn-wrap">
+                            <button type="button" class="profile-edit-btn">수정</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/src/js/layout/includeHeader.js"></script>
+    <script type="module" src="/src/js/layout/includeStuSidebar.js"></script>
+    <script src="/src/js/pages/student/profile.js"></script>
+</body>
+</html>
