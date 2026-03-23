@@ -18,6 +18,40 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+const subTarget1 = document.querySelector('.inner-filter');
+
+fetch('/pages/student/classFilter.html')
+    .then(res => res.text())
+    .then(data => {
+        subTarget1.innerHTML = data;
+
+        if (typeof window.initFilters === 'function') {
+            window.initFilters();
+        }
+    })
+
+const subTarget2 = document.querySelector('.inner-table');
+
+fetch('/pages/student/classTable.html')
+    .then(res => res.text())
+    .then(data => {
+        subTarget2.innerHTML = data;
+
+        const regiBtns = subTarget2.querySelectorAll('.regi');
+
+        regiBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.innerText = '완료';
+                this.classList.add('done');
+                this.disabled = true;
+                this.style.cursor = 'default';
+            });
+        });
+    })
+
+
+
+
 // 그레이박스 사이드바 유지
 fetch('/layout/classSideMenu.html')
     .then(res => res.text())
@@ -43,22 +77,3 @@ function highlightActiveMenu() {
         }
     });
 }
-
-
-// 그레이박스 메인
-fetch('/pages/student/classTable.html')
-    .then(res => res.text())
-    .then(data => {
-        document.querySelector('.gb-main').innerHTML = data;
-
-        const regiBtn = document.querySelectorAll('.regi');
-
-        regiBtn.forEach(btn => {
-            btn.addEventListener('click', function() {
-                this.innerText = '완료';
-                this.classList.add('done');
-                this.disabled = true;
-                this.style.cursor = 'default';
-            });
-        });
-    })

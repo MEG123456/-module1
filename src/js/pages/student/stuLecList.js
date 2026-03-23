@@ -8,7 +8,7 @@ const majorData = {
 };
 
 
-function initFilters() {
+export function initFilters() {
   const collegeSelect = document.querySelector('select[name="college"]');
   const majorSelect = document.getElementById('major-filter');
   const gradeSelect = document.getElementById('grade-filter');
@@ -20,14 +20,14 @@ function initFilters() {
     const isCollegeSelected = collegeSelect.value !== "all-college";
     const isMajorSortSelected = sortSelect.value === "sort-major";
 
-    // 학부를 선택했거나, 구분에서 '전공'을 선택했다면 학과 활성화
+    // 학과 활성화
     if (isCollegeSelected || isMajorSortSelected) {
       majorSelect.disabled = false;
     } else {
-      // 그 외의 경우(교양 선택 등)에는 학과 비활성화 및 초기화
+      // 그 외 초기화
       majorSelect.disabled = true;
       majorSelect.value = "all-major";
-      // 학과가 비활성화되면 연쇄적으로 학년도 비활성화하기 위해 이벤트 발생
+      // 학과가 비활성화되면 연쇄적으로 학년도 비활성화
       majorSelect.dispatchEvent(new Event('change')); 
     }
   }
@@ -40,14 +40,14 @@ function initFilters() {
     let majors = [];
     
     if (selectedCollege === "free_major") {
-      // ⭐ 자유전공학부 선택 시: hightech, nature, human 학과를 모두 합침
+      // 자유전공학부 선택
       majors = [
         ...majorData["hightech"],
         ...majorData["nature"],
         ...majorData["human"]
       ];
     } else if (selectedCollege !== "all-college") {
-      // 일반 학부 선택 시
+      // 일반 학부 선택
       majors = majorData[selectedCollege] || [];
     }
 
@@ -89,4 +89,14 @@ function initFilters() {
   updateMajorStatus();
 }
 
-initFilters();
+function autoInit() {
+    const collegeSelect = document.querySelector('select[name="college"]');
+
+    window.initFilters = initFilters;
+
+    if (collegeSelect) {
+        initFilters();
+    }
+}
+
+autoInit();
