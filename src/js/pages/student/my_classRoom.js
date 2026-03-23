@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const interval = setInterval(() => {
-        const target = document.querySelector(".professor-sidebar") || document.querySelector(".sidebar");
+        const target = document.querySelector(".student-sidebar") || document.querySelector(".sidebar");
 
         if (target) {
             clearInterval(interval);
