@@ -11,8 +11,8 @@ const store = {
 
 function LectureManager() {
     this.lectures = [];
-    let tempLectureData = null; // 유효성 검사를 통과한 데이터를 임시 저장할 변수
-    
+    let tempLectureData = null; 
+
     const urlParams = new URLSearchParams(window.location.search);
     const editIndex = urlParams.get('editIndex');
 
@@ -33,9 +33,31 @@ function LectureManager() {
         $('input[name="credit"]').value = data.credit || "";
         $('input[name="classroom"]').value = data.room || "";
         $('textarea[name="about"]').value = data.about || "";
-        
+
         if (data.type === '전공') $("#major").checked = true;
         else $("#etc").checked = true;
+    };
+
+    // --- 모달 제어 함수 ---
+    const showModal = (message, hasButtons = true) => {
+        const modal = $("#modalOverlay");
+        const confirmBtn = $("#confirmBtn");
+        const cancelBtn = $("#cancelBtn");
+        
+        $(".modal-text").innerText = message;
+        
+        if (hasButtons) {
+            confirmBtn.style.display = "inline-block";
+            cancelBtn.style.display = "inline-block";
+        } else {
+            confirmBtn.style.display = "none";
+            cancelBtn.style.display = "none";
+        }
+        modal.style.display = "flex";
+    };
+
+    const closeModal = () => {
+        $("#modalOverlay").style.display = "none";
     };
 
     const getFormData = () => {
@@ -48,9 +70,15 @@ function LectureManager() {
         const room = $('input[name="classroom"]').value;
         const about = $('textarea[name="about"]').value;
 
-        // 유효성 검사: 필수 항목이 비었는지 확인
+        // [수정] alert 대신 확인 버튼만 있는 모달 표시
         if (!title.trim() || !prof.trim() || !max.trim() || !time.trim()) {
-            alert("강의 정보를 모두 입력해주세요!");
+            showModal("강의 정보를 모두 입력해주세요!", true);
+            $("#cancelBtn").style.display = "none"; // 확인 버튼만 남김
+            
+            const confirmBtn = $("#confirmBtn");
+            const newConfirmBtn = confirmBtn.cloneNode(true);
+            confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+            newConfirmBtn.onclick = closeModal;
             return null;
         }
 
@@ -58,49 +86,46 @@ function LectureManager() {
     };
 
     const initEventListeners = () => {
-
         // 1. [저장] 버튼 클릭 시
         $("#saveBtn").addEventListener("click", (e) => {
-            e.preventDefault(); // 폼 제출 기본 동작 방지
-            
-            // 유효성 검사 실행 (여기서 비어있으면 alert가 뜸)
-            const data = getFormData(); 
+            e.preventDefault();
+            const data = getFormData();
+            if (!data) return;
 
-            if (!data) {
-                return; 
-            }
+            tempLectureData = data;
+            const msg = editIndex !== null ? "변경사항을 저장하시겠습니까?" : "새 강좌를 등록하시겠습니까?";
+            showModal(msg, true);
 
-            // 2. 데이터가 정상적으로 있을 때만 모달 관련 로직 실행
-            tempLectureData = data; 
-            
-            const modalText = $(".modal-text");
-            if (editIndex !== null) {
-                modalText.innerText = "변경사항을 저장하시겠습니까?";
-            } else {
-                modalText.innerText = "새 강좌를 등록하시겠습니까?";
-            }
-            
-            // 3. 모든 조건이 만족될 때만 모달을 화면에 표시
-            $("#modalOverlay").style.display = "flex";
-        });
+            // 확인 버튼 이벤트 재설정 (중복 방지)
+            const confirmBtn = $("#confirmBtn");
+            const newConfirmBtn = confirmBtn.cloneNode(true);
+            confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
 
-        // 2. 모달 내 [확인] 버튼 클릭 시
-        $("#confirmBtn").addEventListener("click", () => {
-            if (tempLectureData) {
-                if (editIndex !== null) {
-                    this.lectures[editIndex] = tempLectureData;
-                } else {
-                    this.lectures.push(tempLectureData);
+            newConfirmBtn.addEventListener("click", () => {
+                if (tempLectureData) {
+                    const isEdit = editIndex !== null;
+                    if (isEdit) {
+                        this.lectures[editIndex] = tempLectureData;
+                    } else {
+                        this.lectures.push(tempLectureData);
+                    }
+                    store.setLocalStorage(this.lectures);
+
+                    // [추가] 등록/수정 완료 후 버튼 없는 모달 1초 띄우기
+                    const finishMsg = isEdit ? "수정되었습니다." : "등록되었습니다.";
+                    showModal(finishMsg, false);
+
+                    setTimeout(() => {
+                        window.location.href = "lec_create.html";
+                    }, 1000);
                 }
-                store.setLocalStorage(this.lectures);
-                window.location.href = "lec_create.html"; 
-            }
+            });
         });
 
         // 3. 모달 내 [취소] 버튼
         $("#cancelBtn").addEventListener("click", () => {
             tempLectureData = null;
-            $("#modalOverlay").style.display = "none";
+            closeModal();
         });
     };
 }
@@ -110,19 +135,11 @@ lectureManager.init();
 
 document.addEventListener("DOMContentLoaded", () => {
     const interval = setInterval(() => {
-        // 사이드바가 로드되었는지 확인 (클래스명을 확인해 보세요!)
         const target = document.querySelector(".professor-sidebar") || document.querySelector(".sidebar");
-
         if (target) {
             clearInterval(interval);
-
             const sidebarLinks = target.querySelectorAll('li a');
-
-            // 1. 모든 메뉴에서 active 제거
             sidebarLinks.forEach(link => link.classList.remove('active'));
-
-            // 2. '강의 목록'이 두 번째 메뉴라면 1번 인덱스에 active 추가
-            // 등록/수정 페이지에 들어와 있어도 부모 메뉴인 '강의 목록'에 불이 들어오게 합니다.
             if (sidebarLinks[0]) {
                 sidebarLinks[0].classList.add('active');
             }

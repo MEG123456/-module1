@@ -78,22 +78,34 @@ function LectureList() {
         // 2. 화살표 함수를 사용하여 'this'가 LectureList 객체를 가리키도록 고정
         $("#confirmBtn").addEventListener("click", () => {
             if (currentIndex !== null) {
-                // 선택한 인덱스의 데이터를 삭제
+                // 1. 데이터 삭제
                 this.lectures.splice(currentIndex, 1);
-                // 로컬 스토리지 업데이트
                 store.setLocalStorage("lectures", this.lectures);
-                // 화면 다시 그리기
-                renderLectures();
-                // 모달 닫기 및 인덱스 초기화
-                $("#modalOverlay").style.display = "none";
-                currentIndex = null;
+                
+                // 2. "삭제되었습니다" 안내 모달로 전환
+                $("#modalMessage").innerText = "삭제되었습니다.";
+                // 확인/취소 버튼을 잠시 숨김 (안내만 보여주기 위함)
+                $("#confirmBtn").style.display = "none";
+                $("#cancelBtn").style.display = "none";
+
+                // 3. 1초 뒤에 모달을 닫고 화면을 다시 그림
+                setTimeout(() => {
+                    $("#modalOverlay").style.display = "none";
+                    // 버튼들 다시 원래대로 보이게 복구 (다음 모달을 위해)
+                    $("#confirmBtn").style.display = "inline-block";
+                    $("#cancelBtn").style.display = "inline-block";
+                    
+                    renderLectures();
+                    currentIndex = null;
+                }, 1000); // 1초 동안 보여줌
             }
         });
-
+        
         $("#cancelBtn").addEventListener("click", () => {
             $("#modalOverlay").style.display = "none";
             currentIndex = null;
         });
+        
     };
 }
 
