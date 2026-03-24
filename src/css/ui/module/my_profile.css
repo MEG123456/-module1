@@ -61,6 +61,7 @@
 .profile-content {
     padding-top: 32px;
     padding-bottom: 28px;
+    text-align: center;
 }
 
 .profile-row {
@@ -71,17 +72,19 @@
     font-size: 17px;
     line-height: 1;
     color: #0B0D0F;
+    letter-spacing: 1.2px;
 }
 
 .profile-row .label {
-    width: 88px;
-    text-align: right;
+    width: 110px;
+    text-align: center;
     font-weight: 700;
     color: #0B0D0F;
+    white-space: nowrap;
 }
 
 .profile-row .colon {
-    width: 26px;
+    width: 8px;
     text-align: center;
     font-weight: 700;
     color: #0B0D0F;
@@ -89,7 +92,7 @@
 
 .profile-row .value {  
     flex: 1;
-    text-align: left;
+    text-align: center;
     font-weight: 500;
     color: #0B0D0F;
 }
@@ -106,6 +109,111 @@
     border-radius: 4px;
     background-color: #7498CE;
     color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.pw-input-wrap {
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    margin: 20px auto;
+    margin-top: 6px;
+}
+
+#pwInput {
+    width: 100%;
+    height: 48px;                 
+    padding: 0 45px 0 14px;   
+    border: 2px solid #464A58;    
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.input-error {
+    border: 2px solid red !important;  
+}
+
+.pw-error {
+    min-height: 18px;
+    color: red; 
+    font-size: 13px;
+    margin-top: 6px;
+}
+.pw-error:empty {
+    visibility: hidden;  
+}
+
+#pwInput:focus {
+    outline: none;
+    border: 2px solid #7498CE;
+}
+
+.toggle-eye {
+    position: absolute;
+    right: 24px;
+    top: 33%;                    
+    transform: translateY(-50%);
+    width: 24px;               
+    cursor: pointer;
+}
+
+.toggle-eye.disabled {
+    opacity: 0.3;
+    filter: grayscale(100%);
+    pointer-events: none;
+}
+
+#pwModal .pw-input-wrap {
+    width: 260px;
+    height: 60px;
+}
+
+.pw-input-wrap {
+    position: relative;
+    width: 210px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pw-inline {
+    width: 100%;
+    height: 28px;
+    padding: 0 30px 0 8px;
+    box-sizing: border-box;
+}
+
+.small-eye {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    cursor: pointer;
+}
+
+.pw-msg {
+    position: absolute;
+    top: 100%;          /* input 바로 아래 */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: red;
+    margin-top: 4px;
+    white-space: nowrap;
+    
+}
+
+#pwSaveBtn {
+    background-color: #7498CE;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 14px;
     font-size: 12px;
     font-weight: 700;
     cursor: pointer;
