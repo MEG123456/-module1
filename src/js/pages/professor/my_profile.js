@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const savedUser = JSON.parse(localStorage.getItem("user")) || {};
+  const savedUser = JSON.parse(localStorage.getItem("loginUser")) || {};
 
   const nameEl = document.getElementById("profile-name");
   const collegeEl = document.getElementById("profile-college");
@@ -7,16 +7,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const studentIdEl = document.getElementById("profile-studentId");
   const emailEl = document.getElementById("profile-email");
   const phoneEl = document.getElementById("profile-phone");
+  const editBtn = document.getElementById("editProfileBtn");
 
-  if (nameEl) nameEl.textContent = savedUser.name || "홍길동";
+  if (nameEl) nameEl.textContent = savedUser.name || "";
   if (collegeEl)
-    collegeEl.textContent = convertCollege(savedUser.college) || "첨단학부";
+    collegeEl.textContent = convertCollege(savedUser.college) || "";
   if (departmentEl)
-    departmentEl.textContent = savedUser.department || "의료 IT";
-  if (studentIdEl) studentIdEl.textContent = savedUser.studentId || "-";
-  if (emailEl) emailEl.textContent = savedUser.email || "gildong@eulji.ac.kr";
-  if (phoneEl) phoneEl.textContent = savedUser.phone || "010 - xxxx - xxxx";
-});
+    departmentEl.textContent = savedUser.department || "";
+  if (studentIdEl) studentIdEl.textContent = savedUser.professorCode || "";
+  if (emailEl) emailEl.textContent = savedUser.email || "";
+  if (phoneEl) phoneEl.textContent = savedUser.phone || "";
+  if (editBtn) {
+    editBtn.addEventListener("click", () => {
+      window.location.href = "/pages/my/edit_profile/edit_profile.html";
+    });
+  }
+}); 
+
 
 function convertCollege(collegeValue) {
   const collegeMap = {
@@ -33,4 +40,3 @@ function convertCollege(collegeValue) {
 }
 
 
-//로컬 연동 해주세요 + 수정 버튼 동작 되게 수정 페이지 만들어주세요
