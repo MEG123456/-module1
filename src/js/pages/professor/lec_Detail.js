@@ -32,7 +32,7 @@ function LectureDetail() {
                     target.className = "student-sidebar"; // 클래스명 교체
                     target.innerHTML = `
                         <li><a href="../student/lec_list.html">강의</a></li>
-                        <li><a href="#">수강</a></li>
+                        <li><a href="/layout/stuClassMain.html">수강</a></li>
                         <li><a href="../student/my_page.html">마이페이지</a></li>
                     `;
                     
