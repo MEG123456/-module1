@@ -26,6 +26,27 @@
     box-sizing: border-box;
     flex-direction: row;
     overflow-y: auto;
-    /* height: 100%;
-    display: flex; */
+}
+
+@media (max-width: 768px) {
+    .gb-sub {
+        width: 160px;
+    }
+}
+
+@media (max-width: 600px) {
+    .gb-container {
+        flex-direction: column;
+        height: auto; 
+    }
+
+    .gb-sub {
+        width: 100%;
+        border-right: none;
+        border-bottom: 3px solid #898A8D;
+    }
+
+    .gb-main {
+        width: 100%;
+    }
 }

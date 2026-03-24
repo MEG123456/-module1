@@ -162,11 +162,12 @@
 .lecture-list {
     padding-left: 30px;
     color: #464A58;
-    font-size: clamp(20px, 1.2vw, 28px);
+    font-size: clamp(24px, 1.2vw, 30px);
 }
 
 .lecture-item {
     cursor: pointer;
+    padding: 12px 3px;
 }
 
 .lecture-item:hover {
