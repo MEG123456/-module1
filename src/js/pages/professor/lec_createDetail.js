@@ -98,7 +98,7 @@ function LectureManager() {
             if (!data) return;
 
             tempLectureData = data;
-            const isEdit = !isNaN(editIndex);
+            const isEdit = urlParams.has('editIndex');
             const msg = isEdit ? "변경사항을 저장하시겠습니까?" : "새 강좌를 등록하시겠습니까?";
             showModal(msg, true);
 
@@ -110,7 +110,7 @@ function LectureManager() {
             newConfirmBtn.addEventListener("click", () => {
                 if (tempLectureData) {
                     const editIndex = Number(urlParams.get('editIndex'));
-                    const isEdit = !isNaN(editIndex);
+                    const isEdit = urlParams.has('editIndex');
                     if (isEdit) {
                         this.lectures[editIndex] = tempLectureData;
                     } else {
@@ -124,7 +124,7 @@ localStorage.setItem("lectures_all", JSON.stringify(this.lectures));
                     showModal(finishMsg, false);
 
                     setTimeout(() => {
-                        window.location.href = "lec_create.html";
+                        window.location.replace("lec_create.html");
                     }, 1000);
                 }
             });

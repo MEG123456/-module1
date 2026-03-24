@@ -47,17 +47,10 @@ class LectureManager {
 
     // [수정] 임의 데이터 삭제, 로컬 스토리지에서만 로드
     loadLocalData() {
-    let allLectures = [];
+    const data = JSON.parse(localStorage.getItem("lectures_all")) || [];
 
-    Object.keys(localStorage).forEach(key => {
-        if (key.startsWith("lectures_")) {
-            const data = JSON.parse(localStorage.getItem(key)) || [];
-            allLectures = allLectures.concat(data);
-        }
-    });
-
-    this.allLectures = allLectures;
-    this.displayLectures = [...allLectures];
+    this.allLectures = data;
+    this.displayLectures = [...data];
 
     if (this.allLectures.length === 0) {
         console.info("현재 등록된 강의 데이터가 없습니다.");
