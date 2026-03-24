@@ -1,4 +1,5 @@
-const majorData = {
+// 1. 공통 상수 설정
+const MAJOR_DATA = {
   "medical": ["의예과"],
   "nursing": ["간호학과"],
   "health_science": ["임상병리학과", "안경광학과", "응급구조학과", "방사선학과", "치위생학과", "물리치료학과", "의료경영학과"],
@@ -7,96 +8,180 @@ const majorData = {
   "human": ["레저산업전공", "뷰티아트전공", "시각디자인전공", "사회복지전공", "아동청소년상담전공", "중독상담전공", "장례산업전공"]
 };
 
+const KR_NAMES = {
+    "medical": "의과대학", "nursing": "간호대학", "health_science": "보건과학대학", 
+    "free_major": "자유전공학부", "hightech": "첨단학부", "nature": "자연계열학부", "human": "인문사회계열학부",
+    "first": "1학년", "second": "2학년", "third": "3학년", "fourth": "4학년",
+    "sort-major": "전공", "sort-etc": "교양",
+    "mon": "월요일", "tue": "화요일", "wed": "수요일", "thu": "목요일", "fri": "금요일",
+    "one": "1학점", "two": "2학점", "three": "3학점"
+};
 
-export function initFilters() {
-  const collegeSelect = document.querySelector('select[name="college"]');
-  const majorSelect = document.getElementById('major-filter');
-  const gradeSelect = document.getElementById('grade-filter');
-  const sortSelect = document.querySelector('select[name="sort"]');
-  const weekSelect = document.querySelector('select[name="week"]');
+class LectureManager {
+    constructor() {
+        // DOM 요소 캐싱
+        this.els = {
+            college: document.querySelector('select[name="college"]'),
+            major: document.getElementById('major-filter'),
+            grade: document.getElementById('grade-filter'),
+            sort: document.querySelector('select[name="sort"]'),
+            week: document.querySelector('select[name="week"]'),
+            score: document.querySelector('select[name="score"]'),
+            search: document.querySelector('.lecture-search'),
+            tableBody: document.querySelector("#allLecTableBody"),
+            checkBtn: document.querySelector(".check-btn"),
+            searchBtn: document.querySelector(".lecSearch_btn")
+        };
 
-
-  function updateMajorStatus() {
-    const isCollegeSelected = collegeSelect.value !== "all-college";
-    const isMajorSortSelected = sortSelect.value === "sort-major";
-
-    // 학과 활성화
-    if (isCollegeSelected || isMajorSortSelected) {
-      majorSelect.disabled = false;
-    } else {
-      // 그 외 초기화
-      majorSelect.disabled = true;
-      majorSelect.value = "all-major";
-      // 학과가 비활성화되면 연쇄적으로 학년도 비활성화
-      majorSelect.dispatchEvent(new Event('change')); 
-    }
-  }
-
-  // 1. 학부 변경 시
-  collegeSelect.addEventListener('change', function() {
-    const selectedCollege = this.value;
-
-    majorSelect.innerHTML = '<option value="all-major" selected>전체</option>';
-    let majors = [];
-    
-    if (selectedCollege === "free_major") {
-      // 자유전공학부 선택
-      majors = [
-        ...majorData["hightech"],
-        ...majorData["nature"],
-        ...majorData["human"]
-      ];
-    } else if (selectedCollege !== "all-college") {
-      // 일반 학부 선택
-      majors = majorData[selectedCollege] || [];
+        this.allLectures = [];
+        this.displayLectures = [];
     }
 
-    // 합쳐진(또는 선택된) 학과들을 옵션으로 추가
-    majors.forEach(major => {
-      const option = document.createElement('option');
-      option.value = major;
-      option.textContent = major;
-      majorSelect.appendChild(option);
-    });
-
-    updateMajorStatus();
-  });
-
-  // 2. 구분 변경 시
-  sortSelect.addEventListener('change', function() {
-    // 요일 활성화 (전체만 아니면 활성화)
-    if (this.value !== "all-sort") {
-      weekSelect.disabled = false;
-    } else {
-      weekSelect.disabled = true;
-      weekSelect.value = "all-week";
+    init() {
+        this.loadLocalData();
+        this.initUIEvents();
+        this.updateFilterStatus(); 
+        this.render();
     }
-    
-    updateMajorStatus();
-  });
 
-  // 3. 학과 변경 시
-  majorSelect.addEventListener('change', function() {
-    if (this.value !== "all-major" && this.value !== "") {
-      gradeSelect.disabled = false;
-    } else {
-      gradeSelect.disabled = true;
-      gradeSelect.value = "all-grade";
+    // [수정] 임의 데이터 삭제, 로컬 스토리지에서만 로드
+    loadLocalData() {
+        this.allLectures = JSON.parse(localStorage.getItem("lectures")) || [];
+        this.displayLectures = [...this.allLectures];
+        
+        if (this.allLectures.length === 0) {
+            console.info("현재 등록된 강의 데이터가 없습니다.");
+        }
     }
-  });
 
-  // 초기 실행: 모든 필터 상태 세팅
-  updateMajorStatus();
+    // UI 필터 활성화 상태 제어
+    updateFilterStatus() {
+        const isCollegeSelected = this.els.college.value !== "all-college";
+        const isMajorSortSelected = this.els.sort.value === "sort-major";
+
+        this.els.major.disabled = !(isCollegeSelected || isMajorSortSelected);
+        if (this.els.major.disabled) {
+            this.els.major.value = "all-major";
+            this.els.grade.disabled = true;
+            this.els.grade.value = "all-grade";
+        }
+
+        this.els.week.disabled = (this.els.sort.value === "all-sort");
+        if (this.els.week.disabled) this.els.week.value = "all-week";
+    }
+
+    initUIEvents() {
+        // 학부 선택 시 학과 리스트 업데이트
+        this.els.college.addEventListener('change', () => {
+            const selectedCollege = this.els.college.value;
+            let majors = [];
+
+            if (selectedCollege === "free_major") {
+                majors = [...MAJOR_DATA["hightech"], ...MAJOR_DATA["nature"], ...MAJOR_DATA["human"]];
+            } else if (selectedCollege !== "all-college") {
+                majors = MAJOR_DATA[selectedCollege] || [];
+            }
+
+            this.els.major.innerHTML = '<option value="all-major" selected>전체</option>';
+            majors.forEach(m => {
+                const opt = document.createElement('option');
+                opt.value = opt.textContent = m;
+                this.els.major.appendChild(opt);
+            });
+
+            this.updateFilterStatus();
+        });
+
+        this.els.sort.addEventListener('change', () => this.updateFilterStatus());
+
+        this.els.major.addEventListener('change', () => {
+            const hasValue = this.els.major.value !== "all-major" && this.els.major.value !== "";
+            this.els.grade.disabled = !hasValue;
+            if (!hasValue) this.els.grade.value = "all-grade";
+        });
+
+        // 통합 검색/필터 실행 함수
+        const runFilter = () => {
+            this.displayLectures = this.applyFilters();
+            this.render();
+        };
+
+        if (this.els.checkBtn) this.els.checkBtn.addEventListener("click", runFilter);
+        if (this.els.searchBtn) this.els.searchBtn.addEventListener("click", runFilter);
+        if (this.els.search) {
+            this.els.search.addEventListener("keypress", (e) => {
+                if (e.key === "Enter") runFilter();
+            });
+        }
+
+        // 테이블 내 상세 링크 클릭 이벤트
+        this.els.tableBody.addEventListener("click", (e) => {
+            const target = e.target.closest(".lecture-link");
+            if (target) {
+                const index = target.dataset.index;
+                window.location.href = `/pages/professor/lec_Detail.html?index=${index}`;
+            }
+        });
+    }
+
+    // 실제 필터링 로직
+    applyFilters() {
+        const searchText = this.els.search.value.trim().toLowerCase();
+        const filters = {
+            college: this.els.college.value,
+            major: this.els.major.value,
+            grade: this.els.grade.value,
+            sort: this.els.sort.value,
+            week: this.els.week.value,
+            score: this.els.score.value
+        };
+
+        return this.allLectures.filter(lec => {
+            // 모든 필드 기반 통합 검색
+            const allValueString = Object.values(lec).join(" ").toLowerCase();
+            const matchesSearch = !searchText || allValueString.includes(searchText);
+            
+            const matchesCollege = filters.college === 'all-college' || lec.college === filters.college;
+            const matchesMajor = filters.major === 'all-major' || lec.major === filters.major;
+            const matchesGrade = filters.grade === 'all-grade' || lec.grade === filters.grade;
+            const matchesSort = filters.sort === 'all-sort' || lec.type === filters.sort;
+            const matchesWeek = filters.week === 'all-week' || lec.day === filters.week;
+            const matchesScore = filters.score === 'all-score' || lec.credit === filters.score;
+
+            return matchesSearch && matchesCollege && matchesMajor && 
+                   matchesGrade && matchesSort && matchesWeek && matchesScore;
+        });
+    }
+
+    // 결과 렌더링
+    render() {
+        if (this.displayLectures.length === 0) {
+            this.els.tableBody.innerHTML = '<tr><td colspan="5" style="text-align:center;">조건에 맞는 강의가 없습니다.</td></tr>';
+            return;
+        }
+
+        this.els.tableBody.innerHTML = this.displayLectures.map((lec, index) => {
+            const krType = KR_NAMES[lec.type] || lec.type;
+            const krCredit = KR_NAMES[lec.credit] || lec.credit;
+            const krDay = KR_NAMES[lec.day] ? KR_NAMES[lec.day] + " " : "";
+
+            return `
+                <tr>
+                    <td>${100000 + index}</td> 
+                    <td class="lecture-link" data-index="${index}" style="cursor:pointer; font-weight:bold;">
+                        ${lec.title}
+                    </td>
+                    <td>${krType}</td>
+                    <td>${krCredit}</td>
+                    <td>${krDay}${lec.time}</td>
+                </tr>
+            `;
+        }).join("");
+    }
 }
 
-function autoInit() {
-    const collegeSelect = document.querySelector('select[name="college"]');
-
-    window.initFilters = initFilters;
-
-    if (collegeSelect) {
-        initFilters();
-    }
-}
-
-autoInit();
+// 앱 실행
+document.addEventListener('DOMContentLoaded', () => {
+    const app = new LectureManager();
+    app.init();
+});
