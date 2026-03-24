@@ -1,3 +1,4 @@
+
 // // 선택한 메뉴바 유지
 // document.addEventListener("DOMContentLoaded", () => {
 //     const interval = setInterval(() => {
@@ -130,74 +131,78 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (typeof window.initFilters === 'function') {
                     window.initFilters();
                 }
+
+                renderLectures();
             })
             .catch(err => console.log("필터를 불러오는 중 오류 발생:", err));
     }
 
     // 3. 테이블 영역 로드 (공통으로 사용하는 .inner-table3 요소 기준)
-    const tableArea = document.querySelector('.gb-main');
-    if (tableArea) {
-        // 공통 테이블 HTML 호출
-        fetch('/pages/student/class_table.html') 
-            .then(res => res.text())
-            .then(data => {
-                tableArea.innerHTML = data;
+    // 3. 테이블 영역 로드
+function renderLectures() {
+    const lectures = JSON.parse(localStorage.getItem("lectures_all")) || [];
+    const tbody = document.querySelector('.allLec-table tbody');
 
-                const lectures = JSON.parse(localStorage.getItem("lectures_all")) || [];
-                const tbody = tableArea.querySelector("tbody");
+    console.log("🔥 렌더 실행됨", tbody);
 
-                if (tbody && lectures.length > 0) {
-                    tbody.innerHTML = lectures.map((lec, index) => `
-                        <tr>
-                            <td>${lec.title}</td>
-                            <td>${lec.prof}</td>
-                            <td>${lec.time}</td>
-                            <td>${lec.room}</td>
-                            <td>
-                                <button class="regi" data-index="${index}">신청</button>
-                            </td>
-                        </tr>
-                    `).join('');
-                }
+    if (!tbody) return;
 
-                // 테이블 내부 버튼(신청/취소) 이벤트 바인딩
-                const regiBtns = tableArea.querySelectorAll('.regi');
+    tbody.innerHTML = lectures.map((lec, index) => `
+        <tr>
+            <td>${100000 + index}</td>
+            <td>${lec.title}</td>
+            <td>${lec.type}</td>
+            <td>${lec.credit}</td>
+            <td>${lec.time}</td>
+            <td>
+                <button class="regi" data-index="${index}">신청</button>
+            </td>
+        </tr>
+    `).join('');
 
-regiBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
+    // 버튼 이벤트 여기서 다시 연결
+    const regiBtns = document.querySelectorAll('.regi');
 
-        const index = this.dataset.index;
-        const lectures = JSON.parse(localStorage.getItem("lectures_all")) || [];
-        const lecture = lectures[index];
+    regiBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
 
-        const user = JSON.parse(localStorage.getItem("loginUser")) || {};
-        const STORAGE_KEY = `myCourses_${user.id || user.email}`;
+            const index = parseInt(this.dataset.index);
 
-        let myCourses = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            const user = JSON.parse(localStorage.getItem("loginUser")) || {};
+            const STORAGE_KEY = `myCourses_${user.id || user.email}`;
 
-        const exists = myCourses.some(l => l.title === lecture.title);
-        if (exists) {
-            alert("이미 신청한 강의입니다.");
-            return;
-        }
+            const lectures = JSON.parse(localStorage.getItem("lectures_all")) || [];
+            const lecture = lectures[index];
 
-        myCourses.push({
-            ...lecture,
-            profIndex: index,
-            lecId: lecture.id || index 
+            if (!lecture) {
+                alert("강의 정보를 찾을 수 없습니다.");
+                return;
+            }
+
+            let myCourses = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+            const exists = myCourses.some(l => l.title === lecture.title);
+            if (exists) {
+                alert("이미 신청한 강의입니다.");
+                return;
+            }
+
+            myCourses.push({
+                ...lecture,
+                profIndex: index,
+                lecId: lecture.id || index 
+            });
+
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(myCourses));
+
+            this.innerText = '완료';
+            this.classList.add('done');
+            this.disabled = true;
         });
-
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(myCourses));
-
-        this.innerText = '완료';
-        this.classList.add('done');
-        this.disabled = true;
-        this.style.cursor = 'default';
     });
-});
-            })
-            .catch(err => console.log("테이블을 불러오는 중 오류 발생:", err));
-    }
+}
+
+
 
     // 4. 그레이박스 왼쪽 메뉴(내 바구니, 수강신청 등) 유지 및 하이라이트
     const subArea = document.querySelector('.gb-sub');
@@ -223,4 +228,4 @@ function highlightActiveMenu() {
             link.parentElement.classList.add('active');
         }
     });
-}
+} 

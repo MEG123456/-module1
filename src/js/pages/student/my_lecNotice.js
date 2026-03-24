@@ -1,15 +1,22 @@
-fetch("/pages/student/my_classRoom.html")
-    .then(res => res.text())
-    .then(data => {
-        document.querySelector(".container-main").insertAdjacentHTML("beforeend", data);
-    });
-
 document.addEventListener("DOMContentLoaded", () => {
+    const container = document.querySelector(".container-main");
+
+if (container && !container.querySelector("#my-lecture-list")) {
+    fetch("/pages/student/my_classRoom.html")
+        .then(res => res.text())
+        .then(data => {
+            container.insertAdjacentHTML("beforeend", data);
+
+            if (window.renderStudentLectures) {
+                window.renderStudentLectures();
+            }
+        });
+}
     const $ = (selector) => document.querySelector(selector);
 
     // 교수용과 동일한 인덱스 키를 사용해야 데이터를 가져옴// 학생용으로 저장된 인덱스
     
-    const selectedStuIndex = localStorage.getItem("selectedStuLecIndex");
+    const selectedStuIndex = parseInt(localStorage.getItem("selectedStuLecIndex"));
 
     if (selectedStuIndex === null) {
         const checkEmpty = setInterval(() => {

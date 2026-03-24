@@ -1,11 +1,18 @@
-fetch("/pages/student/my_classRoom.html")
-    .then(res => res.text())
-    .then(data => {
-        document.querySelector(".container-main").insertAdjacentHTML("beforeend", data);
-        window.dispatchEvent(new Event('mainHtmlLoaded'));
-    });
-
 document.addEventListener("DOMContentLoaded", () => {
+    const container = document.querySelector(".container-main");
+
+if (container && !container.querySelector("#my-lecture-list")) {
+    fetch("/pages/student/my_classRoom.html")
+        .then(res => res.text())
+        .then(data => {
+            container.insertAdjacentHTML("beforeend", data);
+
+            if (window.renderStudentLectures) {
+                window.renderStudentLectures();
+            }
+        });
+}
+
     const $ = (selector) => document.querySelector(selector);
 
     // 학생이 선택한 강의 인덱스 확인
