@@ -11,13 +11,13 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    align-items: flex-start;
+    height: 100%;
+    align-items: stretch;
 }
 
-.inner-table {
+.inner-table, .inner-table2, .inner-table3 {
     flex-grow: 1;
     min-width: 0;
-    /* padding: 20px; */
     box-sizing: border-box;
     height: 100%;
 }
