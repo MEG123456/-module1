@@ -20,13 +20,14 @@ function LectureManager() {
     const editIndex = Number(urlParams.get('editIndex'));
 
     this.init = () => {
-        this.lectures = store.getLocalStorage();
-        if (!isNaN(editIndex) && this.lectures[editIndex]) {
-            fillEditForm(this.lectures[editIndex]);
-            if ($(".body-title")) $(".body-title").innerText = "내 강의 수정";
-        }
-        initEventListeners();
-    };
+    this.lectures = store.getLocalStorage();
+    if (urlParams.has('editIndex') && this.lectures[editIndex]) {
+        fillEditForm(this.lectures[editIndex]);
+        if ($(".body-title")) $(".body-title").innerText = "내 강의 수정";
+    }
+
+    initEventListeners();
+};
 
     const fillEditForm = (data) => {
         $('input[name="lecture-title"]').value = data.title || "";
