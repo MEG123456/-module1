@@ -99,6 +99,7 @@ td:last-child {
 }
 
 .enroll-btn {
+    cursor: pointer;
     background-color: #186CE9;
     padding: 5px 45px;
     border: none;

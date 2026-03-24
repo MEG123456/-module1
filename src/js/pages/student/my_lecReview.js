@@ -6,13 +6,15 @@ fetch("/pages/student/my_classRoom.html")
     });
 
 document.addEventListener("DOMContentLoaded", () => {
+    const $ = (selector) => document.querySelector(selector);
+    
     // 학생이 선택한 강의 인덱스 확인
     const selectedLecIndex = localStorage.getItem("selectedStuLecIndex");
     
     // 과목 미선택 시 안내
     if (selectedLecIndex === null) {
         const checkEmpty = setInterval(() => {
-            const mainContainer = document.querySelector(".gb-main");
+            const mainContainer = $(".gb-main");
             if(mainContainer) {
                 clearInterval(checkEmpty);
                 mainContainer.innerHTML = `
@@ -32,9 +34,41 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem(storageKey, JSON.stringify(reviewList));
     }
 
+    // --- 모달 제어 함수 ---
+    const showModal = (message, hasButtons = true) => {
+        const modal = $("#modalOverlay");
+        const confirmBtn = $("#confirmBtn");
+        const cancelBtn = $("#cancelBtn");
+        
+        $("#modalMessage").innerText = message;
+        
+        if (hasButtons) {
+            confirmBtn.style.display = "inline-block";
+            cancelBtn.style.display = "inline-block";
+        } else {
+            confirmBtn.style.display = "none";
+            cancelBtn.style.display = "none";
+        }
+        modal.style.display = "flex";
+    };
+
+    const closeModal = () => {
+        const modal = $("#modalOverlay");
+        if (modal) modal.style.display = "none";
+    };
+
+    const initConfirmBtn = (callback) => {
+        const confirmBtn = $("#confirmBtn");
+        const newConfirmBtn = confirmBtn.cloneNode(true);
+        confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+        newConfirmBtn.addEventListener("click", callback);
+    };
+
+    $("#cancelBtn").addEventListener("click", closeModal);
+
     // HTML 로드 대기 후 렌더링
     const checkExist = setInterval(() => {
-        const mainContainer = document.querySelector(".gb-main");
+        const mainContainer = $(".gb-main");
         if (mainContainer) {
             clearInterval(checkExist);
             renderList();
@@ -43,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 1. 수강평 목록 보기
     function renderList() {
-        const mainContainer = document.querySelector(".gb-main");
+        const mainContainer = $(".gb-main");
         if (!mainContainer) return;
 
         let tableRows = "";
@@ -58,8 +92,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     </td>
                     <td>${item.date}</td>
                     <td class="btn-td">
-                        <button class="edit-btn" data-id="${item.id}">수정</button>
-                        <button class="delete-btn" data-id="${item.id}">삭제</button>
+                        <button class="edit-btn" data-id="${item.id}" style="cursor:pointer;">수정</button>
+                        <button class="delete-btn" data-id="${item.id}" style="cursor:pointer;">삭제</button>
                     </td>
                 </tr>
             `).join('');
@@ -74,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="notice-container">
                     <div class="notice-top">
                         <div class="total-count">Total <span>${reviewList.length}</span>건</div>
-                        <button class="write-btn" id="go-write">작성하기</button>
+                        <button class="write-btn" id="go-write" style="cursor:pointer;">작성하기</button>
                     </div>
                     <table class="notice-table">
                         <thead>
@@ -85,19 +119,16 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <th style="width:20%">관리</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            ${tableRows}
-                        </tbody>
+                        <tbody>${tableRows}</tbody>
                     </table>
                 </div>
             </div>
         `;
 
-        // 리스너 연결
         document.querySelectorAll(".view-detail").forEach(el => {
             el.addEventListener("click", () => renderDetail(parseInt(el.dataset.id)));
         });
-        document.querySelector("#go-write").addEventListener("click", () => renderWriteForm());
+        $("#go-write").addEventListener("click", () => renderWriteForm());
         
         document.querySelectorAll(".edit-btn").forEach(btn => {
             btn.addEventListener("click", (e) => {
@@ -109,11 +140,20 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".delete-btn").forEach(btn => {
             btn.addEventListener("click", (e) => {
                 e.stopPropagation();
-                if (confirm("수강평을 삭제하시겠습니까?")) {
-                    reviewList = reviewList.filter(item => item.id !== parseInt(btn.dataset.id));
+                const deleteId = parseInt(btn.dataset.id);
+                
+                showModal("수강평을 삭제하시겠습니까?");
+                initConfirmBtn(() => {
+                    reviewList = reviewList.filter(item => item.id !== deleteId);
                     saveToLocalStorage();
-                    renderList();
-                }
+                    
+                    // 삭제 완료 안내 (버튼 없음)
+                    showModal("삭제되었습니다.", false);
+                    setTimeout(() => {
+                        closeModal();
+                        renderList();
+                    }, 1000);
+                });
             });
         });
     }
@@ -121,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 2. 수강평 상세 보기
     function renderDetail(id) {
         const review = reviewList.find(item => item.id === id);
-        const mainContainer = document.querySelector(".gb-main");
+        const mainContainer = $(".gb-main");
 
         mainContainer.innerHTML = `
             <div class="top-menu">
@@ -131,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div id="page-content">
                 <div class="notice-detail-view">
                     <div class="detail-back-container">
-                        <button class="back-to-list" id="go-list">목록으로</button>
+                        <button class="back-to-list" id="go-list" style="cursor:pointer;">목록으로</button>
                     </div>
                     <div class="detail-table-wrapper">
                         <div class="detail-header-row">
@@ -146,13 +186,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             </div>
         `;
-        document.querySelector("#go-list").addEventListener("click", renderList);
+        $("#go-list").addEventListener("click", renderList);
     }
 
     // 3. 수강평 작성/수정 폼
     function renderWriteForm(review = null) {
         const isEdit = review !== null;
-        const mainContainer = document.querySelector(".gb-main");
+        const mainContainer = $(".gb-main");
 
         mainContainer.innerHTML = `
             <div class="notice-write-container">
@@ -168,34 +208,49 @@ document.addEventListener("DOMContentLoaded", () => {
                         <textarea id="review-content" placeholder="강의에 대한 솔직한 후기를 남겨주세요">${isEdit ? review.content : ''}</textarea>
                     </div>
                     <div class="btn-container">
-                        <button class="btn-submit" id="btn-save">${isEdit ? '수정' : '등록'}</button>
-                        <button class="btn-submit" id="btn-cancel" style="background:#888; margin-left:10px;">취소</button>
+                        <button class="btn-submit" id="btn-save" style="cursor:pointer;">${isEdit ? '수정' : '등록'}</button>
+                        <button class="btn-submit" id="btn-cancel" style="background:#888; margin-left:10px; cursor:pointer;">취소</button>
                     </div>
                 </div>
             </div>
         `;
 
-        document.querySelector("#btn-cancel").addEventListener("click", renderList);
+        $("#btn-cancel").addEventListener("click", renderList);
 
-        document.querySelector("#btn-save").addEventListener("click", () => {
-            const title = document.querySelector("#review-title").value;
-            const content = document.querySelector("#review-content").value;
+        $("#btn-save").addEventListener("click", () => {
+            const title = $("#review-title").value;
+            const content = $("#review-content").value;
 
-            if (!title || !content) return alert("제목과 내용을 모두 입력해주세요.");
-
-            const dateStr = new Date().toLocaleDateString();
-
-            if (isEdit) {
-                const idx = reviewList.findIndex(r => r.id === review.id);
-                reviewList[idx] = { ...reviewList[idx], title, content, date: dateStr + " (수정됨)" };
-            } else {
-                reviewList.unshift({
-                    id: reviewList.length > 0 ? Math.max(...reviewList.map(o => o.id)) + 1 : 1,
-                    title, content, date: dateStr
-                });
+            if (!title || !content) {
+                showModal("제목과 내용을 모두 입력해주세요.", true);
+                $("#cancelBtn").style.display = "none"; // 경고 시 확인 버튼만
+                initConfirmBtn(closeModal);
+                return;
             }
-            saveToLocalStorage();
-            renderList();
+
+            const msg = isEdit ? "수강평을 수정하시겠습니까?" : "수강평을 등록하시겠습니까?";
+            showModal(msg);
+
+            initConfirmBtn(() => {
+                const dateStr = new Date().toLocaleDateString();
+                if (isEdit) {
+                    const idx = reviewList.findIndex(r => r.id === review.id);
+                    reviewList[idx] = { ...reviewList[idx], title, content, date: dateStr + " (수정됨)" };
+                } else {
+                    reviewList.unshift({
+                        id: reviewList.length > 0 ? Math.max(...reviewList.map(o => o.id)) + 1 : 1,
+                        title, content, date: dateStr
+                    });
+                }
+                saveToLocalStorage();
+
+                // 등록/수정 완료 안내 (버튼 없음)
+                showModal(isEdit ? "수정되었습니다." : "등록되었습니다.", false);
+                setTimeout(() => {
+                    closeModal();
+                    renderList();
+                }, 1000);
+            });
         });
     }
 });

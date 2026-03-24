@@ -5,12 +5,14 @@ fetch("/pages/student/my_classRoom.html")
     });
 
 document.addEventListener("DOMContentLoaded", () => {
+    const $ = (selector) => document.querySelector(selector);
+
     // 교수용과 동일한 인덱스 키를 사용해야 데이터를 가져옴
     const selectedLecIndex = localStorage.getItem("selectedStuLecIndex"); // 학생용으로 저장된 인덱스
     
     if (selectedLecIndex === null) {
         const checkEmpty = setInterval(() => {
-            const mainContainer = document.querySelector(".gb-main");
+            const mainContainer = $(".gb-main");
             if(mainContainer) {
                 clearInterval(checkEmpty);
                 mainContainer.innerHTML = `
@@ -26,8 +28,38 @@ document.addEventListener("DOMContentLoaded", () => {
     const storageKey = `profNotices_${selectedLecIndex}`;
     let noticeList = JSON.parse(localStorage.getItem(storageKey)) || [];
 
+    // --- 모달 제어 함수 ---
+    const showModal = (message, showCancel = true) => {
+        const modal = $("#modalOverlay");
+        const msg = $("#modalMessage");
+        const cancelBtn = $("#cancelBtn");
+        if (modal && msg) {
+            msg.innerText = message;
+            cancelBtn.style.display = showCancel ? "inline-block" : "none";
+            modal.style.display = "flex";
+        }
+    };
+
+    const closeModal = () => {
+        const modal = $("#modalOverlay");
+        if (modal) modal.style.display = "none";
+    };
+
+    const initConfirmBtn = (callback) => {
+        const confirmBtn = $("#confirmBtn");
+        const newConfirmBtn = confirmBtn.cloneNode(true);
+        confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+        newConfirmBtn.addEventListener("click", callback);
+    };
+
+    // 모달 취소 버튼 이벤트 바인딩
+    const cancelBtn = $("#cancelBtn");
+    if (cancelBtn) {
+        cancelBtn.onclick = closeModal;
+    }
+
     const checkExist = setInterval(() => {
-        const mainContainer = document.querySelector(".gb-main");
+        const mainContainer = $(".gb-main");
         if (mainContainer) {
             clearInterval(checkExist);
             renderList();
@@ -36,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 목록 렌더링
     function renderList() {
-        const mainContainer = document.querySelector(".gb-main");
+        const mainContainer = $(".gb-main");
         if (!mainContainer) return;
 
         let tableRows = "";
@@ -89,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 상세 보기 렌더링
     function renderDetail(id) {
         const notice = noticeList.find(item => item.id === id);
-        const mainContainer = document.querySelector(".gb-main");
+        const mainContainer = $(".gb-main");
 
         mainContainer.innerHTML = `
             <div class="top-menu">
@@ -121,14 +153,23 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
 
-        document.querySelector("#go-list").addEventListener("click", renderList);
+        $("#go-list").addEventListener("click", renderList);
 
         if (notice.fileName) {
-            document.querySelector("#file-download-link").addEventListener("click", (e) => {
+            $("#file-download-link").addEventListener("click", (e) => {
                 e.preventDefault();
-                if (confirm(`${notice.fileName} 파일을 다운로드하시겠습니까?`)) {
-                    alert("파일 다운로드가 시작됩니다.");
-                }
+                
+                // confirm 모달 사용
+                showModal(`${notice.fileName} 파일을 다운로드하시겠습니까?`);
+                
+                initConfirmBtn(() => {
+                    closeModal();
+                    // 모달 안내 (취소 버튼 없음)
+                    setTimeout(() => {
+                        showModal("파일 다운로드가 시작됩니다.", false);
+                        initConfirmBtn(closeModal);
+                    }, 200);
+                });
             });
         }
     }
