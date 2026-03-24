@@ -6,6 +6,15 @@ fetch("/pages/professor/my_lecMane.html")
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    const selectedLecIndex = localStorage.getItem("selectedLecIndex");
+    const user = JSON.parse(localStorage.getItem("loginUser")) || {};
+
+    if (selectedLecIndex === null) {
+        alert("강의를 먼저 선택해주세요.");
+        location.href = "/pages/professor/my_lecMane.html";
+        return;
+    }
+
     function showModal(message, onConfirm = null, showCancel = true) {
     const overlay = document.getElementById("modalOverlay");
     const msg = document.getElementById("modalMessage");
@@ -44,7 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
             buttons.forEach(btn => btn.classList.remove('active'));
             buttons[1].classList.add('active');
 
-            let students = JSON.parse(localStorage.getItem("students"));
+            const STORAGE_KEY = `students_${user.id || user.email}_${selectedLecIndex}`;
+            let students = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
             if (!students) {
                 students = [
@@ -112,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.querySelectorAll('.memo-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
 
-                    const index = e.target.dataset.index;
+                    const index = Number(e.target.dataset.index);
                     selectedIndex = index;
 
                     document.querySelectorAll('#student-tbody tr').forEach(tr => {
@@ -125,7 +135,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     const student = students[index];
 
                     textarea.value = student.memo || "";
-                    textarea.readOnly = false;
+                    if (student.memo && student.memo.trim() !== "") {
+                        textarea.readOnly = true;
+                    } else {
+                        textarea.readOnly = false;
+                    }
 
                     if (student.memo && student.memo.trim() !== "") {
                         document.querySelector('.top-actions').innerHTML = `
@@ -153,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     students[selectedIndex].memo = value;
 
-                    localStorage.setItem("students", JSON.stringify(students));
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(students));
 
                     showModal("메모가 성공적으로 등록되었습니다", null, false);
 
@@ -198,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     showModal("정말 삭제하시겠습니까?", () => {
 
                         students[selectedIndex].memo = "";
-                        localStorage.setItem("students", JSON.stringify(students));
+                        localStorage.setItem(STORAGE_KEY, JSON.stringify(students));
                         textarea.value = "";
 
                         document.querySelector('.top-actions').innerHTML = `

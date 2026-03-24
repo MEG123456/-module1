@@ -1,3 +1,6 @@
+const user = JSON.parse(localStorage.getItem("loginUser")) || {};
+const LECTURE_KEY = `lectures_${user.id || user.email || "guest"}`;
+
 const $ = (selector) => document.querySelector(selector);
 
 const store = {
@@ -14,7 +17,7 @@ function LectureList() {
     let currentIndex = null;
 
     this.init = () => {
-        this.lectures = store.getLocalStorage("lectures");
+        this.lectures = store.getLocalStorage(LECTURE_KEY);
         renderLectures();
         initEventListeners();
     };
@@ -84,7 +87,7 @@ function LectureList() {
             if (currentIndex !== null) {
                 // 1. 데이터 삭제
                 this.lectures.splice(currentIndex, 1);
-                store.setLocalStorage("lectures", this.lectures);
+                store.setLocalStorage(LECTURE_KEY, this.lectures);
                 
                 // 2. "삭제되었습니다" 안내 모달로 전환
                 $("#modalMessage").innerText = "삭제되었습니다.";
