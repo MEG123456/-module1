@@ -24,5 +24,8 @@
 .gb-main {
     flex-grow: 1;
     box-sizing: border-box;
+    flex-direction: row;
     overflow-y: auto;
+    height: 100%;
+    display: flex;
 }

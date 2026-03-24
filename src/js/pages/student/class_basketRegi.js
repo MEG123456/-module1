@@ -30,7 +30,7 @@ fetch('/pages/student/filter.html')
         }
     })
 
-const subTarget2 = document.querySelector('.inner-table');
+const subTarget2 = document.querySelector('.inner-table2');
 
 fetch('/pages/student/class_basketTable.html')
     .then(res => res.text())

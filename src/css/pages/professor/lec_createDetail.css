@@ -40,7 +40,7 @@ html, body {
 .enroll-box {
     background: #FFFFFF;
     border: 0.5px solid #2A2A2A;
-    padding: 40px 200px;
+    padding: 40px 10%;
     flex: 1;           /* 회색 박스 내부에서 남는 공간 차지 */
     overflow-y: auto;
     min-height: 0;
@@ -69,7 +69,8 @@ label {
     border: 1px solid #D9D9D9;
     background: #F3F3F3;
     height: 40px;
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     padding-left: 10px;
     color: #0B0D0F;
 }
@@ -78,7 +79,8 @@ label {
     border: 1px solid #D9D9D9;
     background: #F3F3F3;
     height: 200px;
-    width: 700px;
+    width: 100%;
+    max-width: 700px;
     resize: none;
     padding: 10px;
     box-sizing: border-box; /* 패딩이 너비에 포함되도록 설정 */
@@ -107,4 +109,40 @@ label {
 
 .save-btn:hover {
     background-color: #155dc8;
+}
+
+
+@media (max-width: 1200px) {
+    .enroll-box {
+        padding: 30px 5%;
+    }
+}
+
+@media (max-width: 850px) {
+    /* 입력창 세로로 배치 */
+    .input-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+
+    .input-group .radio-group {
+        flex-direction: row;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .radio-group label {
+        width: auto;
+        font-size: 19px;
+        margin-right: 0px;
+        cursor: pointer;
+    }
+
+    .word, .about-text {
+        max-width: 100%;
+    }
 }
