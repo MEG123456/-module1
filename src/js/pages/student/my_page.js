@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             `;
 
-            // 2. 로컬스토리지에서 데이터 가져오기 (말씀하신 그 데이터)
+            // 2. 로컬스토리지에서 데이터 가져오기
             const stuLectures = JSON.parse(localStorage.getItem("student_lectures")) || [];
 
             // 3. 강의 목록 생성

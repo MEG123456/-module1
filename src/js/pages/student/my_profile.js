@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateEyeState() {
   if (!pwInput.value.trim()) {
     toggleEye.classList.add("disabled");
-    toggleEye.src = "/asset/eyesclose.svg";   // 🔥 닫힌 눈 유지
+    toggleEye.src = "/asset/eyesclose.svg"; 
     pwInput.type = "password";
   } else {
     toggleEye.classList.remove("disabled");
@@ -56,7 +56,7 @@ updateEyeState();
   pwError.innerText = "";
   pwInput.classList.remove("input-error");
 
-  updateEyeState();   // 🔥 이것만
+  updateEyeState(); 
 });
 
 

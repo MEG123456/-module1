@@ -30,7 +30,8 @@ class LectureManager {
             search: document.querySelector('.lecture-search'),
             tableBody: document.querySelector("#allLecTableBody"),
             checkBtn: document.querySelector(".check-btn"),
-            searchBtn: document.querySelector(".lecSearch_btn")
+            searchBtn: document.querySelector(".lecSearch_btn"),
+            resetBtn: document.querySelector(".reset-btn")
         };
 
         this.allLectures = [];
@@ -89,6 +90,7 @@ class LectureManager {
                 this.els.major.appendChild(opt);
             });
 
+
             this.updateFilterStatus();
         });
 
@@ -122,6 +124,10 @@ class LectureManager {
                 window.location.href = `/pages/professor/lec_Detail.html?index=${index}`;
             }
         });
+
+        if (this.els.resetBtn) {
+            this.els.resetBtn.addEventListener("click", () => this.resetFilters());
+        }
     }
 
     // 실제 필터링 로직
@@ -186,9 +192,30 @@ class LectureManager {
                     <td>${krDay}${lec.time}</td>
                 </tr>
             `;
-        }).join("");
+            }).join("");
     }
-}
+
+        resetFilters() {
+            this.els.college.value = "all-college";
+            this.els.major.innerHTML = '<option value="all-major" selected>전체</option>';
+            this.els.major.value = "all-major";
+
+            this.els.grade.value = "all-grade";
+            this.els.sort.value = "all-sort";
+            this.els.week.value = "all-week";
+            this.els.score.value = "all-score";
+
+            this.els.search.value = "";
+
+            this.updateFilterStatus();
+
+            this.displayLectures = [...this.allLectures];
+            this.render();
+        }
+    }
+
+
+            
 
 // 앱 실행
 document.addEventListener('DOMContentLoaded', () => {
