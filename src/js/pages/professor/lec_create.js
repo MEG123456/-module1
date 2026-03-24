@@ -28,27 +28,31 @@ function LectureList() {
             return;
         }
 
+        const KR_NAMES = { "m": "전공", "e": "교양" };
+
 
         const lectureTemplate = this.lectures.map((lecture, index) => {
-            return `
-            <tr>
-                <td>${100000 + index}</td> 
-                <td class="lecture-link" data-index="${index}" style="cursor:pointer;">
-                ${lecture.title}
-                </td>
-                <td>${lecture.type}</td>
-                <td>${lecture.credit}</td>
-                <td>${lecture.time}</td>
-                <td>
-                    <button class="edit-btn" data-index="${index}">수정</button>
-                    <button class="delete-btn" data-index="${index}">삭제</button>
-                </td>
-            </tr>
-        `;
-        }).join("");
+        // 2. 데이터가 'm'이면 '전공'으로 변환, 이미 '전공'이면 그대로 유지
+        const displayType = KR_NAMES[lecture.type] || lecture.type;
 
-        $("#profLecListBody").innerHTML = lectureTemplate;
-    };
+        return `
+        <tr>
+            <td>${100000 + index}</td> 
+            <td class="lecture-link" data-index="${index}" style="cursor:pointer;">
+                ${lecture.title}
+            </td>
+            <td>${displayType}</td> <td>${lecture.credit}</td>
+            <td>${lecture.time}</td>
+            <td>
+                <button class="edit-btn" data-index="${index}">수정</button>
+                <button class="delete-btn" data-index="${index}">삭제</button>
+            </td>
+        </tr>
+    `;
+    }).join("");
+
+    $("#profLecListBody").innerHTML = lectureTemplate;
+};
 
     const initEventListeners = () => {
         $("#enrollBtn").addEventListener("click", () => {

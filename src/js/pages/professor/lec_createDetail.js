@@ -34,7 +34,7 @@ function LectureManager() {
         $('input[name="classroom"]').value = data.room || "";
         $('textarea[name="about"]').value = data.about || "";
 
-        if (data.type === '전공') $("#major").checked = true;
+        if (data.type === 'm' || data.type === '전공') $("#major").checked = true;
         else $("#etc").checked = true;
     };
 
