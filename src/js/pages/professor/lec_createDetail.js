@@ -21,7 +21,7 @@ function LectureManager() {
 
     this.init = () => {
         this.lectures = store.getLocalStorage();
-        if (editIndex !== null && this.lectures[editIndex]) {
+        if (!isNaN(editIndex) && this.lectures[editIndex]) {
             fillEditForm(this.lectures[editIndex]);
             if ($(".body-title")) $(".body-title").innerText = "내 강의 수정";
         }
@@ -97,7 +97,8 @@ function LectureManager() {
             if (!data) return;
 
             tempLectureData = data;
-            const msg = editIndex !== null ? "변경사항을 저장하시겠습니까?" : "새 강좌를 등록하시겠습니까?";
+            const isEdit = !isNaN(editIndex);
+            const msg = isEdit ? "변경사항을 저장하시겠습니까?" : "새 강좌를 등록하시겠습니까?";
             showModal(msg, true);
 
             // 확인 버튼 이벤트 재설정 (중복 방지)
@@ -107,7 +108,8 @@ function LectureManager() {
 
             newConfirmBtn.addEventListener("click", () => {
                 if (tempLectureData) {
-                    const isEdit = editIndex !== null;
+                    const editIndex = Number(urlParams.get('editIndex'));
+                    const isEdit = !isNaN(editIndex);
                     if (isEdit) {
                         this.lectures[editIndex] = tempLectureData;
                     } else {
@@ -115,22 +117,7 @@ function LectureManager() {
                     }
                     store.setLocalStorage(this.lectures);
 
-                    const allLectures = JSON.parse(localStorage.getItem("lectures_all")) || [];
-
-                    if (isEdit) {
-                        const idx = allLectures.findIndex(
-                            lec => lec.prof === tempLectureData.prof && lec.title === tempLectureData.title
-                        );
-
-                        if (idx !== -1) {
-                            allLectures[idx] = tempLectureData;
-                        }
-                    } else {
-                        allLectures.push(tempLectureData);
-                    }
-
-                    localStorage.setItem("lectures_all", JSON.stringify(allLectures));
-
+localStorage.setItem("lectures_all", JSON.stringify(this.lectures));
                     // [추가] 등록/수정 완료 후 버튼 없는 모달 1초 띄우기
                     const finishMsg = isEdit ? "수정되었습니다." : "등록되었습니다.";
                     showModal(finishMsg, false);
