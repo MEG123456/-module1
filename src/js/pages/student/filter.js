@@ -1,20 +1,20 @@
 // 1. 공통 상수 설정
 const MAJOR_DATA = {
-  "medical": ["의예과"],
-  "nursing": ["간호학과"],
-  "health_science": ["임상병리학과", "안경광학과", "응급구조학과", "방사선학과", "치위생학과", "물리치료학과", "의료경영학과"],
-  "hightech": ["빅데이터인공지능학과"],
-  "nature": ["식품영양전공", "식품생명공학전공", "안전공학전공", "의료공학전공", "화장품과학전공"],
-  "human": ["레저산업전공", "뷰티아트전공", "시각디자인전공", "사회복지전공", "아동청소년상담전공", "중독상담전공", "장례산업전공"]
+  "medical_college": ["의예과"],
+  "nursing_college": ["간호학과"],
+  "health_science_college": ["임상병리학과", "안경광학과", "응급구조학과", "방사선학과", "치위생학과", "물리치료학과", "의료경영학과"],
+  "advanced_school": ["빅데이터인공지능학과"],
+  "natural_school": ["식품영양전공", "식품생명공학전공", "안전공학전공", "의료공학전공", "화장품과학전공"],
+  "human_social_school": ["레저산업전공", "뷰티아트전공", "시각디자인전공", "사회복지전공", "아동청소년상담전공", "중독상담전공", "장례산업전공"]
 };
 
 const KR_NAMES = {
-    "medical": "의과대학", "nursing": "간호대학", "health_science": "보건과학대학", 
-    "free_major": "자유전공학부", "hightech": "첨단학부", "nature": "자연계열학부", "human": "인문사회계열학부",
+    "medical_college": "의과대학", "nursing_college": "간호대학", "health_science_college": "보건과학대학", 
+    "free_major_school": "자유전공학부", "advanced_school": "첨단학부", "natural_school": "자연계열학부", "human_social_school": "인문사회계열학부",
     "first": "1학년", "second": "2학년", "third": "3학년", "fourth": "4학년",
-    "sort-major": "전공", "sort-etc": "교양",
+    "m": "전공", "e": "교양",
     "mon": "월요일", "tue": "화요일", "wed": "수요일", "thu": "목요일", "fri": "금요일",
-    "one": "1학점", "two": "2학점", "three": "3학점"
+    "1": "1", "2": "2", "3": "3"
 };
 
 class LectureManager {
@@ -57,7 +57,7 @@ class LectureManager {
     // UI 필터 활성화 상태 제어
     updateFilterStatus() {
         const isCollegeSelected = this.els.college.value !== "all-college";
-        const isMajorSortSelected = this.els.sort.value === "sort-major";
+        const isMajorSortSelected = this.els.sort.value === "m";
 
         this.els.major.disabled = !(isCollegeSelected || isMajorSortSelected);
         if (this.els.major.disabled) {
@@ -127,6 +127,7 @@ class LectureManager {
     // 실제 필터링 로직
     applyFilters() {
         const searchText = this.els.search.value.trim().toLowerCase();
+
         const filters = {
             college: this.els.college.value,
             major: this.els.major.value,
@@ -138,13 +139,22 @@ class LectureManager {
 
         return this.allLectures.filter(lec => {
             // 모든 필드 기반 통합 검색
-            const allValueString = Object.values(lec).join(" ").toLowerCase();
-            const matchesSearch = !searchText || allValueString.includes(searchText);
+            const targetTitle = (lec.title || "").toLowerCase();
+            const targetProf = (lec.prof || "").toLowerCase(); // 교수명도 검색 대상에 포함
+        
+            const matchesSearch = !searchText || 
+                             targetTitle.includes(searchText) || 
+                             targetProf.includes(searchText);
             
             const matchesCollege = filters.college === 'all-college' || lec.college === filters.college;
             const matchesMajor = filters.major === 'all-major' || lec.major === filters.major;
             const matchesGrade = filters.grade === 'all-grade' || lec.grade === filters.grade;
-            const matchesSort = filters.sort === 'all-sort' || lec.type === filters.sort;
+            
+            const matchesSort = filters.sort === 'all-sort' || 
+                       lec.type === filters.sort || 
+                       (filters.sort === 'm' && lec.type === '전공') || 
+                       (filters.sort === 'e' && lec.type === '교양');
+
             const matchesWeek = filters.week === 'all-week' || lec.day === filters.week;
             const matchesScore = filters.score === 'all-score' || lec.credit === filters.score;
 
