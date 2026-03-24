@@ -29,7 +29,7 @@ fetch("/layout/stuSidebar.html")
 
       else if (
         currentFile.startsWith("my_") &&
-        href.includes("mypage")
+        href.includes("my_")
       ) {
         link.classList.add("active");
       }

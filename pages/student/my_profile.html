@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>교수 마이페이지</title>
+    <title>학생 마이페이지</title>
 
     <link rel="stylesheet" href="/src/css/ui/module/header.css">
     <link rel="stylesheet" href="/src/css/ui/module/sidebar.css">
     <link rel="stylesheet" href="/src/css/ui/module/my_profile.css">
+    <link rel="stylesheet" href="/src/css/ui/module/modal.css">
+    <link rel="stylesheet" href="/src/css/ui/module/my_lecMane.css">
 </head>
-<body>
     <div id="header"></div>
 
     <div class="container">
@@ -71,9 +72,38 @@
             </div>
         </div>
     </div>
+    <div id="pwModal" class="modal-overlay">
+        <div class="modal-content">
 
+            <p class="modal-text">현재 비밀번호를 입력해주세요</p>
+
+            <div class="pw-input-wrap">
+            <input type="password" id="pwInput" placeholder="8~12자 이내로 입력해 주세요" />
+            <img src="/asset/eyesclose.svg" class="toggle-eye" id="toggleEye">
+            <p id="pwError" class="pw-error"></p>
+
+        </div>
+
+        
+        <div class="modal-buttons">
+            <button id="pwConfirmBtn" class="confirm-btn">확인</button>
+            <button id="pwCancelBtn" class="cancel-btn">취소</button>
+        </div>
+    </div>
+</div>
+
+<div id="alertModal" class="modal-overlay">
+    <div class="modal-content">
+        <p id="alertText" class="modal-text"></p>
+
+        <div class="modal-buttons">
+            <button id="alertOkBtn" class="confirm-btn">확인</button>
+        </div>
+    </div>
+</div>
     <script type="module" src="/src/js/layout/includeHeader.js"></script>
-    <script type="module" src="/src/js/layout/includeProfSidebar.js"></script>
-    <script src="/src/js/pages/professor/my_profile.js"></script>
+    <script type="module" src="/src/js/layout/includeStuSidebar.js"></script>
+    <script type="module" src="/src/js/pages/student/my_profile.js"></script>
+
 </body>
 </html>
