@@ -45,3 +45,8 @@
     background-color: #E9E5E5;
     font-weight: bold;
 }
+
+#sidebar li a.active {
+    background-color: #E9E5E5;
+    font-weight: bold;
+}

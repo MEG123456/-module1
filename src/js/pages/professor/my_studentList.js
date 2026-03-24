@@ -6,6 +6,27 @@ fetch("/pages/professor/my_lecMane.html")
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    function showModal(message, onConfirm = null, showCancel = true) {
+    const overlay = document.getElementById("modalOverlay");
+    const msg = document.getElementById("modalMessage");
+    const confirmBtn = document.getElementById("confirmBtn");
+    const cancelBtn = document.getElementById("cancelBtn");
+
+    msg.innerHTML = message;
+    overlay.classList.add("active");
+
+    confirmBtn.onclick = () => {
+        overlay.classList.remove("active");
+        if (onConfirm) onConfirm();
+    };
+
+    cancelBtn.onclick = () => {
+        overlay.classList.remove("active");
+    };
+    cancelBtn.style.display = showCancel ? "inline-block" : "none";
+}
+
+
     let selectedIndex = null;
     let isEditing = false;
 
@@ -68,6 +89,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         </div>
     `);
+    const textarea = document.querySelector('.memo-area');
+    textarea.readOnly = true;
 
             const tbody = document.getElementById("student-tbody");
 
@@ -100,10 +123,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     row.classList.add('selected-row');
 
                     const student = students[index];
-                    const textarea = document.querySelector('.memo-area');
 
                     textarea.value = student.memo || "";
-                    textarea.readOnly = true;
+                    textarea.readOnly = false;
 
                     if (student.memo && student.memo.trim() !== "") {
                         document.querySelector('.top-actions').innerHTML = `
@@ -122,7 +144,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             document.querySelector('.top-actions').addEventListener('click', (e) => {
 
-                const textarea = document.querySelector('.memo-area');
 
                 if (e.target.classList.contains('save-btn')) {
 
@@ -134,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     localStorage.setItem("students", JSON.stringify(students));
 
-                    alert("메모가 성공적으로 등록되었습니다");
+                    showModal("메모가 성공적으로 등록되었습니다", null, false);
 
                     e.currentTarget.innerHTML = `
                         <button class="edit-btn">수정</button>
@@ -156,32 +177,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (e.target.classList.contains('cancel-btn')) {
 
-                    const student = students[selectedIndex];
-                    textarea.value = student.memo || "";
-                    textarea.readOnly = true;
+                    showModal("작성 중인 내용이 사라집니다. <br> 계속하시겠습니까?", () => {
 
-                    isEditing = false;
+                        const student = students[selectedIndex];
+                        textarea.value = student.memo || "";
+                        textarea.readOnly = true;
 
-                    e.currentTarget.innerHTML = `
+                        isEditing = false;
+
+                        document.querySelector('.top-actions').innerHTML = `
                         <button class="edit-btn">수정</button>
                         <button class="delete-btn">삭제</button>
-                    `;
+                        `;
+                    });
+
                 }
 
                 if (e.target.classList.contains('delete-btn')) {
 
-                    if (confirm("정말 삭제하시겠습니까?")) {
+                    showModal("정말 삭제하시겠습니까?", () => {
 
                         students[selectedIndex].memo = "";
-
                         localStorage.setItem("students", JSON.stringify(students));
-
                         textarea.value = "";
 
-                        e.currentTarget.innerHTML = `
-                            <button class="save-btn">저장</button>
+                        document.querySelector('.top-actions').innerHTML = `
+                        <button class="save-btn">저장</button>
                         `;
-                    }
+                    });
+
                 }
 
             });

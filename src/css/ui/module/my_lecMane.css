@@ -67,12 +67,12 @@
     margin-right: 14px;
 }
 
-/* 선택된 강의 항목 */
+/* 선택된 강의 항목
 .lec-item.selected {
     font-weight: bold;
     text-decoration: underline;
     color: #2E4298;
-}
+} */
 
 /* 버튼 비활성화 상태 */
 .menu-btn {
@@ -84,4 +84,9 @@
 .menu-btn.enabled {
     pointer-events: auto; /* 클릭 허용 */
     cursor: pointer;
+}
+
+.lec-item.active {
+    font-weight: 700;
+    text-decoration: underline;
 }
