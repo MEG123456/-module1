@@ -143,16 +143,58 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(data => {
                 tableArea.innerHTML = data;
 
+                const lectures = JSON.parse(localStorage.getItem("lectures_all")) || [];
+                const tbody = tableArea.querySelector("tbody");
+
+                if (tbody && lectures.length > 0) {
+                    tbody.innerHTML = lectures.map((lec, index) => `
+                        <tr>
+                            <td>${lec.title}</td>
+                            <td>${lec.prof}</td>
+                            <td>${lec.time}</td>
+                            <td>${lec.room}</td>
+                            <td>
+                                <button class="regi" data-index="${index}">신청</button>
+                            </td>
+                        </tr>
+                    `).join('');
+                }
+
                 // 테이블 내부 버튼(신청/취소) 이벤트 바인딩
                 const regiBtns = tableArea.querySelectorAll('.regi');
-                regiBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        this.innerText = '완료';
-                        this.classList.add('done');
-                        this.disabled = true;
-                        this.style.cursor = 'default';
-                    });
-                });
+
+regiBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+
+        const index = this.dataset.index;
+        const lectures = JSON.parse(localStorage.getItem("lectures_all")) || [];
+        const lecture = lectures[index];
+
+        const user = JSON.parse(localStorage.getItem("loginUser")) || {};
+        const STORAGE_KEY = `myCourses_${user.id || user.email}`;
+
+        let myCourses = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+        const exists = myCourses.some(l => l.title === lecture.title);
+        if (exists) {
+            alert("이미 신청한 강의입니다.");
+            return;
+        }
+
+        myCourses.push({
+            ...lecture,
+            profIndex: index,
+            lecId: lecture.id || index 
+        });
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(myCourses));
+
+        this.innerText = '완료';
+        this.classList.add('done');
+        this.disabled = true;
+        this.style.cursor = 'default';
+    });
+});
             })
             .catch(err => console.log("테이블을 불러오는 중 오류 발생:", err));
     }

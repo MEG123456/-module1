@@ -7,10 +7,11 @@ fetch("/pages/student/my_classRoom.html")
 document.addEventListener("DOMContentLoaded", () => {
     const $ = (selector) => document.querySelector(selector);
 
-    // 교수용과 동일한 인덱스 키를 사용해야 데이터를 가져옴
-    const selectedLecIndex = localStorage.getItem("selectedStuLecIndex"); // 학생용으로 저장된 인덱스
+    // 교수용과 동일한 인덱스 키를 사용해야 데이터를 가져옴// 학생용으로 저장된 인덱스
     
-    if (selectedLecIndex === null) {
+    const selectedStuIndex = localStorage.getItem("selectedStuLecIndex");
+
+    if (selectedStuIndex === null) {
         const checkEmpty = setInterval(() => {
             const mainContainer = $(".gb-main");
             if(mainContainer) {
@@ -25,7 +26,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     // 교수가 저장한 키값(`profNotices_인덱스`)과 동일하게 맞춤
-    const storageKey = `profNotices_${selectedLecIndex}`;
+    
+
+    const user = JSON.parse(localStorage.getItem("loginUser")) || {};
+    const STORAGE_KEY = `myCourses_${user.id || user.email}`;
+    const myCourses = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+    const selectedLecture = myCourses[selectedStuIndex];
+
+    if (!selectedLecture) return;
+
+    const profIndex = selectedLecture.profIndex;
+
+// 🔥 핵심
+const storageKey = `profNotices_${profIndex}`;
     let noticeList = JSON.parse(localStorage.getItem(storageKey)) || [];
 
     // --- 모달 제어 함수 ---
@@ -86,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
             `).join('');
         }
 
-        const savedIndex = localStorage.getItem("selectedLecIndex");
+        const savedIndex = localStorage.getItem("selectedStuLecIndex");
         const isEnabled = savedIndex !== null ? "enabled" : "";
 
         mainContainer.innerHTML = `

@@ -11,23 +11,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (profileContainer && lectureListContainer) {
             clearInterval(interval);
-            const user = JSON.parse(localStorage.getItem("loginUser"));
+            const user = JSON.parse(localStorage.getItem("loginUser")) || {};
 
-            // 1. 프로필 렌더링
             profileContainer.innerHTML = `
                 <div class="profile-line">
                     <span>${collegeMap[user.college] || user.college}</span>
                     <span>${user.department}</span>
                 </div>
                 <div class="profile-line">
-                    <span>${user.studentId}</span>
-                    <span>${user.name}</span>
-                </div>
+                <span>${user.studentId}</span>
+                <span>${user.name}</span>
+            </div>
             `;
 
-            // 2. 로컬스토리지에서 데이터 가져오기
-            const stuLectures = JSON.parse(localStorage.getItem("student_lectures")) || [];
 
+    const STORAGE_KEY = `myCourses_${user.id || user.email}`;
+    const stuLectures = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
             // 3. 강의 목록 생성
             lectureListContainer.innerHTML = stuLectures.map((lec, index) => `
                 <li class="lecture-item" data-title="${lec.title}" data-index="${index}" style="cursor:pointer;">

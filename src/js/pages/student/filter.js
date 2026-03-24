@@ -47,13 +47,22 @@ class LectureManager {
 
     // [수정] 임의 데이터 삭제, 로컬 스토리지에서만 로드
     loadLocalData() {
-        this.allLectures = JSON.parse(localStorage.getItem("lectures")) || [];
-        this.displayLectures = [...this.allLectures];
-        
-        if (this.allLectures.length === 0) {
-            console.info("현재 등록된 강의 데이터가 없습니다.");
+    let allLectures = [];
+
+    Object.keys(localStorage).forEach(key => {
+        if (key.startsWith("lectures_")) {
+            const data = JSON.parse(localStorage.getItem(key)) || [];
+            allLectures = allLectures.concat(data);
         }
+    });
+
+    this.allLectures = allLectures;
+    this.displayLectures = [...allLectures];
+
+    if (this.allLectures.length === 0) {
+        console.info("현재 등록된 강의 데이터가 없습니다.");
     }
+}
 
     // UI 필터 활성화 상태 제어
     updateFilterStatus() {
@@ -78,7 +87,11 @@ class LectureManager {
             let majors = [];
 
             if (selectedCollege === "free_major") {
-                majors = [...MAJOR_DATA["hightech"], ...MAJOR_DATA["nature"], ...MAJOR_DATA["human"]];
+                majors = [
+                    ...MAJOR_DATA["advanced_school"],
+                    ...MAJOR_DATA["natural_school"],
+                    ...MAJOR_DATA["human_social_school"]
+                ];
             } else if (selectedCollege !== "all-college") {
                 majors = MAJOR_DATA[selectedCollege] || [];
             }
@@ -116,18 +129,53 @@ class LectureManager {
             });
         }
 
-        // 테이블 내 상세 링크 클릭 이벤트
-        this.els.tableBody.addEventListener("click", (e) => {
-            const target = e.target.closest(".lecture-link");
-            if (target) {
-                const index = target.dataset.index;
-                window.location.href = `/pages/professor/lec_Detail.html?index=${index}`;
-            }
-        });
 
         if (this.els.resetBtn) {
             this.els.resetBtn.addEventListener("click", () => this.resetFilters());
         }
+
+
+    if (this.els.tableBody) {
+    this.els.tableBody.addEventListener("click", (e) => {
+
+        // 1. 강의 클릭
+        const lecTarget = e.target.closest(".lecture-link");
+        if (lecTarget) {
+            const index = lecTarget.dataset.index;
+            window.location.href = `/pages/professor/lec_Detail.html?index=${index}`;
+            return;
+        }
+
+        // 2. 신청 버튼 클릭
+        const btn = e.target.closest(".apply-btn");
+        if (btn) {
+            const index = btn.dataset.index;
+            const lecture = this.displayLectures[index];
+
+            const user = JSON.parse(localStorage.getItem("loginUser")) || {};
+            const STORAGE_KEY = `myCourses_${user.id || user.email}`;
+
+            let myCourses = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+            const exists = myCourses.some(l => l.title === lecture.title);
+            if (exists) {
+                alert("이미 신청한 강의입니다.");
+                return;
+            }
+
+            myCourses.push({
+                ...lecture,
+                profIndex: index
+            });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(myCourses));
+
+            btn.innerText = "완료";
+            btn.disabled = true;
+            btn.classList.add("done");
+        }
+
+    });
+}
     }
 
     // 실제 필터링 로직
@@ -171,6 +219,7 @@ class LectureManager {
 
     // 결과 렌더링
     render() {
+        if (!this.els.tableBody) return;
         if (this.displayLectures.length === 0) {
             this.els.tableBody.innerHTML = '<tr><td colspan="5" style="text-align:center;">조건에 맞는 강의가 없습니다.</td></tr>';
             return;
@@ -190,6 +239,9 @@ class LectureManager {
                     <td>${krType}</td>
                     <td>${krCredit}</td>
                     <td>${krDay}${lec.time}</td>
+                    <td>
+                        <button class="apply-btn" data-index="${index}">신청</button>
+                    </td>
                 </tr>
             `;
             }).join("");

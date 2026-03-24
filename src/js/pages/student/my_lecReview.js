@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
             `).join('');
         }
 
-        const savedIndex = localStorage.getItem("selectedLecIndex");
+        const savedIndex = localStorage.getItem("selectedStuLecIndex");
         const isEnabled = savedIndex !== null ? "enabled" : "";
 
         mainContainer.innerHTML = `
