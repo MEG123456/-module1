@@ -1,40 +1,40 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    const currentPath = window.location.pathname;
+
+    if (currentPath.includes("my_classRoom.html")) {
+        localStorage.removeItem("selectedStuLecIndex");
+    }
+
     const renderStudentLectures = () => {
-        // 1. 임의의 테스트 과목 데이터
-        let stuLectures = JSON.parse(localStorage.getItem("student_lectures"));
-        if (!stuLectures) {
-            stuLectures = [
-                { title: "자바스크립트 프로그래밍", prof: "이교수" },
-                { title: "데이터베이스 기초", prof: "박교수" },
-                { title: "UI/UX 디자인", prof: "최교수" }
-            ];
-            localStorage.setItem("student_lectures", JSON.stringify(stuLectures));
-        }
 
-        const listContainer = document.querySelector("#my-lecture-list");
-        const menuButtons = document.querySelectorAll(".menu-btn"); 
+    const user = JSON.parse(localStorage.getItem("loginUser")) || {};
+    const STORAGE_KEY = `myCourses_${user.id || user.email}`;
+
+    let stuLectures = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+    const listContainer = document.querySelector("#my-lecture-list");
+    const menuButtons = document.querySelectorAll(".menu-btn"); 
         
-        if (!listContainer) return false;
-        if (listContainer.children.length > 0) return true;
+    if (!listContainer) return false;
 
-        // 2. 강의 목록 생성
-        listContainer.innerHTML = stuLectures.map((lec, index) =>
-            `<li class="lec-item" data-index="${index}" style="cursor:pointer; font-weight:normal;">${lec.title}</li>`
-        ).join("");
+    if (stuLectures.length === 0) {
+    listContainer.innerHTML = `<li style="color:gray;">신청한 강의가 없습니다.</li>`;
+    return true;
+    }
 
-
-        // 현재 파일의 경로를 확인합니다.
-        const currentPath = window.location.pathname;
+    // 강의 목록
+    listContainer.innerHTML = stuLectures.map((lec, index) =>
+        `<li class="lec-item" data-index="${index}" style="cursor:pointer;">${lec.title}</li>`
+    ).join("");
         
-        // 'my_classRoom.html' 페이지에 막 진입한 경우 
-        // 기존에 저장된 '선택된 강의 인덱스'를 무조건 삭제하여 초기화합니다.
-        if (currentPath.includes("my_classRoom.html")) {
-            localStorage.removeItem("selectedStuLecIndex");
-        }
+        
+
+        listContainer.replaceWith(listContainer.cloneNode(true));
+        const newListContainer = document.querySelector("#my-lecture-list");
 
         // 3. 클릭 이벤트: 과목을 누르면 인덱스 저장 후 학생 공지사항으로 이동
-        listContainer.addEventListener("click", (e) => {
+        newListContainer.addEventListener("click", (e) => {
             const target = e.target.closest(".lec-item");
             if (!target) return;
 
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // 4. 페이지 로드 시 상태 복원 (선택된 인덱스가 있을 때만 활성화)
         const savedIndex = localStorage.getItem("selectedStuLecIndex");
         if (savedIndex !== null) {
-            const items = listContainer.querySelectorAll(".lec-item");
+            const items = newListContainer.querySelectorAll(".lec-item");
             if (items[savedIndex]) {
                 items[savedIndex].style.fontWeight = "700";
                 items[savedIndex].style.textDecoration = "underline";
@@ -79,11 +79,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return true;
     };
-
-    const checkExist = setInterval(() => {
-        if (renderStudentLectures()) clearInterval(checkExist);
-    }, 100);
+    renderStudentLectures();
 });
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const interval = setInterval(() => {
