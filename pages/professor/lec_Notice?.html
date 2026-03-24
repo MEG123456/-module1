@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>교수 강의 공지사항</title>
+    <link rel="stylesheet" href="/src/css/ui/module/graybox.css">
+    <link rel="stylesheet" href="/src/css/ui/module/header.css">
+    <link rel="stylesheet" href="/src/css/ui/module/sidebar.css">
+    <link rel="stylesheet" href="/src/css/ui/module/my_lecMane.css">
+    <link rel="stylesheet" href="/src/css/pages/my_lecNotice.css">
+    <link rel="stylesheet" href="/src/css/ui/module/modal.css">
+</head>
+
+<body>
+    <div id="header"></div>
+    <div class="container">
+
+        <div id="sidebar"></div>
+
+        <div class="container-main">
+            <div id="student-content"></div>
+        </div>
+    </div>
+    <div class="gb-container">
+        <div class="gb-sub">
+        </div>
+
+        <div class="gb-main">
+        </div>
+    </div>
+
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <p id="modalMessage" class="modal-text"></p>
+            <div class="modal-buttons">
+                <button id="confirmBtn" class="confirm-btn">확인</button>
+                <button id="cancelBtn" class="cancel-btn">취소</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/src/js/layout/includeHeader.js"></script>
+    <script type="module" src="/src/js/layout/includeProfSidebar.js"></script>
+    <script type="module" src="/src/js/pages/professor/my_lecMane.js"></script>
+</body>
+
+</html>
+<!--연동 확인 필요!!!!!!!!!!!! 공지사항 버튼 눌렀을 때 나오는 페이지-->
