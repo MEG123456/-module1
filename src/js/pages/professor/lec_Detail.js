@@ -74,11 +74,15 @@ function LectureDetail() {
     };
 
     this.renderDetail = (data) => {
+        const KR_NAMES = { "m": "전공", "e": "교양" };
+        const krType = KR_NAMES[data.type] || data.type;
+
+
         $("#view-title").innerText = data.title || "-";
         $("#view-prof").innerText = data.prof || "-";
         $("#view-max").innerText = data.max || "-";
         $("#view-time").innerText = data.time || "-";
-        $("#view-type").innerText = data.type || "-";
+        $("#view-type").innerText = krType || "-";
         $("#view-credit").innerText = data.credit || "-";
         $("#view-room").innerText = data.room || "-";
         $("#view-about").innerText = data.about || "-";

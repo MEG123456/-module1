@@ -34,7 +34,7 @@ function LectureManager() {
         $('input[name="classroom"]').value = data.room || "";
         $('textarea[name="about"]').value = data.about || "";
 
-        if (data.type === '전공') $("#major").checked = true;
+        if (data.type === 'm' || data.type === '전공') $("#major").checked = true;
         else $("#etc").checked = true;
     };
 
@@ -65,7 +65,7 @@ function LectureManager() {
         const prof = $('input[name="prof-name"]').value;
         const max = $('input[name="lecture-max"]').value;
         const time = $('input[name="lecture-time"]').value;
-        const type = $('input[name="subject"]:checked').value;
+        const type = $('input[name="subject"]:checked').id === 'major' ? '전공' : '교양';
         const credit = $('input[name="credit"]').value;
         const room = $('input[name="classroom"]').value;
         const about = $('textarea[name="about"]').value;
