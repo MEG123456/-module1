@@ -7,13 +7,13 @@ fetch("/pages/professor/my_lecMane.html")
 
 document.addEventListener("DOMContentLoaded", () => {
     const $ = (selector) => document.querySelector(selector);
-    
+
     const selectedLecIndex = localStorage.getItem("selectedLecIndex");
-    
+
     if (selectedLecIndex === null) {
         const checkEmpty = setInterval(() => {
             const mainContainer = $(".gb-main");
-            if(mainContainer) {
+            if (mainContainer) {
                 clearInterval(checkEmpty);
                 mainContainer.innerHTML = `
                     <div style="text-align:center; padding:100px;">
@@ -21,13 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>`;
             }
         }, 50);
-        return; 
+        return;
     }
-    
+
     const storageKey = `profNotices_${selectedLecIndex || 'default'}`;
     let noticeList = JSON.parse(localStorage.getItem(storageKey)) || [];
-    let tempNoticeData = null; 
-    let isEditing = false;      
+    let tempNoticeData = null;
+    let isEditing = false;
 
     function saveToLocalStorage() {
         localStorage.setItem(storageKey, JSON.stringify(noticeList));
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const msg = $("#modalMessage");
         const confirmBtn = $("#confirmBtn");
         const cancelBtn = $("#cancelBtn");
-        
+
         if (modal && msg) {
             msg.innerText = message;
             cancelBtn.style.display = showCancel ? "inline-block" : "none";
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const mainContainer = $(".gb-main");
         if (!mainContainer) return;
 
-        let tableRows = noticeList.length === 0 
+        let tableRows = noticeList.length === 0
             ? `<tr><td colspan="4" style="padding: 50px; color: #898A8D; text-align:center;">등록된 공지사항이 없습니다.</td></tr>`
             : noticeList.map(item => `
                 <tr>
@@ -91,10 +91,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     </td>
                 </tr>`).join('');
 
+        const savedIndex = localStorage.getItem("selectedLecIndex");
+        const isEnabled = savedIndex !== null ? "enabled" : "";
+
         mainContainer.innerHTML = `
             <div class="top-menu">
-                <button class="menu-btn active" onclick="location.href='my_lecNotice.html'">공지사항</button>
-                <button class="menu-btn" onclick="location.href='my_studentList.html'">수강 학생</button>
+                <button class="menu-btn active ${isEnabled}" onclick="location.href='/pages/professor/my_lecNotice.html'">공지사항</button>
+                <button class="menu-btn ${isEnabled}" onclick="location.href='/pages/professor/my_studentList.html'">수강 학생</button>
             </div>
             <div id="page-content">
                 <div class="notice-container">
@@ -123,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
             initConfirmBtn(() => {
                 noticeList = noticeList.filter(item => item.id !== deleteId);
                 saveToLocalStorage();
-                
+
                 // [삭제 완료 모달] 1초 노출
                 showModal("삭제되었습니다.", false, false);
                 setTimeout(() => {
@@ -140,8 +143,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         mainContainer.innerHTML = `
             <div class="top-menu">
-                <button class="menu-btn active" onclick="location.href='my_lecNotice.html'">공지사항</button>
-                <button class="menu-btn" onclick="location.href='my_studentList.html'">수강 학생</button>
+                <button class="menu-btn active" onclick="location.href='/pages/professor/my_lecNotice.html'">공지사항</button>
+                <button class="menu-btn" onclick="location.href='/pages/professor/my_studentList.html'">수강 학생</button>
             </div>
             <div id="page-content">
                 <div class="notice-detail-view">
@@ -239,11 +242,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         noticeList.unshift(tempNoticeData);
                     }
                     saveToLocalStorage();
-                    
+
                     // [등록/수정 완료 모달] 1초 노출
                     const finishMsg = isEditing ? "수정되었습니다." : "등록되었습니다.";
                     showModal(finishMsg, false, false);
-                    
+
                     setTimeout(() => {
                         closeModal();
                         tempNoticeData = null;

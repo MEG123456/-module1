@@ -86,10 +86,13 @@ document.addEventListener("DOMContentLoaded", () => {
             `).join('');
         }
 
+        const savedIndex = localStorage.getItem("selectedLecIndex");
+        const isEnabled = savedIndex !== null ? "enabled" : "";
+
         mainContainer.innerHTML = `
             <div class="top-menu">
-                <button class="menu-btn active" onclick="location.href='/pages/student/my_lecNotice.html'">공지사항</button>
-                <button class="menu-btn" onclick="location.href='/pages/student/my_lecReview.html'">수강평</button>
+                <button class="menu-btn active ${isEnabled}" onclick="location.href='/pages/student/my_lecNotice.html'">공지사항</button>
+                <button class="menu-btn ${isEnabled}" onclick="location.href='/pages/student/my_lecReview.html'">수강평</button>
             </div>
             <div id="page-content">
                 <div class="notice-container">

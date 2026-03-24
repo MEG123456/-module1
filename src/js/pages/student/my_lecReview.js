@@ -7,15 +7,15 @@ fetch("/pages/student/my_classRoom.html")
 
 document.addEventListener("DOMContentLoaded", () => {
     const $ = (selector) => document.querySelector(selector);
-    
+
     // 학생이 선택한 강의 인덱스 확인
     const selectedLecIndex = localStorage.getItem("selectedStuLecIndex");
-    
+
     // 과목 미선택 시 안내
     if (selectedLecIndex === null) {
         const checkEmpty = setInterval(() => {
             const mainContainer = $(".gb-main");
-            if(mainContainer) {
+            if (mainContainer) {
                 clearInterval(checkEmpty);
                 mainContainer.innerHTML = `
                     <div style="text-align:center; padding:100px;">
@@ -23,9 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>`;
             }
         }, 50);
-        return; 
+        return;
     }
-    
+
     // 수강평 전용 storageKey (과목별로 구분)
     const storageKey = `lecReviews_${selectedLecIndex}`;
     let reviewList = JSON.parse(localStorage.getItem(storageKey)) || [];
@@ -39,9 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const modal = $("#modalOverlay");
         const confirmBtn = $("#confirmBtn");
         const cancelBtn = $("#cancelBtn");
-        
+
         $("#modalMessage").innerText = message;
-        
+
         if (hasButtons) {
             confirmBtn.style.display = "inline-block";
             cancelBtn.style.display = "inline-block";
@@ -99,10 +99,13 @@ document.addEventListener("DOMContentLoaded", () => {
             `).join('');
         }
 
+        const savedIndex = localStorage.getItem("selectedLecIndex");
+        const isEnabled = savedIndex !== null ? "enabled" : "";
+
         mainContainer.innerHTML = `
             <div class="top-menu">
-                <button class="menu-btn" onclick="location.href='/pages/student/my_lecNotice.html'">공지사항</button>
-                <button class="menu-btn active" onclick="location.href='/pages/student/my_lecReview.html'">수강평</button>
+                <button class="menu-btn ${isEnabled}" onclick="location.href='/pages/student/my_lecNotice.html'">공지사항</button>
+                <button class="menu-btn active ${isEnabled}" onclick="location.href='/pages/student/my_lecReview.html'">수강평</button>
             </div>
             <div id="page-content">
                 <div class="notice-container">
@@ -129,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
             el.addEventListener("click", () => renderDetail(parseInt(el.dataset.id)));
         });
         $("#go-write").addEventListener("click", () => renderWriteForm());
-        
+
         document.querySelectorAll(".edit-btn").forEach(btn => {
             btn.addEventListener("click", (e) => {
                 e.stopPropagation();
@@ -141,12 +144,12 @@ document.addEventListener("DOMContentLoaded", () => {
             btn.addEventListener("click", (e) => {
                 e.stopPropagation();
                 const deleteId = parseInt(btn.dataset.id);
-                
+
                 showModal("수강평을 삭제하시겠습니까?");
                 initConfirmBtn(() => {
                     reviewList = reviewList.filter(item => item.id !== deleteId);
                     saveToLocalStorage();
-                    
+
                     // 삭제 완료 안내 (버튼 없음)
                     showModal("삭제되었습니다.", false);
                     setTimeout(() => {
@@ -165,8 +168,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         mainContainer.innerHTML = `
             <div class="top-menu">
-                <button class="menu-btn" onclick="location.href='../student/my_lecNotice.html'">공지사항</button>
-                <button class="menu-btn active" onclick="location.href='../student/my_lecReview.html'">수강평</button>
+                <button class="menu-btn" onclick="location.href='/pages/student/my_lecNotice.html'">공지사항</button>
+                <button class="menu-btn active" onclick="location.href='/pages/student/my_lecReview.html'">수강평</button>
             </div>
             <div id="page-content">
                 <div class="notice-detail-view">
