@@ -1,3 +1,6 @@
+const user = JSON.parse(localStorage.getItem("loginUser")) || {};
+const LECTURE_KEY = `lectures_${user.id || user.email || "guest"}`;
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const collegeMap = { 
@@ -14,29 +17,36 @@ document.addEventListener("DOMContentLoaded", () => {
         const profileContainer = document.querySelector(".info-text-group");
         const lectureListContainer = document.querySelector(".lecture-list");
 
+        if (!user || !user.name) return;
         if (profileContainer && lectureListContainer) {
             clearInterval(interval);
 
-            const user = JSON.parse(localStorage.getItem("loginUser"));
 
-            const lectures = JSON.parse(localStorage.getItem("lectures")) || [];
+            const lectures = JSON.parse(localStorage.getItem(LECTURE_KEY)) || [];
+            const myLectures = lectures;
 
-            const myLectures = lectures.filter(l => l.prof === user.name);
+            if (myLectures.length === 0) {
+                lectureListContainer.innerHTML = `
+                    <li style="color:#898A8D; padding:10px;">
+                        등록된 강의가 없습니다.
+                    </li>
+                `;
+            } else {
+                lectureListContainer.innerHTML = myLectures.map((lec, index) => `
+                    <li class="lecture-item" data-id="${index}">
+                        ${lec.title}
+                    </li>
+                `).join('');
+            }
 
-            lectureListContainer.innerHTML = myLectures.map((lec, index) => `
-                <li class="lecture-item" data-id="${index}">
-                    ${lec.title}
-                </li>
-            `).join('');
-
-            document.querySelectorAll(".lecture-item").forEach((item, index) => {
-                item.addEventListener("click", () => {
-
-                localStorage.setItem("selectedLecIndex", index);
-
-                window.location.href = "/pages/professor/my_lecNotice.html";
+            if (myLectures.length > 0) {
+                document.querySelectorAll(".lecture-item").forEach((item, index) => {
+                    item.addEventListener("click", () => {
+                        localStorage.setItem("selectedLecIndex", index);
+                        window.location.href = "/pages/professor/my_lecNotice.html";
+                    });
                 });
-            });
+            }
 
             profileContainer.innerHTML = `
                 <div class="profile-line">
@@ -46,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 <div class="profile-line">
                     <span>${user.professorCode}</span>
-                    <span>${user.name}</span>
+                    <span>${user.name} (교수) </span>
                 </div>
             `;
         }

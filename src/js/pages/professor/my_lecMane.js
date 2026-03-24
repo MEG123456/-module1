@@ -1,23 +1,31 @@
+if (window.location.pathname.includes("my_lecMane.html")) {
+    localStorage.removeItem("selectedLecIndex");
+}
+
+const user = JSON.parse(localStorage.getItem("loginUser")) || {};
+const LECTURE_KEY = `lectures_${user.id || user.email || "guest"}`;
+
 document.addEventListener("DOMContentLoaded", () => {
 
+    const savedIndex = localStorage.getItem("selectedLecIndex");
+
     const renderMyLectures = () => {
-        const lectures = JSON.parse(localStorage.getItem("lectures")) || [];
+        const lectures = JSON.parse(localStorage.getItem(LECTURE_KEY)) || [];
         const listContainer = document.querySelector("#my-lecture-list");
         const menuButtons = document.querySelectorAll(".menu-btn");
         
         if (!listContainer) return false;
     
         const savedIndex = localStorage.getItem("selectedLecIndex");
-        const isFromLectureClick = sessionStorage.getItem("fromLectureClick");
 
         // 1. 강의 목록 생성
         listContainer.innerHTML = lectures.map((lec, index) => {
 
             return `
-                <li class="lec-item ${savedIndex == index && isFromLectureClick ? 'active' : ''}" 
-                data-index="${index}" 
-                style="cursor:pointer;">
-                ${lec.title}
+                <li class="lec-item ${savedIndex == index ? 'active' : ''}"
+                    data-index="${index}"
+                    style="cursor:pointer;">
+                    ${lec.title}
             </li>
         `;
     }).join("");
@@ -66,5 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const checkExist = setInterval(() => {
         if (renderMyLectures()) clearInterval(checkExist);
+
     }, 100);
 });

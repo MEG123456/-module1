@@ -1,9 +1,12 @@
+const user = JSON.parse(localStorage.getItem("loginUser")) || {};
+const LECTURE_KEY = `lectures_${user.id || user.email || "guest"}`;
+
 const $ = (selector) => document.querySelector(selector);
 
 const store = {
-    getLocalStorage() {
-        // profLec2.js와 동일하게 "lectures" 키를 사용
-        return JSON.parse(localStorage.getItem("lectures")) || [];
+    getLocalStorage(isStudent) {
+    const key = isStudent ? "lectures_all" : LECTURE_KEY;
+    return JSON.parse(localStorage.getItem(key)) || [];
     }
 };
 
@@ -52,7 +55,8 @@ function LectureDetail() {
     this.init = () => {
         setupSidebar(); // 사이드바 설정 호출
 
-        this.lectures = store.getLocalStorage();
+        const isStudent = document.referrer.includes("lec_list.html");
+        this.lectures = store.getLocalStorage(isStudent);
         if (index !== null && this.lectures[index]) {
             this.renderDetail(this.lectures[index]);
         } else {
@@ -61,6 +65,7 @@ function LectureDetail() {
 
         // 목록으로 버튼 로직 (기존과 동일)
         const backBtn = $("#backBtn");
+        
         if (backBtn) {
             backBtn.addEventListener("click", () => {
                 const prevPage = document.referrer;

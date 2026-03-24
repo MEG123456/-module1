@@ -24,7 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    const storageKey = `profNotices_${selectedLecIndex || 'default'}`;
+    const user = JSON.parse(localStorage.getItem("loginUser")) || {};
+    const storageKey = `profNotices_${user.id || user.email}_${selectedLecIndex}`;
     let noticeList = JSON.parse(localStorage.getItem(storageKey)) || [];
     let tempNoticeData = null;
     let isEditing = false;
