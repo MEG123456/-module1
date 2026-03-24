@@ -1,0 +1,183 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; 
+}
+
+
+.filter-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 9px 0;
+    color: #545559;
+}
+
+.filter-group label{
+    display: block;
+    font-size: 19px;
+    font-weight: 500;
+    color: #545559;
+    padding-bottom: 2px;
+}
+
+.filter-group {
+    padding-bottom: 9px;
+}
+
+.filter-group select {
+    width: 190px;
+    height: 30px;
+    border: 1.5px solid #545559;
+    font-size: 16px;
+    font-weight: 450;
+    color: #545559;
+}
+
+.search-container {
+    display: flex;
+    border-bottom: 2px solid #898A8D;
+    padding: 0 10px 20px 10px;
+    margin: 0 -12px 10px -12px;
+}
+
+.lecture-search {
+    border: 3px solid #4563B2;
+    height: 40px;
+    width: 140px;
+}
+
+.lecture-search::placeholder {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.lecSearch_btn {
+    color: #FFFFFF;
+    background: #4563B2;
+    border: none;
+    font-size: 20px;
+    font-weight: 500;
+    height: 40px;
+    width: 50px;
+}
+
+.btn-container {
+    display: flex;
+    flex-direction: row;  
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.check-btn {
+    background-color: #186CE9;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 3px;
+    width: 95px;
+    height: 30px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.check-btn,
+.reset-btn {
+    display: inline-block;
+}
+
+.check-btn:hover {
+    background-color: #155dc8;
+}
+
+.reset-btn {
+    background-color: #898A8D;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    width: 95px;
+    height: 30px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.reset-btn:hover {
+    background-color: #333;
+}
+
+.allLec-container {
+    height: 100%;
+    width: 100%;
+}
+
+.allLec-table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    background-color: #FFFFFF;
+}
+
+
+.allLec-table tbody tr {
+    height: calc(100% / 12);
+}
+
+.allLec-table thead th {
+    background-color: #F7F8FD;
+    font-size: 23px;
+    font-weight: bold;
+    padding: 10px;
+    border-right: 1px solid #898A8D;
+    box-shadow: inset 0 -2px 0 #898A8D;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.allLec-table thead th:last-child,
+.allLec-table tbody td:last-child {
+    border-right: none;
+}
+
+.allLec-table tbody td {
+    padding: 11px 10px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid #D1D1D1;
+    border-right: 1px solid #D1D1D1;
+    color: #444;
+}
+
+.apply-btn {
+    background-color: #4563B2;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.apply-btn:hover {
+    background-color: #2f4c9a;
+}
+
+.apply-btn.done {
+    background-color: #898A8D;
+    cursor: default;
+}
+
+.inner-filter .btn-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center;
+    gap: 10px;
+}
+
+.inner-filter .btn-container button {
+    display: inline-block;
+}
